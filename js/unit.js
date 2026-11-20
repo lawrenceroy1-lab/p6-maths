@@ -35,19 +35,30 @@ fetch(`content/unit${UNIT_ID}.json`, { cache: "no-cache" })
   });
 askName(false);
 
+let mode = "";               // "" = a section, "practice" or "test" = whole-unit modes
+
 function readHash() {
   const h = new URLSearchParams(location.hash.slice(1));
   const s = parseInt(h.get("s"), 10);
   if (!isNaN(s) && DATA.sections[s]) secIdx = s;
   if (ACTS.some(a => a.id === h.get("a"))) act = h.get("a");
+  if (["practice", "test"].includes(h.get("m"))) mode = h.get("m");
 }
-function writeHash() { history.replaceState(null, "", `#s=${secIdx}&a=${act}`); }
+function writeHash() { history.replaceState(null, "", mode ? `#m=${mode}` : `#s=${secIdx}&a=${act}`); }
 
 function renderTabs() {
+  document.getElementById("unitBar").innerHTML = `
+    <button class="ubtn practice ${mode === "practice" ? "on" : ""}" data-m="practice">✏️ Practice</button>
+    <button class="ubtn test ${mode === "test" ? "on" : ""}" data-m="test">📝 Unit Test</button>
+    <a class="ubtn board" href="leaderboard.html?u=${UNIT_ID}">🏅 Leaderboard</a>`;
+  const leaveOk = () => !window.TEST_RUNNING || confirm("Leave the Unit Test? Your answers will be lost.");
+  document.querySelectorAll(".ubtn[data-m]").forEach(b => b.onclick = () => { if (!leaveOk()) return; mode = b.dataset.m; renderTabs(); go(); });
   document.getElementById("tabs").innerHTML = DATA.sections.map((s, i) =>
-    `<button class="tab ${i === secIdx ? "on" : ""}" data-i="${i}">${esc(s.short || s.title)}</button>`).join("");
-  document.querySelectorAll(".tab").forEach(b => b.onclick = () => { secIdx = +b.dataset.i; renderTabs(); go(); });
-  document.getElementById("acts").innerHTML = ACTS.map(a =>
+    `<button class="tab ${!mode && i === secIdx ? "on" : ""}" data-i="${i}">${esc(s.short || s.title)}</button>`).join("");
+  document.querySelectorAll(".tab").forEach(b => b.onclick = () => { if (!leaveOk()) return; mode = ""; secIdx = +b.dataset.i; renderTabs(); go(); });
+  const acts = document.getElementById("acts");
+  acts.style.display = mode ? "none" : "";
+  acts.innerHTML = ACTS.map(a =>
     `<button class="act ${a.id === act ? "on" : ""}" data-a="${a.id}"><span class="e">${a.e}</span>${a.name}</button>`).join("");
   document.querySelectorAll(".act").forEach(b => b.onclick = () => { act = b.dataset.a; renderTabs(); go(); });
 }
@@ -55,9 +66,13 @@ function renderTabs() {
 function go() {
   if (cleanup) { cleanup(); cleanup = null; }
   writeHash();
-  const sec = DATA.sections[secIdx];
-  ({ learn: Learn, guided: Guided, flash: Flash, match: Match, quiz: Quiz, battle: Battle })[act](sec);
-  window.scrollTo({ top: document.getElementById("tabs").offsetTop - 10, behavior: "smooth" });
+  if (mode === "practice") Practice();
+  else if (mode === "test") UnitTest();
+  else {
+    const sec = DATA.sections[secIdx];
+    ({ learn: Learn, guided: Guided, flash: Flash, match: Match, quiz: Quiz, battle: Battle })[act](sec);
+  }
+  window.scrollTo({ top: document.getElementById("unitBar").offsetTop - 10, behavior: "smooth" });
 }
 
 function header(sec, title, extra) {

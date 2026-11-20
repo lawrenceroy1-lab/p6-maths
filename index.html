@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>P.6 Maths with T. Roy</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=7">
 </head>
 <body>
 <header class="topbar">
@@ -18,11 +18,12 @@
     <h1>Targeting Mathematics 6B</h1>
     <p>Pick a unit to learn, practise and play.</p>
   </section>
+  <div class="unitbar" style="max-width:520px;margin:10px auto 0"><a class="ubtn board" href="leaderboard.html">🏅 Leaderboard</a></div>
   <div class="unit-grid" id="units"></div>
   <p class="footer">Made by T. Roy for classes 6/1, 6/2 and 6/3</p>
 </main>
-<script src="js/config.js?v=5"></script>
-<script src="js/common.js?v=5"></script>
+<script src="js/config.js?v=7"></script>
+<script src="js/common.js?v=7"></script>
 <script>
   document.getElementById("units").innerHTML = UNITS.map(u => `
     <a class="unit-card ${u.ready ? "" : "soon"}" href="unit.html?u=${u.id}">
@@ -30,6 +31,7 @@
       <div class="num">${u.id === "review" ? "REVIEW" : "UNIT " + Number(u.id)}</div>
       <h2>${u.title}</h2>
       <div class="pg">📖 ${u.pages}</div>
+      ${(b => b ? `<div class="done">🏅 Best test: ${b.score} / ${b.total}</div>` : "")(store.get("testBest_" + u.id, null))}
     </a>`).join("");
   askName(false);
 </script>

@@ -27,8 +27,11 @@ Do these steps once. You need your Google account.
 - Paste the web app URL into your browser. You should see: **T. Roy score receiver is working ✅**
 - Play one Speed Quiz on the website. A new tab called **Scores** appears in your sheet with one row.
 
+## Leaderboard
+The same web app also feeds the 🏅 Leaderboard page. Nothing extra to set up. Once the URL is in `js/config.js`, the leaderboard shows every class's Unit Test results.
+
 ## Good to know
 - Columns: Date and time, Name, Class, Unit, Section, Activity, Score, Total, Time taken (s).
-- Speed Quiz: Score = number correct out of 10. Match Game: Score = pairs matched, Time = seconds.
+- Speed Quiz: Score = number correct out of 10. Match Game: Score = pairs matched. Unit Test: Score = number correct out of 20. Time is always in seconds.
 - If a student has no internet, the score waits in their browser and is sent next time they open the site.
 - If you change Code.gs later: Deploy > **Manage deployments** > ✏️ edit > Version: **New version** > Deploy. The URL stays the same.

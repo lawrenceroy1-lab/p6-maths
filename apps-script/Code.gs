@@ -1,4 +1,4 @@
-// T. Roy's P.6 Maths website: score receiver.
+// T. Roy's P.6 Maths website: score receiver and leaderboard.
 // Paste this whole file into Extensions > Apps Script in your Google Sheet.
 
 const SHEET_NAME = "Scores";
@@ -23,8 +23,17 @@ function doPost(e) {
   }
 }
 
-// Lets you open the web app link in a browser to check it is working.
-function doGet() {
+// GET: ?action=leaderboard sends the Unit Test results (first name, class, unit, score, total, time).
+// Opening the web app link with nothing after it just says the receiver is working.
+function doGet(e) {
+  if (e && e.parameter && e.parameter.action === "leaderboard") {
+    const values = getSheet_().getDataRange().getValues().slice(1);
+    const rows = values
+      .filter(r => r[5] === "Unit Test")
+      .map(r => ({ name: String(r[1]), cls: String(r[2]), unit: String(r[3]), score: Number(r[6]), total: Number(r[7]), time: Number(r[8]) }));
+    return ContentService.createTextOutput(JSON.stringify({ rows: rows }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   return ContentService.createTextOutput("T. Roy score receiver is working ✅");
 }
 

@@ -50,6 +50,27 @@ for s in d["sections"]:
         errors.append(f"{s['id']}: need at least 6 flashcards")
     print(f"{s['id']:5} {s['title']:24} questions={len(s['questions']):3} pages={sorted(set(pages))}")
 
+import os
+bp = f"content/bank{uid}.json"
+if os.path.exists(bp):
+    bank = json.load(open(bp, encoding="utf-8"))["questions"]
+    braw = json.dumps(bank, ensure_ascii=False)
+    if "\u2014" in braw or "\u2013" in braw:
+        errors.append("bank: found an em dash or en dash")
+    if len(bank) % 10 != 0 or len(bank) < 20:
+        errors.append(f"bank: {len(bank)} questions (need a round number, at least 20)")
+    texts = [q["q"] + json.dumps(q.get("fig")) for q in bank]
+    if len(set(texts)) != len(texts):
+        errors.append("bank: duplicate question")
+    for q in bank:
+        if len(q["options"]) != 4 or len(set(q["options"])) != 4:
+            errors.append(f"bank: needs 4 different options: {q['q']}")
+        if not q.get("why") or not q.get("src"):
+            errors.append(f"bank: missing why or source: {q['q']}")
+    print(f"bank  {len(bank)} practice/test questions")
+else:
+    print("bank  (none yet)")
+
 print("PROBLEMS:" if errors else "All checks passed ✅")
 for e in errors:
     print("  -", e)
