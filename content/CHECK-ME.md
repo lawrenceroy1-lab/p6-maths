@@ -16,3 +16,11 @@ Notes for T. Roy:
 - p.64 Q3 says "six incomplete nets" but the answer key page only shows 4 grids, (a) to (d). The site has those 4.
 - Photos of objects (p.51, p.52) are replaced with simple drawings of the solid.
 - The nets on p.60 and p.62 are redrawn. They are not exact copies, but each one has the same right or wrong answer as in the key.
+
+## Unit 9
+No disagreements. All 50 answers matched the key.
+
+Notes for T. Roy:
+- p.76 Q2 asks students to measure. The site shows the key's measurements in the steps (for example 5 cm, 4.5 cm, 3 cm).
+- No algebra letters: p.95 Q4 (the key uses x) and p.77 Q3(d) (the key uses 3(IJ)) are explained in words and with ÷ instead.
+- Book names (Siti, Ravi, Janice and others) stay in the book questions. The Learn cards use English names (Lily, Tom).
