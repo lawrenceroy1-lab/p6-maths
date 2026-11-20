@@ -1,0 +1,6 @@
+answer-keys/
+.DS_Store
+.claude/
+CLAUDE.md
+__pycache__/
+Tutoring_Website_Claude_Code_Kickoff_Prompt.md

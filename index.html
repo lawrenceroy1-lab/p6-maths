@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>P.6 Maths with T. Roy</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+<link rel="stylesheet" href="css/style.css?v=3">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html">📐 P.6 Maths with T. Roy</a>
+  <div id="studentBar"></div>
+</header>
+<main class="wrap">
+  <section class="hero">
+    <h1>Targeting Mathematics 6B</h1>
+    <p>Pick a unit to learn, practise and play.</p>
+  </section>
+  <div class="unit-grid" id="units"></div>
+  <p class="footer">Made by T. Roy for classes 6/1, 6/2 and 6/3</p>
+</main>
+<script src="js/config.js?v=3"></script>
+<script src="js/common.js?v=3"></script>
+<script>
+  document.getElementById("units").innerHTML = UNITS.map(u => `
+    <a class="unit-card ${u.ready ? "" : "soon"}" href="unit.html?u=${u.id}">
+      <div class="icon">${u.icon}</div>
+      <div class="num">${u.id === "review" ? "REVIEW" : "UNIT " + Number(u.id)}</div>
+      <h2>${u.title}</h2>
+      <div class="pg">📖 ${u.pages}</div>
+    </a>`).join("");
+  askName(false);
+</script>
+</body>
+</html>
