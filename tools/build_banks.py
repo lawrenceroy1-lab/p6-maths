@@ -20,6 +20,7 @@ with contextlib.redirect_stdout(io.StringIO()):
     import build_unit08 as U8  # noqa: E402
     import build_unit09 as U9  # noqa: E402
     import build_unit10 as U10  # noqa: E402
+    import build_unit11 as U11  # noqa: E402
 
 GREEN, BLUE, ORANGE, PINK, YELLOW, PURPLE = "#C8E6C9", "#BBDEFB", "#FFE0B2", "#F8BBD0", "#FFF59D", "#D1C4E9"
 
@@ -391,13 +392,72 @@ for a, b_ in [(3 * 180, 540), (6 * 180, 1080), (360 - 330, 30), (180 - 140, 40),
     check(a, b_, "bank 10")
 check(len(b10), 40, "bank 10 size")
 
+# ==================================================================
+# UNIT 11
+# ==================================================================
+P7, P314, r2 = U11.P7, U11.P314, U11.r2
+Fr = Fraction
+b11 = []
+for part, kind, v, ans, wrongs in [("(a)", "r", 8, "16π cm", ["8π cm", "64π cm", "32π cm"]), ("(b)", "r", 7, "14π cm", ["7π cm", "49π cm", "28π cm"]),
+                                   ("(c)", "d", 31, "31π cm", ["62π cm", "15.5π cm", "961π cm"]), ("(d)", "r", 8.5, "17π cm", ["8.5π cm", "72.25π cm", "34π cm"])]:
+    b11.append(B("O is the center. Find the circumference of the circle. Leave the answer in terms of π.", [ans] + wrongs,
+                 ("Circumference = π × diameter = π × " + U9.num(v) if kind == "d" else f"Circumference = 2 × π × radius = 2 × π × {U9.num(v)}") + f" = {ans}.",
+                 f"Review Q20{part}, p.256", U11.cfig(kind, v, "cm", ORANGE)))
+check(r2(2 * P7 * 42), 264, "R21a"); check(r2(P7 * 70), 220, "R21b")
+b11.append(B("Radius 42 cm. Find the circumference. (Take π ≈ 22/7.)", ["264 cm", "132 cm", "5,544 cm", "528 cm"], "2 × 22/7 × 42: 84 ÷ 7 = 12, 22 × 12 = 264 cm.", "Review Q21(a), p.257", U11.cfig("r", 42, "cm", BLUE)))
+b11.append(B("Radius 35 m. Find the circumference. (Take π ≈ 22/7.)", ["220 m", "110 m", "3,850 m", "440 m"], "2 × 22/7 × 35: 70 ÷ 7 = 10, 22 × 10 = 220 m.", "Review Q21(b), p.257", U11.cfig("r", 35, "m", ORANGE)))
+check(r2(P314 * 36), 113.04, "R22a"); check(r2(Fr(1, 2) * P314 * 256), 401.92, "R22b")
+b11.append(B("Radius 6 m. Find the area. (Take π ≈ 3.14.)", ["113.04 m²", "37.68 m²", "18.84 m²", "452.16 m²"], "3.14 × 6 × 6 = 3.14 × 36 = 113.04 m².", "Review Q22(a), p.257", U11.cfig("r", 6, "m", YELLOW)))
+b11.append(B("A semicircle has diameter 32 cm. Find its area. (Take π ≈ 3.14.)", ["401.92 cm²", "803.84 cm²", "1,607.68 cm²", "50.24 cm²"], "Radius 16 cm: ½ × 3.14 × 16 × 16 = ½ × 803.84 = 401.92 cm².", "Review Q22(b), p.257"))
+check(r2(Fr(1, 2) * 2 * P314 * 5 + 12 + 12 + 5 + 5), 49.7, "R23")
+b11.append(B("An acrylic sheet is 2 quarter circles (radius 5 cm) and a 12 cm by 5 cm rectangle. Perimeter? (Take π ≈ 3.14.)", ["49.7 cm", "39.7 cm", "31.4 cm", "44.7 cm"],
+             "The 2 quarter arcs make half a circle: ½ × 2 × 3.14 × 5 = 15.7 cm. Then 15.7 + 12 + 12 + 5 + 5 = 49.7 cm.", "Review Q23, p.258"))
+check(r2(3 * Fr(1, 2) * P314 * 10), 47.1, "R24")
+b11.append(B("A wire forms 2 semicircles and 2 quarter circles, each with diameter 10 cm. Length of wire? (Take π ≈ 3.14.)", ["47.1 cm", "31.4 cm", "62.8 cm", "94.2 cm"],
+             "2 semicircles + 2 quarter circles = 3 half circles: 3 × ½ × 3.14 × 10 = 47.1 cm.", "Review Q24, p.258"))
+for q, ans, wrongs, why, src, a, b_ in [
+    ("Radius 7 m. Circumference? (π ≈ 22/7)", "44 m", ["22 m", "154 m", "88 m"], "2 × 22/7 × 7 = 2 × 22 = 44 m.", "p.150", r2(2 * P7 * 7), 44),
+    ("Diameter 21 cm. Circumference? (π ≈ 22/7)", "66 cm", ["33 cm", "132 cm", "1,386 cm"], "21 ÷ 7 = 3, 22 × 3 = 66 cm.", "p.151", r2(P7 * 21), 66),
+    ("Semicircle, diameter 10 cm. Perimeter? (π ≈ 3.14)", "25.7 cm", ["15.7 cm", "31.4 cm", "20.7 cm"], "Arc 15.7 cm + diameter 10 cm = 25.7 cm.", "p.151", r2(P314 * 5 + 10), 25.7),
+    ("Quarter circle, radius 5 cm. Perimeter? (π ≈ 3.14)", "17.85 cm", ["7.85 cm", "12.85 cm", "31.4 cm"], "Arc 7.85 cm + 5 + 5 = 17.85 cm.", "p.152", r2(P314 * Fr(10, 4) + 10), 17.85),
+    ("Radius 40 cm. Circumference? (π ≈ 3.14)", "251.2 cm", ["125.6 cm", "5,024 cm", "502.4 cm"], "2 × 3.14 × 40 = 3.14 × 80 = 251.2 cm.", "Do and Learn (a), p.153", r2(P314 * 80), 251.2),
+    ("Diameter 20.5 cm. Circumference? (π ≈ 3.14)", "64.37 cm", ["128.74 cm", "32.19 cm", "41 cm"], "3.14 × 20.5 = 64.37 cm.", "Do and Learn (b), p.153", r2(P314 * Fr("20.5")), 64.37),
+    ("Estimate the circumference of a circle with diameter 13 cm.", "About 39 cm", ["About 13 cm", "About 26 cm", "About 169 cm"], "About 3 × the diameter: 3 × 13 = 39 cm.", "Exercise 1(c), p.154", 39, 39),
+    ("Radius 8.4 cm. Circumference? (π ≈ 22/7)", "52.8 cm", ["26.4 cm", "221.76 cm", "16.8 cm"], "2 × 8.4 = 16.8, 16.8 ÷ 7 = 2.4, 22 × 2.4 = 52.8 cm.", "Exercise 2(b), p.155", r2(P7 * Fr("16.8")), 52.8),
+    ("Diameter 18 cm. Circumference? (π ≈ 3.14)", "56.52 cm", ["113.04 cm", "28.26 cm", "254.34 cm"], "3.14 × 18 = 56.52 cm.", "Exercise 3(a), p.155", r2(P314 * 18), 56.52),
+    ("3 quarter circles of radius 21 cm plus 2 radii. Perimeter? (π ≈ 22/7)", "141 cm", ["99 cm", "132 cm", "174 cm"], "¾ × 132 = 99 cm, then 99 + 21 + 21 = 141 cm.", "Exercise 4(a), p.156", r2(Fr(3, 4) * 2 * P7 * 21 + 42), 141),
+    ("A coaster has diameter 6 cm. Area in terms of π?", "9π cm²", ["36π cm²", "6π cm²", "3π cm²"], "Radius 3 cm: π × 3 × 3 = 9π cm².", "Do and Learn 1, p.162", 9, 9),
+    ("Radius 14 cm. Area? (π ≈ 22/7)", "616 cm²", ["88 cm²", "308 cm²", "1,232 cm²"], "22/7 × 14 × 14: 14 ÷ 7 = 2, 22 × 2 × 14 = 616 cm².", "Do and Learn 2(a), p.162", r2(P7 * 196), 616),
+    ("Diameter 42 m. Area? (π ≈ 22/7)", "1,386 m²", ["5,544 m²", "132 m²", "693 m²"], "Radius 21 m: 22/7 × 21 × 21 = 66 × 21 = 1,386 m².", "Do and Learn 2(b), p.162", r2(P7 * 441), 1386),
+    ("Radius 18 cm. Area? (π ≈ 3.14)", "1,017.36 cm²", ["113.04 cm²", "254.34 cm²", "56.52 cm²"], "3.14 × 18 × 18 = 3.14 × 324 = 1,017.36 cm².", "Do and Learn 3(a), p.162", r2(P314 * 324), 1017.36),
+    ("Diameter 26 m. Area? (π ≈ 3.14)", "530.66 m²", ["2,122.64 m²", "81.64 m²", "40.82 m²"], "Radius 13 m: 3.14 × 13 × 13 = 530.66 m².", "Do and Learn 3(b), p.162", r2(P314 * 169), 530.66),
+    ("Radius 9.2 cm. Area in terms of π?", "84.64π cm²", ["18.4π cm²", "9.2π cm²", "42.32π cm²"], "π × 9.2 × 9.2 = 84.64π cm².", "Exercise 1(b), p.163", 84.64, 84.64),
+    ("Diameter 38 m. Area in terms of π?", "361π m²", ["1,444π m²", "38π m²", "19π m²"], "Radius 19 m: π × 19 × 19 = 361π m².", "Exercise 1(d), p.163", 361, 361),
+    ("Radius 4 m. Area? (π ≈ 3.14)", "50.24 m²", ["25.12 m²", "12.56 m²", "200.96 m²"], "3.14 × 4 × 4 = 3.14 × 16 = 50.24 m².", "Exercise 3, p.164", r2(P314 * 16), 50.24),
+    ("Diameter 34 cm. Area? (π ≈ 3.14)", "907.46 cm²", ["3,629.84 cm²", "106.76 cm²", "453.73 cm²"], "Radius 17 cm: 3.14 × 17 × 17 = 3.14 × 289 = 907.46 cm².", "Exercise 4, p.164", r2(P314 * 289), 907.46),
+    ("Semicircle with diameter 28 cm. Area? (π ≈ 22/7)", "308 cm²", ["616 cm²", "1,232 cm²", "44 cm²"], "Radius 14 cm: ½ × 22/7 × 14 × 14 = ½ × 616 = 308 cm².", "Exercise 5(a), p.165", r2(P7 * 98), 308),
+    ("Quarter circle with radius 21 cm. Area? (π ≈ 22/7)", "346.5 cm²", ["1,386 cm²", "693 cm²", "33 cm²"], "¼ × 22/7 × 21 × 21 = ¼ × 1,386 = 346.5 cm².", "Exercise 5(b), p.165", r2(P7 * Fr(441, 4)), 346.5),
+    ("A circular paper has diameter 14 cm. Area? (π ≈ 3.14)", "153.86 cm²", ["615.44 cm²", "43.96 cm²", "21.98 cm²"], "Radius 7 cm: 3.14 × 49 = 153.86 cm².", "p.166", r2(P314 * 49), 153.86),
+    ("A circular field has diameter 12.5 m. Circumference? (π ≈ 3.14)", "39.25 m", ["78.5 m", "122.66 m", "19.63 m"], "3.14 × 12.5 = 39.25 m.", "p.166", r2(P314 * Fr("12.5")), 39.25),
+    ("A semicircle (radius 10 cm) has a triangle (base 20 cm, height 10 cm) inside. Shaded area? (π ≈ 22/7)", "57.14 cm²", ["157.14 cm²", "100 cm²", "214.29 cm²"], "157.14 - 100 = 57.14 cm².", "Do and Learn 1, p.170", r2(P7 * 50 - 100), 57.14),
+    ("A table has radius 26.5 cm. Length of cloth around it? (π ≈ 22/7)", "166.57 cm", ["83.29 cm", "2,207.07 cm", "53 cm"], "2 × 22/7 × 26.5 = 1,166 ÷ 7 ≈ 166.57 cm.", "Exercise 1, p.171", r2(2 * P7 * Fr("26.5")), 166.57),
+    ("A wheel of radius 25 cm makes 50 turns. Distance in meters? (π ≈ 3.14)", "78.5 m", ["7,850 m", "157 m", "39.25 m"], "1 turn = 157 cm. 50 × 157 = 7,850 cm = 78.5 m.", "Exercise 3, p.172", r2(P314 * 50 * 50 / 100), 78.5),
+    ("A wheel of diameter 49 cm rolls 924 cm. How many complete turns? (π ≈ 22/7)", "6", ["154", "19", "3"], "1 turn = 154 cm. 924 ÷ 154 = 6.", "Exercise 4, p.172", r2(924 / (P7 * 49)), 6),
+    ("⅓ of a circle with radius 9 cm. Perimeter of that part? (π ≈ 3.14)", "36.84 cm", ["18.84 cm", "56.52 cm", "27.84 cm"], "Arc = ⅓ × 56.52 = 18.84 cm, plus 9 + 9 = 36.84 cm.", "Exercise 5(a), p.173", r2(Fr(1, 3) * P314 * 18 + 18), 36.84),
+    ("A 28 cm square handkerchief with 8 semicircles of radius 7 cm. Area? (π ≈ 22/7)", "1,400 cm²", ["784 cm²", "2,016 cm²", "1,092 cm²"], "784 + 4 × 154 = 784 + 616 = 1,400 cm².", "Exercise 6, p.173", r2(784 + 4 * P7 * 49), 1400),
+    ("2 wheels (radius 7 cm) close 88 cm every 2 seconds and must cover 704 cm. Time? (π ≈ 22/7)", "16 seconds", ["8 seconds", "32 seconds", "4 seconds"], "704 ÷ 88 = 8 turns, 8 × 2 = 16 seconds.", "Problem Solving, p.177", 704 / 88 * 2, 16),
+]:
+    check(a, b_, f"bank 11 {src}")
+    b11.append(B(q, [ans] + wrongs, why, src))
+check(len(b11), 40, "bank 11 size")
+
 if PROBLEMS:
     print("MATHS CHECK FAILED. Nothing was written:")
     for p in PROBLEMS:
         print("  -", p)
     sys.exit(1)
 root = os.path.join(os.path.dirname(__file__), "..", "content")
-for uid, bank in (("07", b7), ("08", b8), ("09", b9), ("10", b10)):
+for uid, bank in (("07", b7), ("08", b8), ("09", b9), ("10", b10), ("11", b11)):
     with open(os.path.join(root, f"bank{uid}.json"), "w", encoding="utf-8") as fh:
         json.dump({"unit": uid, "questions": bank}, fh, ensure_ascii=False, separators=(",", ":"))
-print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)}, Unit 10: {len(b10)} questions. All checks passed.")
+print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)}, Unit 10: {len(b10)}, Unit 11: {len(b11)} questions. All checks passed.")

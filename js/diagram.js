@@ -56,6 +56,18 @@ const Diagram = (() => {
           else out.push(`<ellipse cx="${f(c[0])}" cy="${f(c[1])}" rx="${rx}" ry="${ry}" ${st}/>`);
           break;
         }
+        case "sector": {
+          // pie slice (or just the curve with open: true). a0, a1 in degrees, clockwise from 3 o'clock
+          const c = pt(it.c), r = it.r;
+          const rad = d => d * Math.PI / 180;
+          const s = [c[0] + r * Math.cos(rad(it.a0)), c[1] + r * Math.sin(rad(it.a0))];
+          const e = [c[0] + r * Math.cos(rad(it.a1)), c[1] + r * Math.sin(rad(it.a1))];
+          const large = ((it.a1 - it.a0) % 360 + 360) % 360 > 180 ? 1 : 0;
+          const arc = `A${r},${r} 0 ${large} 1 ${f(e[0])},${f(e[1])}`;
+          const d = it.open ? `M${f(s[0])},${f(s[1])} ${arc}` : `M${f(c[0])},${f(c[1])} L${f(s[0])},${f(s[1])} ${arc} Z`;
+          out.push(`<path d="${d}" fill="${it.open ? "none" : (it.fill || "none")}" stroke="${it.color || COLORS.line}" stroke-width="2.5" ${it.dash ? 'stroke-dasharray="6 5"' : ""}/>`);
+          break;
+        }
         case "dot": {
           const c = pt(it.p);
           out.push(`<circle cx="${f(c[0])}" cy="${f(c[1])}" r="${it.r || 4}" fill="${it.color || COLORS.line}"/>`);
@@ -132,6 +144,7 @@ const Diagram = (() => {
     Object.values(spec.pts || {}).forEach(p => grow(p[0], p[1], 30));
     for (const it of spec.items || []) {
       if (it.t === "circle") { const c = P(spec, it.c); grow(c[0] - it.r, c[1] - it.r, 8); grow(c[0] + it.r, c[1] + it.r, 8); }
+      if (it.t === "sector") { const c = P(spec, it.c); grow(c[0] - it.r, c[1] - it.r, 8); grow(c[0] + it.r, c[1] + it.r, 8); }
       if (it.t === "ell") { const c = P(spec, it.c); grow(c[0] - it.rx, c[1] - it.ry, 8); grow(c[0] + it.rx, c[1] + it.ry, 8); }
       if (it.t === "poly" || it.t === "seg") it.p.forEach(q => { const c = P(spec, q); if (c) grow(c[0], c[1], 8); });
       if (it.t === "txt") grow(it.at[0], it.at[1], 20);

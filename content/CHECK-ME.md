@@ -32,3 +32,10 @@ Please check:
 - **p.133 Q4 (See and Learn):** the question says the triangles' height is 10 cm, but the key works it out with 10.4 cm (area 374.4 cm²). I left this example off the Learn cards. Which height is right?
 - **p.125 Q4:** the key writes "(½ × 25 × 16) × (21.8 × 13)" but the answer 483.4 cm² comes from adding (+), not multiplying. The site's Learn card uses +.
 - **p.116 Q3:** the key writes ∠EDA = 180° - 58° - 35°. The site explains it as ∠ADC = 180° - 58° = 122°, then 122° - 35° = 87°. Same answer.
+
+## Unit 11
+No disagreements. All 41 Guided Answers and 40 practice questions matched the key, using the book's own π (22/7 or 3.14) for each question.
+
+Notes for T. Roy:
+- p.151 Q4 uses the calculator's π (62.83 cm). The site doesn't use it, because students may not have a calculator.
+- p.171 Q1 says "sloth skirting". The site writes "cloth skirting".
