@@ -9,7 +9,7 @@ const SHEET_URL = "";
 // Units shown on the home page. "ready: true" means the data file exists.
 const UNITS = [
   { id: "07", title: "2D Shapes",                        pages: "p.1 to 46",   icon: "🔺", ready: true  },
-  { id: "08", title: "3D Shapes",                        pages: "p.47 to 70",  icon: "🧊", ready: false },
+  { id: "08", title: "3D Shapes",                        pages: "p.47 to 70",  icon: "🧊", ready: true  },
   { id: "09", title: "Perimeter and Area of Triangles",  pages: "p.71 to 104", icon: "📐", ready: false },
   { id: "10", title: "Area and Perimeter of Polygons",   pages: "p.105 to 146",icon: "⬟",  ready: false },
   { id: "11", title: "Circumference and Area of Circles",pages: "p.147 to 180",icon: "⭕", ready: false },

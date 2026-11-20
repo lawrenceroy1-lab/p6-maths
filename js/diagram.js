@@ -47,6 +47,15 @@ const Diagram = (() => {
           out.push(`<circle cx="${f(c[0])}" cy="${f(c[1])}" r="${it.r}" fill="${it.fill || "none"}" stroke="${it.color || COLORS.line}" stroke-width="2.5" ${it.dash ? 'stroke-dasharray="6 5"' : ""}/>`);
           break;
         }
+        case "ell": {
+          // ellipse; half: "front" (lower half only) or "back" (upper half only)
+          const c = pt(it.c), rx = it.rx, ry = it.ry;
+          const st = `fill="${it.fill || "none"}" stroke="${it.color || COLORS.line}" stroke-width="2.5" ${it.dash ? 'stroke-dasharray="6 5"' : ""}`;
+          if (it.half === "front") out.push(`<path d="M${f(c[0] - rx)},${f(c[1])} A${rx},${ry} 0 0 0 ${f(c[0] + rx)},${f(c[1])}" ${st}/>`);
+          else if (it.half === "back") out.push(`<path d="M${f(c[0] - rx)},${f(c[1])} A${rx},${ry} 0 0 1 ${f(c[0] + rx)},${f(c[1])}" ${st}/>`);
+          else out.push(`<ellipse cx="${f(c[0])}" cy="${f(c[1])}" rx="${rx}" ry="${ry}" ${st}/>`);
+          break;
+        }
         case "dot": {
           const c = pt(it.p);
           out.push(`<circle cx="${f(c[0])}" cy="${f(c[1])}" r="${it.r || 4}" fill="${it.color || COLORS.line}"/>`);
@@ -123,6 +132,8 @@ const Diagram = (() => {
     Object.values(spec.pts || {}).forEach(p => grow(p[0], p[1], 30));
     for (const it of spec.items || []) {
       if (it.t === "circle") { const c = P(spec, it.c); grow(c[0] - it.r, c[1] - it.r, 8); grow(c[0] + it.r, c[1] + it.r, 8); }
+      if (it.t === "ell") { const c = P(spec, it.c); grow(c[0] - it.rx, c[1] - it.ry, 8); grow(c[0] + it.rx, c[1] + it.ry, 8); }
+      if (it.t === "poly" || it.t === "seg") it.p.forEach(q => { const c = P(spec, q); if (c) grow(c[0], c[1], 8); });
       if (it.t === "txt") grow(it.at[0], it.at[1], 20);
     }
     return `<svg class="diagram" viewBox="${f(x0)} ${f(y0)} ${f(x1 - x0)} ${f(y1 - y0)}" role="img" aria-label="diagram" xmlns="http://www.w3.org/2000/svg">${out.join("")}</svg>`;
