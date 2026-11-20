@@ -19,6 +19,7 @@ with contextlib.redirect_stdout(io.StringIO()):
     import build_unit07 as U7  # noqa: E402
     import build_unit08 as U8  # noqa: E402
     import build_unit09 as U9  # noqa: E402
+    import build_unit10 as U10  # noqa: E402
 
 GREEN, BLUE, ORANGE, PINK, YELLOW, PURPLE = "#C8E6C9", "#BBDEFB", "#FFE0B2", "#F8BBD0", "#FFF59D", "#D1C4E9"
 
@@ -317,13 +318,86 @@ for a, b_ in [(28 + 11 + 22, 61), (13 * 3, 39), (23 + 23 + 31, 77), (47 - 28, 19
     check(round(a, 2), b_, "bank 9")
 check(len(b9), 40, "bank 9 size")
 
+# ==================================================================
+# UNIT 10
+# ==================================================================
+b10 = []
+hexf = FIG({"_%d" % k: p for k, p in enumerate(U10.reg(6, 160, 120, 90, -120))}, [U9.poly(["_%d" % k for k in range(6)], BLUE), U10.ang("_0", "_5", "_1", "120°", 20)], names=False)
+check(120 * 6, 720, "R16a")
+b10.append(B("Each interior angle of hexagon ABCDEF is 120°. What is the sum of its interior angles?", ["720°", "540°", "360°", "600°"],
+             "120° × 6 = 720°. (A hexagon's angles always add up to 720°.)", "Review Q16(a), p.253", hexf))
+check(84 + 48 + 48 + 90 * 4, 540, "R16b")
+f16b = FIG({"I": [160, 20], "J": [240, 90], "K": [240, 200], "L": [80, 200], "M": [80, 90]},
+           [U9.poly(["I", "J", "K", "L", "M"], GREEN), U9.seg("M", "J", True), U10.ang("I", "M", "J", "84°", 20), U10.ang("M", "I", "J", "48°", 26), U9.ra("K", "J", "L"), U9.ra("L", "K", "M")])
+b10.append(B("Pentagon IJKLM is a triangle (84°, 48°, 48°) on top of a rectangle. What is the sum of its interior angles?", ["540°", "360°", "720°", "180°"],
+             "(84° + 48° + 48°) + (90° × 4) = 180° + 360° = 540°.", "Review Q16(b), p.253", f16b))
+check(round(15 + 16.2 + 16.2 + 15 + 15 + 15, 2), 92.4, "R17a")
+b10.append(B("A figure is a 15 cm square with a triangle of sides 16.2 cm attached. Its outside edges are 15, 16.2, 16.2, 15, 15 and 15 cm. Perimeter?", ["92.4 cm", "76.2 cm", "108.6 cm", "92 cm"],
+             "15 + 16.2 + 16.2 + 15 + 15 + 15 = 92.4 cm.", "Review Q17(a), p.253"))
+check(18 + 16 + 18 + 7 * 6, 94, "R17b")
+b10.append(B("A polygon has sides of 18 cm, 16 cm, 18 cm and six sides of 7 cm. Perimeter?", ["94 cm", "59 cm", "87 cm", "101 cm"],
+             "18 + 16 + 18 = 52, and 6 × 7 = 42. 52 + 42 = 94 cm.", "Review Q17(b), p.253"))
+check(7 * 7 + 11 * 11, 170, "R18a")
+b10.append(B("A figure is made of a 7 cm square and an 11 cm square. What is its area?", ["170 cm²", "77 cm²", "36 cm²", "324 cm²"],
+             "7 × 7 = 49 and 11 × 11 = 121. 49 + 121 = 170 cm².", "Review Q18(a), p.254"))
+check(21 / 3, 7, "R18b unit"); check(24 - 7 - 7, 10, "R18b FG"); check(21 * 7 + 14 * 7 + 10 * 7, 315, "R18b")
+b10.append(B("HG = FE = DC = 21 ÷ 3 = 7 cm. The figure is 24 cm tall. How long is FG?", ["10 cm", "17 cm", "14 cm", "7 cm"],
+             "24 - 7 - 7 = 10 cm.", "Review Q18(b), p.254"))
+b10.append(B("The figure is 3 rectangles: 21 × 7, 14 × 7 and 10 × 7 (all in cm). Total area?", ["315 cm²", "345 cm²", "245 cm²", "504 cm²"],
+             "147 + 98 + 70 = 315 cm².", "Review Q18(b), p.254"))
+check(20 * 18 - Fraction(12 * 14, 2) + Fraction(6 * 6, 2), 294, "R19")
+b10.append(B("Rectangle ADEF is 20 cm × 18 cm. Take away triangle ABG (84 cm²) and add triangle BCD (18 cm²). Area of the sheet?", ["294 cm²", "258 cm²", "360 cm²", "462 cm²"],
+             "360 - 84 = 276, and 276 + 18 = 294 cm².", "Review Q19, p.255"))
+for q, ans, wrongs, why, src in [
+    ("The interior angles of a pentagon add up to…", "540°", ["360°", "720°", "500°"], "A pentagon splits into 3 triangles: 3 × 180° = 540°.", "p.108"),
+    ("The interior angles of an octagon add up to…", "1,080°", ["720°", "1,440°", "900°"], "An octagon splits into 6 triangles: 6 × 180° = 1,080°.", "p.108"),
+    ("A quadrilateral has angles 90°, 120° and 120°. What is the fourth angle?", "30°", ["60°", "330°", "150°"], "360° - 90° - 120° - 120° = 30°.", "p.111"),
+    ("ABCD is a parallelogram with ∠DAB = 140°. What is ∠ABC?", "40°", ["140°", "220°", "50°"], "Angles between parallel sides add up to 180°: 180° - 140° = 40°.", "p.110"),
+    ("A rhombus has an angle of 60°. What is the angle next to it?", "120°", ["60°", "30°", "300°"], "180° - 60° = 120°.", "p.110"),
+    ("A trapezium has ∠NKL = 112° between its parallel sides. What is the other angle on the same side?", "68°", ["112°", "248°", "78°"], "180° - 112° = 68°.", "p.110"),
+    ("ABCD is a parallelogram. ∠BCD = 108° and ∠DBC = 53°. Find ∠ABD.", "19°", ["72°", "55°", "37°"], "∠ABC = 180° - 108° = 72°, and 72° - 53° = 19°.", "Do and Learn, p.114"),
+    ("An isosceles triangle has a vertex angle of 105°. Each base angle is…", "37.5°", ["75°", "52.5°", "42.5°"], "(180° - 105°) ÷ 2 = 75° ÷ 2 = 37.5°.", "Exercise 1(a), p.115"),
+    ("A rhombus has an angle of 69°. The angles next to it are…", "111°", ["69°", "21°", "291°"], "180° - 69° = 111°.", "Exercise 1(b), p.115"),
+    ("The outside angle at a corner is 114°. The reflex angle inside is…", "246°", ["66°", "114°", "156°"], "Angles at a point add up to 360°: 360° - 114° = 246°.", "Exercise 1(d), p.115"),
+    ("Each angle of a regular octagon is 135°. A rectangle corner inside uses 90°. What is left?", "45°", ["35°", "90°", "225°"], "135° - 90° = 45°.", "Exercise 1(f), p.115"),
+    ("∠BCF = 143° and ∠FCD = 130°. Angles at point C add up to 360°. What is ∠DCB?", "87°", ["93°", "273°", "107°"], "360° - 143° - 130° = 87°.", "Exercise 2, p.116"),
+    ("A rhombus ECFD has ∠CFD = 110°. Find ∠FDC.", "35°", ["70°", "55°", "110°"], "Triangle FDC has FD = FC: (180° - 110°) ÷ 2 = 35°.", "Exercise 3, p.116"),
+    ("DBEC is a rectangle. ∠CBE = 35°. Find ∠DBC.", "55°", ["35°", "145°", "65°"], "∠DBE = 90°, so 90° - 35° = 55°.", "Exercise 5, p.117"),
+    ("A pentagon has sides 9, 12, 21, 13.5 and 12 cm. Perimeter?", "67.5 cm", ["55.5 cm", "66.5 cm", "57 cm"], "9 + 12 + 21 + 13.5 + 12 = 67.5 cm.", "p.118"),
+    ("A regular hexagon has sides of 3.5 m. Perimeter in cm?", "2,100 cm", ["21 cm", "210 cm", "1,750 cm"], "3.5 × 6 = 21 m = 2,100 cm.", "Exercise 1(c), p.121"),
+    ("A regular octagon has sides of 2.9 m. Perimeter?", "23.2 m", ["17.4 m", "20.3 m", "29 m"], "2.9 × 8 = 23.2 m.", "Exercise 1(d), p.121"),
+    ("A star has 10 equal sides of 2 m. Perimeter in cm?", "2,000 cm", ["200 cm", "1,000 cm", "20 cm"], "2 × 10 = 20 m = 2,000 cm.", "Exercise 1(b), p.121"),
+    ("Polygon A has perimeter 42.7 m and polygon B 39.4 m. Difference?", "3.3 m", ["82.1 m", "13.3 m", "3.7 m"], "42.7 - 39.4 = 3.3 m.", "Exercise 3, p.123"),
+    ("A figure is a triangle (½ × 5 × 4), a 6 m × 5 m rectangle and a 6 m square. Total area?", "76 m²", ["66 m²", "86 m²", "96 m²"], "10 + 30 + 36 = 76 m².", "Do and Learn, p.127"),
+    ("A trapezium has height 5 m and parallel sides 19 m and 26 m. Area?", "112.5 m²", ["225 m²", "50 m²", "120 m²"], "½ × 5 × (19 + 26) = ½ × 5 × 45 = 112.5 m².", "Exercise 1(c), p.128"),
+    ("A 12 m square has white parts of 36 m² and 72 m². Shaded area?", "36 m²", ["108 m²", "144 m²", "72 m²"], "144 - 36 - 72 = 36 m².", "Exercise 1(e), p.129"),
+    ("A square has area 81 cm². How long is each side?", "9 cm", ["40.5 cm", "8 cm", "27 cm"], "9 × 9 = 81.", "Exercise 4, p.131"),
+    ("Squares of 81 cm² and 49 cm² have sides that form a right triangle. Its area?", "31.5 cm²", ["63 cm²", "65 cm²", "16 cm²"], "Sides 9 cm and 7 cm: ½ × 9 × 7 = 31.5 cm².", "Exercise 4, p.131"),
+    ("A regular hexagonal tray has perimeter 144 cm. Each side?", "24 cm", ["36 cm", "18 cm", "864 cm"], "144 ÷ 6 = 24 cm.", "p.132"),
+    ("A square of area 144 m². How long is each side?", "12 m", ["72 m", "36 m", "14 m"], "12 × 12 = 144.", "p.134"),
+    ("A 12 cm square paper has two corners cut off, each ½ × 6 × 6. Area of the pentagon left?", "108 cm²", ["126 cm²", "36 cm²", "144 cm²"], "144 - 18 - 18 = 108 cm².", "Do and Learn 2, p.135"),
+    ("A plot of 156 m² costs 12,000 baht per m². Total cost?", "1,872,000 baht", ["187,200 baht", "168,000 baht", "18,720,000 baht"], "156 × 12,000 = 1,872,000 baht.", "Exercise 4, p.137"),
+    ("A 150 cm wire makes 5 long and 5 short sides. One long + one short side is…", "30 cm", ["15 cm", "75 cm", "60 cm"], "150 ÷ 5 = 30 cm.", "Exercise 5, p.138"),
+    ("A fence is 1,500 m all round; 1,392.5 m is finished. How much is left?", "107.5 m", ["117.5 m", "2,892.5 m", "100 m"], "1,500 - 1,392.5 = 107.5 m.", "Exercise 6, p.138"),
+    ("8 right triangles, each with sides 3 cm and 4 cm at the right angle, make a hexagon. Area?", "48 cm²", ["96 cm²", "24 cm²", "84 cm²"], "½ × 3 × 4 = 6 cm², and 6 × 8 = 48 cm².", "Exercise 9(c), p.140"),
+    ("Janice used the slanted side 5 cm as the height of a triangle with base 6 cm. The real height is 4 cm. Correct triangle area?", "12 cm²", ["15 cm²", "24 cm²", "30 cm²"], "½ × 6 × 4 = 12 cm². The height must meet the base at a right angle.", "Math Journal, p.145"),
+]:
+    b10.append(B(q, [ans] + wrongs, why, src))
+for a, b_ in [(3 * 180, 540), (6 * 180, 1080), (360 - 330, 30), (180 - 140, 40), (180 - 60, 120), (180 - 112, 68), (72 - 53, 19), ((180 - 105) / 2, 37.5),
+              (180 - 69, 111), (360 - 114, 246), (135 - 90, 45), (360 - 143 - 130, 87), ((180 - 110) / 2, 35), (90 - 35, 55), (9 + 12 + 21 + 13.5 + 12, 67.5),
+              (3.5 * 6 * 100, 2100), (round(2.9 * 8, 2), 23.2), (2 * 10 * 100, 2000), (round(42.7 - 39.4, 2), 3.3), (10 + 30 + 36, 76), (2.5 * 45, 112.5),
+              (144 - 36 - 72, 36), (9 * 9, 81), (9 * 7 / 2, 31.5), (144 / 6, 24), (12 * 12, 144), (144 - 36, 108), (156 * 12000, 1872000), (150 / 5, 30),
+              (1500 - 1392.5, 107.5), (6 * 8, 48), (6 * 4 / 2, 12)]:
+    check(a, b_, "bank 10")
+check(len(b10), 40, "bank 10 size")
+
 if PROBLEMS:
     print("MATHS CHECK FAILED. Nothing was written:")
     for p in PROBLEMS:
         print("  -", p)
     sys.exit(1)
 root = os.path.join(os.path.dirname(__file__), "..", "content")
-for uid, bank in (("07", b7), ("08", b8), ("09", b9)):
+for uid, bank in (("07", b7), ("08", b8), ("09", b9), ("10", b10)):
     with open(os.path.join(root, f"bank{uid}.json"), "w", encoding="utf-8") as fh:
         json.dump({"unit": uid, "questions": bank}, fh, ensure_ascii=False, separators=(",", ":"))
-print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)} questions. All checks passed.")
+print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)}, Unit 10: {len(b10)} questions. All checks passed.")

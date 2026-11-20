@@ -24,3 +24,11 @@ Notes for T. Roy:
 - p.76 Q2 asks students to measure. The site shows the key's measurements in the steps (for example 5 cm, 4.5 cm, 3 cm).
 - No algebra letters: p.95 Q4 (the key uses x) and p.77 Q3(d) (the key uses 3(IJ)) are explained in words and with ÷ instead.
 - Book names (Siti, Ravi, Janice and others) stay in the book questions. The Learn cards use English names (Lily, Tom).
+
+## Unit 10
+No answer disagreements. All 59 Guided Answers and 40 practice questions matched the key.
+
+Please check:
+- **p.133 Q4 (See and Learn):** the question says the triangles' height is 10 cm, but the key works it out with 10.4 cm (area 374.4 cm²). I left this example off the Learn cards. Which height is right?
+- **p.125 Q4:** the key writes "(½ × 25 × 16) × (21.8 × 13)" but the answer 483.4 cm² comes from adding (+), not multiplying. The site's Learn card uses +.
+- **p.116 Q3:** the key writes ∠EDA = 180° - 58° - 35°. The site explains it as ∠ADC = 180° - 58° = 122°, then 122° - 35° = 87°. Same answer.
