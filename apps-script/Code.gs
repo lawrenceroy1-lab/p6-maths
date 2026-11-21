@@ -56,7 +56,10 @@ function getSheet_() {
   return sheet;
 }
 
-// Keeps text short. The cells are plain text, so nothing is turned into a date, number or formula.
+// Keeps text short and stops spreadsheet formulas being injected.
+// The cells are plain text, so "6/1" and "07" stay exactly as sent.
 function clean_(v, max) {
-  return String(v == null ? "" : v).slice(0, max);
+  let s = String(v == null ? "" : v).slice(0, max);
+  if (/^[=+\-@]/.test(s)) s = "'" + s;
+  return s;
 }
