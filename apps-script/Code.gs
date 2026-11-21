@@ -46,6 +46,9 @@ function getSheet_() {
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold");
     sheet.setFrozenRows(1);
   }
+  // Keep columns A to F as plain text, so a class like "6/1" is not turned into a date (1 June).
+  const textCols = sheet.getRange("A:F");
+  if (textCols.getNumberFormat() !== "@") textCols.setNumberFormat("@");
   return sheet;
 }
 

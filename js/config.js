@@ -4,7 +4,7 @@
 
 // Paste your Google Apps Script web app URL between the quotes.
 // Leave it empty ("") and scores are only saved in the browser.
-const SHEET_URL = "";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwVtMPLi4H1VjIQ4dFfTXrE6Pg900o2RGuvnM8ijyLJJeFtSkepXLhJdVzUA8olowu9/exec";
 
 // Units shown on the home page. "ready: true" means the data file exists.
 const UNITS = [
