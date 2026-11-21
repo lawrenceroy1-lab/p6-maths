@@ -52,9 +52,9 @@ function getSheet_() {
   return sheet;
 }
 
-// Stops spreadsheet formulas being injected and keeps text short.
+// Keeps text short and saves it exactly as text. The leading ' works like typing '6/1 in a cell:
+// Sheets will not turn it into a date, a number (07 → 7) or a formula. The ' itself is not shown.
 function clean_(v, max) {
-  let s = String(v == null ? "" : v).slice(0, max);
-  if (/^[=+\-@]/.test(s)) s = "'" + s;
-  return s;
+  const s = String(v == null ? "" : v).slice(0, max);
+  return s === "" ? "" : "'" + s;
 }
