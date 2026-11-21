@@ -10,11 +10,15 @@ function doPost(e) {
   try {
     const d = JSON.parse(e.postData.contents);
     const sheet = getSheet_();
-    sheet.appendRow([
+    // Set columns A to F of the new row to plain text FIRST, then write the values.
+    // (appendRow ignores the column format and turns "6/1" into a date.)
+    const row = sheet.getLastRow() + 1;
+    sheet.getRange(row, 1, 1, 6).setNumberFormat("@");
+    sheet.getRange(row, 1, 1, 9).setValues([[
       clean_(d.datetime, 30), clean_(d.name, 20), clean_(d.cls, 5),
       clean_(d.unit, 10), clean_(d.section, 60), clean_(d.activity, 30),
       Number(d.score) || 0, Number(d.total) || 0, Number(d.time) || 0
-    ]);
+    ]]);
     return ContentService.createTextOutput("ok");
   } catch (err) {
     return ContentService.createTextOutput("error");
@@ -34,7 +38,7 @@ function doGet(e) {
     return ContentService.createTextOutput(JSON.stringify({ rows: rows }))
       .setMimeType(ContentService.MimeType.JSON);
   }
-  return ContentService.createTextOutput("T. Roy score receiver is working ✅");
+  return ContentService.createTextOutput("T. Roy score receiver is working ✅ (code v4)");
 }
 
 function getSheet_() {
@@ -52,9 +56,7 @@ function getSheet_() {
   return sheet;
 }
 
-// Keeps text short and saves it exactly as text. The leading ' works like typing '6/1 in a cell:
-// Sheets will not turn it into a date, a number (07 → 7) or a formula. The ' itself is not shown.
+// Keeps text short. The cells are plain text, so nothing is turned into a date, number or formula.
 function clean_(v, max) {
-  const s = String(v == null ? "" : v).slice(0, max);
-  return s === "" ? "" : "'" + s;
+  return String(v == null ? "" : v).slice(0, max);
 }
