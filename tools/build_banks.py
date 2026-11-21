@@ -21,6 +21,7 @@ with contextlib.redirect_stdout(io.StringIO()):
     import build_unit09 as U9  # noqa: E402
     import build_unit10 as U10  # noqa: E402
     import build_unit11 as U11  # noqa: E402
+    import build_unit12 as U12  # noqa: E402
 
 GREEN, BLUE, ORANGE, PINK, YELLOW, PURPLE = "#C8E6C9", "#BBDEFB", "#FFE0B2", "#F8BBD0", "#FFF59D", "#D1C4E9"
 
@@ -451,13 +452,68 @@ for q, ans, wrongs, why, src, a, b_ in [
     b11.append(B(q, [ans] + wrongs, why, src))
 check(len(b11), 40, "bank 11 size")
 
+# ==================================================================
+# UNIT 12
+# ==================================================================
+b12 = []
+b12_items = [
+    ("An L-shaped solid is 6 cm deep. Its front is a 27 cm × 6 cm base with a 15 cm × 18 cm column on top. Volume?", "2,592 cm³", ["432 cm³", "1,620 cm³", "2,952 cm³"],
+     "Front area = 27 × 6 + 15 × 18 = 162 + 270 = 432 cm². Volume = 432 × 6 = 2,592 cm³.", "Review Q25(c), p.259", 27 * 6 * 6 + 15 * 18 * 6, 2592),
+    ("A step solid: a 30 × 24 × 11 block with a 30 × 12 × 11 block on top (cm). Volume?", "11,880 cm³", ["7,920 cm³", "3,960 cm³", "15,840 cm³"],
+     "30 × 24 × 11 = 7,920 and 30 × 12 × 11 = 3,960. 7,920 + 3,960 = 11,880 cm³.", "Review Q25(d), p.259", 30 * 24 * 11 + 30 * 12 * 11, 11880),
+    ("A 12 m × 18 m × 30 m block has an 8 m × 14 m hole all the way down. Volume?", "3,120 m³", ["6,480 m³", "3,360 m³", "9,840 m³"],
+     "12 × 18 × 30 = 6,480. Hole: 8 × 14 × 30 = 3,360. 6,480 - 3,360 = 3,120 m³.", "Review Q25(e), p.259", 12 * 18 * 30 - 8 * 14 * 30, 3120),
+    ("Tank A (30 × 10 × 20 cm) is full. Tank B (50 × 12 × 30 cm) is ¼ full. All of A is poured into B. New volume in B?", "10,500 cm³", ["6,000 cm³", "4,500 cm³", "18,000 cm³"],
+     "A = 30 × 10 × 20 = 6,000 cm³. B had ¼ × 50 × 12 × 30 = 4,500 cm³. 6,000 + 4,500 = 10,500 cm³.", "Review Q26(a), p.260", 6000 + 4500, 10500),
+    ("Tank B (base 50 cm × 12 cm) now holds 10,500 cm³. Water height?", "17.5 cm", ["175 cm", "21 cm", "7.5 cm"], "10,500 ÷ (50 × 12) = 10,500 ÷ 600 = 17.5 cm.", "Review Q26(b), p.260", 10500 / 600, 17.5),
+    ("A solid has 14 unit cubes. Its volume is…", "14 cubic units", ["7 cubic units", "28 cubic units", "14 square units"], "Each unit cube is 1 cubic unit.", "Let's Recall 1, p.182", 14, 14),
+    ("A cube is 2 cm by 2 cm by 2 cm. Volume?", "8 cm³", ["6 cm³", "4 cm³", "12 cm³"], "2 × 2 × 2 = 8 cm³.", "Let's Recall 2, p.183", 8, 8),
+    ("A cuboid is 8 m by 4 m by 3 m. Volume?", "96 m³", ["15 m³", "32 m³", "88 m³"], "8 × 4 × 3 = 96 m³.", "Let's Recall 3, p.183", 96, 96),
+    ("A tank 32 × 18 × 20 cm is ⅔ full. Volume of water?", "7,680 cm³", ["11,520 cm³", "3,840 cm³", "5,760 cm³"], "Capacity 11,520 cm³. ⅔ of it: 11,520 ÷ 3 × 2 = 7,680 cm³.", "Let's Recall 4, p.183", 11520 * 2 / 3, 7680),
+    ("A cuboid has base area 70 cm² and volume 840 cm³. Height?", "12 cm", ["14 cm", "910 cm", "770 cm"], "840 ÷ 70 = 12 cm.", "p.187", 840 / 70, 12),
+    ("Volume 1,190 cm³, shaded face 85 cm². The other edge?", "14 cm", ["1,105 cm", "17 cm", "12 cm"], "1,190 ÷ 85 = 14 cm.", "p.187", 1190 / 85, 14),
+    ("A cube's face has area 36 cm². Edge?", "6 cm", ["18 cm", "9 cm", "12 cm"], "6 × 6 = 36.", "p.188", 6 * 6, 36),
+    ("A cube has volume 512 m³. Edge?", "8 m", ["16 m", "64 m", "170.7 m"], "8 × 8 × 8 = 512.", "p.188", 8 ** 3, 512),
+    ("A solid: 12 × 1.5 × 4.5 plus 4 × 1.5 × 9.5 (cm). Volume?", "138 cm³", ["81 cm³", "57 cm³", "128 cm³"], "81 + 57 = 138 cm³.", "p.189", 81 + 57, 138),
+    ("A container: column 5 × 4 × 15 plus base 20 × 4 × 8 (m). Capacity?", "940 m³", ["640 m³", "300 m³", "760 m³"], "300 + 640 = 940 m³.", "Do and Learn, p.191", 300 + 640, 940),
+    ("Volume 6,480 cm³, shaded face 360 cm². The other edge?", "18 cm", ["16 cm", "6,120 cm", "20 cm"], "6,480 ÷ 360 = 18 cm.", "Exercise 1(b), p.192", 6480 / 360, 18),
+    ("Volume 7,644 cm³, shaded face 364 cm². The other edge?", "21 cm", ["12 cm", "7,280 cm", "24 cm"], "7,644 ÷ 364 = 21 cm.", "Exercise 1(c), p.192", 7644 / 364, 21),
+    ("A cube's face has area 169 cm². Edge?", "13 cm", ["84.5 cm", "16 cm", "11 cm"], "13 × 13 = 169.", "Exercise 2(a), p.193", 13 * 13, 169),
+    ("A cube has volume 216 cm³. Edge?", "6 cm", ["72 cm", "36 cm", "8 cm"], "6 × 6 × 6 = 216.", "Exercise 3(a), p.193", 6 ** 3, 216),
+    ("Steps of 10 × 5 × 8, 20 × 5 × 8 and 30 × 5 × 8 (cm). Volume?", "2,400 cm³", ["1,200 cm³", "4,800 cm³", "2,000 cm³"], "400 + 800 + 1,200 = 2,400 cm³.", "Exercise 4(b), p.194", 400 + 800 + 1200, 2400),
+    ("A 10 × 4 × 15 m block with an 8 × 4 × 7 m hole. Volume?", "376 m³", ["600 m³", "224 m³", "824 m³"], "600 - 224 = 376 m³.", "Exercise 4(c), p.194", 600 - 224, 376),
+    ("Water: 6 × 6 × 11 twice, plus 11 × 6 × 7 (cm). Volume?", "1,254 cm³", ["858 cm³", "1,650 cm³", "1,045 cm³"], "396 + 462 + 396 = 1,254 cm³.", "Exercise 5(a), p.195", 396 * 2 + 462, 1254),
+    ("A pool holds 28 m³. Peter pours in 32 m³. How much overflows?", "4 m³", ["60 m³", "28 m³", "2 m³"], "32 - 28 = 4 m³.", "Exercise 6, p.196", 32 - 28, 4),
+    ("You have 164 cm³ and need 424 cm³. How much more?", "260 cm³", ["588 cm³", "160 cm³", "250 cm³"], "424 - 164 = 260 cm³.", "Exercise 7, p.196", 424 - 164, 260),
+    ("A cuboid is 10 m long with volume 250 m³ and 2 square faces. Side of each square?", "5 m", ["25 m", "15 m", "2.5 m"], "250 ÷ 10 = 25 m², and 5 × 5 = 25.", "p.197", 250 / 10, 25),
+    ("Cube A is 27 cm³. Cube B's edge is 4 times A's edge. Volume of B?", "1,728 cm³", ["108 cm³", "432 cm³", "144 cm³"], "A's edge is 3 cm, B's is 12 cm. 12 × 12 × 12 = 1,728 cm³.", "p.197", 12 ** 3, 1728),
+    ("A tank 38 cm × 24 cm has water 15 cm high. 5,472 cm³ is poured away. New water height?", "9 cm", ["6 cm", "21 cm", "12 cm"], "Drop = 5,472 ÷ 912 = 6 cm. 15 - 6 = 9 cm.", "p.198", 15 - 5472 / 912, 9),
+    ("A metal piece: 2 × 1.25 × 4 twice, plus 8 × 1.25 × 2 (m). Volume?", "40 m³", ["30 m³", "20 m³", "50 m³"], "10 + 20 + 10 = 40 m³.", "Do and Learn, p.202", 10 + 20 + 10, 40),
+    ("A tank has base area 8 m² and holds 56 m³. Water height?", "7 m", ["48 m", "64 m", "8 m"], "56 ÷ 8 = 7 m.", "Exercise 1, p.203", 56 / 8, 7),
+    ("17.64 ℓ in cm³?", "17,640 cm³", ["1,764 cm³", "176.4 cm³", "17,640,000 cm³"], "1 ℓ = 1,000 cm³: 17.64 × 1,000 = 17,640 cm³.", "Exercise 2, p.203", 17.64 * 1000, 17640),
+    ("A tank (base 980 cm²) holds 17,640 cm³ when full. It is ⅔ full. Water height?", "12 cm", ["18 cm", "6 cm", "27 cm"], "Tank height 17,640 ÷ 980 = 18 cm. ⅔ of 18 = 12 cm.", "Exercise 2, p.203", 18 * 2 / 3, 12),
+    ("A tank with a 40 cm square base is ⅓ full with 36 ℓ. Height of the tank?", "67.5 cm", ["22.5 cm", "45 cm", "90 cm"], "36,000 ÷ 1,600 = 22.5 cm of water. × 3 = 67.5 cm.", "Exercise 3, p.204", 36000 / 1600 * 3, 67.5),
+    ("A tap fills 12 ℓ a minute for half an hour into a 75 cm × 60 cm tank. Tank height?", "80 cm", ["8 cm", "360 cm", "48 cm"], "12 × 30 = 360 ℓ = 360,000 cm³. 360,000 ÷ 4,500 = 80 cm.", "Exercise 4, p.204", 360000 / 4500, 80),
+    ("A marble cut: 2 cubes of 10 cm plus a 36 × 3 × 20 cm slab. Volume?", "4,160 cm³", ["2,160 cm³", "3,160 cm³", "4,060 cm³"], "1,000 + 2,160 + 1,000 = 4,160 cm³.", "Exercise 5, p.205", 1000 + 2160 + 1000, 4160),
+    ("A vase: 9 × 9 × 24 + 9 × 9 × 16 + 9 × 9 × 8 (cm). Capacity?", "3,888 cm³", ["1,944 cm³", "3,880 cm³", "4,212 cm³"], "1,944 + 1,296 + 648 = 3,888 cm³.", "Exercise 6, p.205", 1944 + 1296 + 648, 3888),
+    ("7.875 m³ in cm³?", "7,875,000 cm³", ["7,875 cm³", "78,750 cm³", "787,500 cm³"], "1 m³ = 1,000,000 cm³: 7.875 × 1,000,000 = 7,875,000 cm³.", "Exercise 7, p.206", 7.875 * 1000000, 7875000),
+    ("A water box of 3,200 cm³ has a 1,200 cm³ block inside. Water?", "2,000 cm³", ["4,400 cm³", "3,200 cm³", "1,200 cm³"], "3,200 - 1,200 = 2,000 cm³.", "Exercise 8, p.206", 3200 - 1200, 2000),
+    ("An E-shaped tank: 3 arms of 20 × 9 × 9 and a back of 10 × 9 × 45 (cm). Capacity?", "8,910 cm³", ["5,670 cm³", "4,860 cm³", "8,100 cm³"], "1,620 × 3 + 4,050 = 8,910 cm³.", "Exercise 9(a), p.207", 1620 * 3 + 4050, 8910),
+    ("Tank B (30 × 20 × 15 cm) is filled at 10 ℓ a minute. How long?", "9/10 min", ["9 min", "90 min", "1 1/2 min"], "30 × 20 × 15 = 9,000 cm³ = 9 ℓ. 9 ÷ 10 = 9/10 min.", "Exercise 10(a), p.208", 9000 / 1000 / 10, 0.9),
+    ("Container X (base 800 cm²) has water 36 cm high. Volume of water?", "28,800 cm³", ["836 cm³", "22,800 cm³", "2,880 cm³"], "800 × 36 = 28,800 cm³.", "Let's Think Along, p.209", 800 * 36, 28800),
+]
+for q, ans, wrongs, why, src, a, b_ in b12_items:
+    check(round(a, 4), b_, f"bank 12 {src}")
+    b12.append(B(q, [ans] + wrongs, why, src))
+check(len(b12), 40, "bank 12 size")
+
 if PROBLEMS:
     print("MATHS CHECK FAILED. Nothing was written:")
     for p in PROBLEMS:
         print("  -", p)
     sys.exit(1)
 root = os.path.join(os.path.dirname(__file__), "..", "content")
-for uid, bank in (("07", b7), ("08", b8), ("09", b9), ("10", b10), ("11", b11)):
+for uid, bank in (("07", b7), ("08", b8), ("09", b9), ("10", b10), ("11", b11), ("12", b12)):
     with open(os.path.join(root, f"bank{uid}.json"), "w", encoding="utf-8") as fh:
         json.dump({"unit": uid, "questions": bank}, fh, ensure_ascii=False, separators=(",", ":"))
-print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)}, Unit 10: {len(b10)}, Unit 11: {len(b11)} questions. All checks passed.")
+print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)}, Unit 10: {len(b10)}, Unit 11: {len(b11)}, Unit 12: {len(b12)} questions. All checks passed.")

@@ -39,3 +39,11 @@ No disagreements. All 41 Guided Answers and 40 practice questions matched the ke
 Notes for T. Roy:
 - p.151 Q4 uses the calculator's π (62.83 cm). The site doesn't use it, because students may not have a calculator.
 - p.171 Q1 says "sloth skirting". The site writes "cloth skirting".
+
+## Unit 12
+No disagreements. All 39 Guided Answers matched the key.
+
+Notes for T. Roy:
+- p.193 Q3(b) says "the volume of the shaded face is 64 m³". It should say "the volume of the cube". The site uses "the volume of the cube is 64 m³".
+- p.196 Q7 has many right answers. The site shows the key's one (add 260 cm³ to make 424 cm³) and says that other answers work too.
+- The Learn cards use English names (Emma) in place of Mrs Loh.
