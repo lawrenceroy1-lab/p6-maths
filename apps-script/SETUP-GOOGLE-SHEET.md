@@ -35,3 +35,25 @@ The same web app also feeds the 🏅 Leaderboard page. Nothing extra to set up. 
 - Speed Quiz: Score = number correct out of 10. Match Game: Score = pairs matched. Unit Test: Score = number correct out of 20. Time is always in seconds.
 - If a student has no internet, the score waits in their browser and is sent next time they open the site.
 - If you change Code.gs later: Deploy > **Manage deployments** > ✏️ edit > Version: **New version** > Deploy. The URL stays the same.
+
+## Update to code v5: class lists and teacher PIN
+Do this once. It takes about 5 minutes.
+
+1. Open your sheet **P6 Maths Scores**, then **Extensions > Apps Script**.
+2. Delete everything in the code box. Paste the new `apps-script/Code.gs`. Click **💾 Save**.
+3. Set your teacher PIN (it is never written in the code or on GitHub):
+   - Click the **⚙️ Project Settings** (gear on the left).
+   - Scroll to **Script properties**, click **Add script property**.
+   - Property: `TEACHER_PIN` · Value: your PIN (for example 6 digits only you know).
+   - Click **Save script properties**.
+4. Click **Deploy > Manage deployments**, click ✏️ (edit), set **Version: New version**, click **Deploy**. The link stays the same.
+5. Check: open the web app link. It should say **(code v5)**.
+
+## The Students tab
+- Column A class, B class number, C nickname. Column D is worked out for you: it adds "(No. 3)" when 2 students in one class share a nickname.
+- To fix a spelling or add a new student, edit columns A to C. The website picks up the change the next time a student opens it.
+
+## Teacher login
+- On the website, type **teacher** or **Lawrence** in the name box (or click "Teacher login"), then your PIN.
+- Google checks the PIN. After 5 wrong tries it pauses for 10 minutes.
+- The PIN is remembered only until the browser is closed.
