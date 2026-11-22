@@ -29,7 +29,7 @@ Notes for T. Roy:
 No answer disagreements. All 59 Guided Answers and 40 practice questions matched the key.
 
 Please check:
-- **p.133 Q4 (See and Learn):** the question says the triangles' height is 10 cm, but the key works it out with 10.4 cm (area 374.4 cm²). I left this example off the Learn cards. Which height is right?
+- **p.133 Q4 (See and Learn): SOLVED.** T. Roy confirmed 10.4 cm (the "10 cm" in the question is a misprint; 12 × √3 ÷ 2 = 10.39 cm). The Learn card shows 10.4 cm with a note. Perimeter 72 cm, area 374.4 cm².
 - **p.125 Q4:** the key writes "(½ × 25 × 16) × (21.8 × 13)" but the answer 483.4 cm² comes from adding (+), not multiplying. The site's Learn card uses +.
 - **p.116 Q3:** the key writes ∠EDA = 180° - 58° - 35°. The site explains it as ∠ADC = 180° - 58° = 122°, then 122° - 35° = 87°. Same answer.
 

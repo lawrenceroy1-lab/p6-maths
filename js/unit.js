@@ -58,7 +58,8 @@ function renderTabs() {
   document.querySelectorAll(".tab").forEach(b => b.onclick = () => { if (!leaveOk()) return; mode = ""; secIdx = +b.dataset.i; renderTabs(); go(); });
   const acts = document.getElementById("acts");
   acts.style.display = mode ? "none" : "";
-  acts.innerHTML = ACTS.map(a =>
+  if (act === "battle" && !isTeacher()) act = "learn";       // Class Battle is for the teacher's projector
+  acts.innerHTML = ACTS.filter(a => a.id !== "battle" || isTeacher()).map(a =>
     `<button class="act ${a.id === act ? "on" : ""}" data-a="${a.id}"><span class="e">${a.e}</span>${a.name}</button>`).join("");
   document.querySelectorAll(".act").forEach(b => b.onclick = () => { act = b.dataset.a; renderTabs(); go(); });
 }

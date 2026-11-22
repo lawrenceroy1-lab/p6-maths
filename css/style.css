@@ -282,3 +282,17 @@ table.lb tr.me td { background: #FFF8D6; }
 .podium .p1 { background: #F9A825; min-height: 150px; } .podium .p2 { background: #90A4AE; min-height: 120px; } .podium .p3 { background: #A1887F; min-height: 100px; }
 .podium .nm { font-size: .9em; } .podium .sc { font-size: .75em; font-weight: 700; }
 .unit-card .done { color: var(--answer); font-weight: 900; font-size: .75em; }
+
+/* ===== Name picker ===== */
+.sug { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 10px 0; }
+.namebtn { border: 3px solid var(--teach); background: var(--teach-bg); color: var(--title); border-radius: 12px; padding: 6px 14px; font-weight: 900; font-size: .9em; }
+.namebtn:hover { background: var(--teach); color: #fff; }
+.clsbtn.big { font-size: 1.2em; padding: 14px 22px; }
+.linkbtn.dark { color: var(--teach); }
+.modal-box { max-height: 92vh; overflow-y: auto; }
+.statrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.stat { background: var(--teach-bg); border-radius: 14px; padding: 10px; text-align: center; }
+.stat b { display: block; font-size: 1.6em; color: var(--title); }
+.stat span { font-size: .7em; color: var(--muted); font-weight: 700; }
+.lb-tabs select { font: inherit; font-size: .75em; padding: 6px 10px; border-radius: 10px; border: 2px solid var(--line); }
+.modal .linkbtn { color: var(--teach); }

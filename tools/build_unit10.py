@@ -487,6 +487,10 @@ sections.append({"id": "10-3", "title": "Finding Area of a Polygon", "short": "3
 # ==================================================================
 check(144 / 6, 24, "p.132 Q1"); check(6.25 * 8, 50, "p.132 Q2"); check(Fraction(8 * 9, 2) + 7 * Fraction("8.2") + 41 * Fraction("11.3"), Fraction("556.7"), "p.133 Q3")
 check(144 - 4 * 0, 144, "x"); check(12 - 4, 8, "p.134 CG"); check(16 * 2 / 8, 4, "p.134 JE")
+check(12 * 6, 72, "p.133 Q4 perim"); check(Fraction(1, 2) * 12 * Fraction("10.4"), Fraction("62.4"), "p.133 Q4 tri"); check(Fraction("62.4") * 6, Fraction("374.4"), "p.133 Q4 area")
+FHEX = FIG({"_o": [150, 130], "_p0": [250, 130], "_p1": [200, 43.4], "_p2": [100, 43.4], "_p3": [50, 130], "_p4": [100, 216.6], "_p5": [200, 216.6], "_m": [150, 216.6]},
+           [poly(["_p0", "_p1", "_p2", "_p3", "_p4", "_p5"], ORANGE), seg("_o", "_p0"), seg("_o", "_p1"), seg("_o", "_p2"), seg("_o", "_p3"), seg("_o", "_p4"), seg("_o", "_p5"),
+            seg("_o", "_m", True), lab("_p4", "_p5", "12 cm", 16), txt(186, 185, "10.4 cm", 14)], names=False)
 learn104 = [
     L("Idea", "Read, draw, solve", "<p>1. Read the problem twice.<br>2. Draw or look at the shape and write the numbers on it.<br>3. Perimeter → add the sides. Area → split into shapes.<br>4. Write the unit!</p>", None, 132),
     L("Example", "A hexagonal tray", "<p>The perimeter of a regular hexagonal tray is 144 cm. Each side?</p><p>6 equal sides share 144 cm: 144 ÷ 6 = <b>24 cm</b></p>", None, 132),
@@ -494,6 +498,11 @@ learn104 = [
     L("Idea", "Working backward", "<p>If you know an area, you can find a length.</p><p>Square of 144 m²: 12 × 12 = 144, so the side is 12 m.</p>"
       "<p>Triangle of 16 m² with base 8 m: ½ × 8 × height = 16, so 4 × height = 16 and height = <b>4 m</b>.</p>", None, 134),
     L("Example", "Garden in 3 parts", "<p>① triangle ½ × 8 × 9 = 36 m²<br>② rectangle 7 × 8.2 = 57.4 m²<br>③ rectangle 41 × 11.3 = 463.3 m²</p><p>Total = <b>556.7 m²</b></p>", None, 133),
+    L("Example", "6 triangles make a hexagon", "<p>John has 6 acrylic sheets in the shapes of equilateral triangles. Each side of each triangle is 12 cm long with the height of 10.4 cm. "
+      "If he made a hexagon out of these triangles, find the perimeter and area of this hexagon.</p>"
+      "<p class=\"small\">The book says 10 cm, but the picture and the working use 10.4 cm.</p>"
+      "<p>Perimeter: the hexagon has 6 outside sides of 12 cm. 12 × 6 = <b>72 cm</b></p>"
+      "<p>Area of 1 triangle: ½ × 12 × 10.4 = 62.4 cm²<br>Area of 6 triangles: 62.4 × 6 = <b>374.4 cm²</b></p>", FHEX, 133),
 ]
 q104 = []
 check(29 * Fraction("64.5") + 26 * Fraction("10.2"), Fraction("2135.7"), "p.135 area"); check(round(38.5 * 2 + 32 * 4 + 10.2 * 2, 2), 225.4, "p.135 perim")
