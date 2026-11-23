@@ -10,7 +10,7 @@ async function loadBank() {
   if (BANK) return BANK;
   const r = await fetch(`content/bank${UNIT_ID}.json`, { cache: "no-cache" });
   if (!r.ok) throw new Error("no bank");
-  BANK = (await r.json()).questions.map((q, i) => ({ ...q, id: i }));
+  BANK = thaiBank((await r.json()).questions).map((q, i) => ({ ...q, id: i }));
   return BANK;
 }
 
@@ -59,7 +59,7 @@ async function Practice() {
       <div class="q-body"><div class="q-text">${q.q}</div>${fig(q.fig)}
         <div class="popts">${q.opts.map((o, k) => `<button class="popt" data-k="${k}"><b class="let">${LETTERS[k]}</b><span>${o.o}</span></button>`).join("")}</div>
         <div id="pfb"></div></div></div>
-      <div class="btnrow"><button class="bigbtn grey" id="pBack" ${i === 0 ? "disabled" : ""}>⬅ Back</button></div>`,
+      <div class="btnrow"><button class="bigbtn grey" id="pBack" ${i === 0 ? "disabled" : ""}>${U("⬅ Back", "ย้อนกลับ")}</button></div>`,
       sideList("✏️ This round", round.map((x, j) => short(x.q, 38)), i, marks))}</div>`;
     view().querySelectorAll(".popt").forEach(b => b.onclick = () => choose(+b.dataset.k));
     document.getElementById("pBack").onclick = () => { i--; ask(); };
@@ -84,7 +84,7 @@ async function Practice() {
     document.getElementById("pfb").innerHTML = ok
       ? `<div class="fb-box good">✅ <b>Correct!</b> ${q.why}</div>`
       : `<div class="fb-box bad">❌ <b>Not quite.</b> The right answer is <b><u>${ans}</u></b>.<div class="why">💡 ${q.why}</div></div>`;
-    document.getElementById("pfb").innerHTML += `<div class="btnrow"><button class="bigbtn" id="pNext">${round.some((_, j) => picks[j] === undefined) ? "Next question ➡" : "See how I did 🏁"}</button></div>`;
+    document.getElementById("pfb").innerHTML += `<div class="btnrow"><button class="bigbtn" id="pNext">${round.some((_, j) => picks[j] === undefined) ? U("Next question ➡", "ข้อถัดไป") : U("See how I did 🏁", "ดูผล")}</button></div>`;
     document.getElementById("pNext").onclick = () => {
       const next = round.findIndex((_, j) => j > i && picks[j] === undefined);
       const any = round.findIndex((_, j) => picks[j] === undefined);

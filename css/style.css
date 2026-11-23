@@ -312,3 +312,15 @@ table.lb tr.me td { background: #FFF8D6; }
   .sidelist { position: sticky; top: 12px; max-height: calc(100vh - 24px); }
 }
 @media print { .sidelist { display: none !important; } .with-side { display: block; } }
+
+/* Thai line under the English */
+.th { display: block; color: #00695C; font-weight: 700; font-size: .9em; margin-top: 3px; line-height: 1.5; }
+.final .th { text-decoration: none; display: block; }
+button .th, .tab .th, .act .th { font-size: .78em; font-weight: 700; color: inherit; opacity: .9; margin-top: 1px; }
+.q-head .th { display: inline; margin-left: 6px; color: inherit; opacity: .85; }
+.ubtn.thsw { background: #00897B; flex: 0 1 110px; }
+
+/* Guided Answers: answer only after "Show answer"; space to write on the smart board */
+.ansbtn { margin-left: auto; }
+.mask { display: inline-block; min-width: 2.2em; text-align: center; background: #FFF3E0; border: 2px dashed var(--question); border-radius: 8px; color: var(--question); padding: 0 6px; }
+.workspace { margin-top: 14px; min-height: 260px; border: 3px dashed var(--line); border-radius: 14px; padding: 8px 12px; color: var(--muted); font-weight: 800; font-size: .8em; background: #fff; }

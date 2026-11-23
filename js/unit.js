@@ -2,18 +2,18 @@
 
 const params = new URLSearchParams(location.search);
 const UNIT_ID = params.get("u") || "07";
-let DATA = null;
+let DATA = null, RAW = null;     // RAW = the English data; DATA = with Thai lines added
 let secIdx = 0;
 let act = "learn";
 let cleanup = null;          // stops timers when leaving an activity
 
 const ACTS = [
-  { id: "learn",   e: "📘", name: "Learn" },
-  { id: "guided",  e: "🧭", name: "Guided Answers" },
-  { id: "flash",   e: "🃏", name: "Flashcards" },
-  { id: "match",   e: "🧩", name: "Match Game" },
-  { id: "quiz",    e: "⚡", name: "Speed Quiz" },
-  { id: "battle",  e: "🏆", name: "Class Battle" }
+  { id: "learn",   e: "📘", name: "Learn", th: "เรียนรู้" },
+  { id: "guided",  e: "🧭", name: "Guided Answers", th: "เฉลยทีละขั้น" },
+  { id: "flash",   e: "🃏", name: "Flashcards", th: "บัตรคำ" },
+  { id: "match",   e: "🧩", name: "Match Game", th: "เกมจับคู่" },
+  { id: "quiz",    e: "⚡", name: "Speed Quiz", th: "ตอบเร็ว" },
+  { id: "battle",  e: "🏆", name: "Class Battle", th: "แข่งขันในห้อง" }
 ];
 
 const fig = (spec, cls) => spec ? Diagram.render(spec).replace('class="diagram"', `class="diagram ${cls || ""}"`) : "";
@@ -22,8 +22,10 @@ const view = () => document.getElementById("view");
 // ---------- Load ----------
 fetch(`content/unit${UNIT_ID}.json`, { cache: "no-cache" })
   .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-  .then(d => {
-    DATA = d;
+  .then(async d => {
+    await loadThai(UNIT_ID);
+    RAW = d;
+    DATA = thaiUnit(RAW);
     document.title = `Unit ${Number(d.unit)}: ${d.title} | T. Roy`;
     document.getElementById("unitTitle").textContent = `Unit ${Number(d.unit)}: ${d.title}`;
     readHash();
@@ -50,17 +52,21 @@ function renderTabs() {
   document.getElementById("unitBar").innerHTML = `
     <button class="ubtn practice ${mode === "practice" ? "on" : ""}" data-m="practice">✏️ Practice</button>
     <button class="ubtn test ${mode === "test" ? "on" : ""}" data-m="test">📝 Unit Test</button>
-    <a class="ubtn board" href="leaderboard.html?u=${UNIT_ID}">🏅 Leaderboard</a>`;
+    <a class="ubtn board" href="leaderboard.html?u=${UNIT_ID}">🏅 Leaderboard</a>${thaiSwitch()}`;
+  document.getElementById("thSw").onclick = () => {
+    if (window.TEST_RUNNING) return alert("Please finish the Unit Test first.");
+    store.set("thai", !thaiOn()); DATA = thaiUnit(RAW); if (typeof BANK !== "undefined") BANK = null; renderTabs(); go();
+  };
   const leaveOk = () => !window.TEST_RUNNING || confirm("Leave the Unit Test? Your answers will be lost.");
   document.querySelectorAll(".ubtn[data-m]").forEach(b => b.onclick = () => { if (!leaveOk()) return; mode = b.dataset.m; renderTabs(); go(); });
   document.getElementById("tabs").innerHTML = DATA.sections.map((s, i) =>
-    `<button class="tab ${!mode && i === secIdx ? "on" : ""}" data-i="${i}">${esc(s.short || s.title)}</button>`).join("");
+    `<button class="tab ${!mode && i === secIdx ? "on" : ""}" data-i="${i}">${esc(s.short || s.title)}${s.thTitle ? `<span class="th">${s.thTitle}</span>` : ""}</button>`).join("");
   document.querySelectorAll(".tab").forEach(b => b.onclick = () => { if (!leaveOk()) return; mode = ""; secIdx = +b.dataset.i; renderTabs(); go(); });
   const acts = document.getElementById("acts");
   acts.style.display = mode ? "none" : "";
   if (act === "battle" && !isTeacher()) act = "learn";       // Class Battle is for the teacher's projector
   acts.innerHTML = ACTS.filter(a => a.id !== "battle" || isTeacher()).map(a =>
-    `<button class="act ${a.id === act ? "on" : ""}" data-a="${a.id}"><span class="e">${a.e}</span>${a.name}</button>`).join("");
+    `<button class="act ${a.id === act ? "on" : ""}" data-a="${a.id}"><span class="e">${a.e}</span>${U(a.name, a.th)}</button>`).join("");
   document.querySelectorAll(".act").forEach(b => b.onclick = () => { act = b.dataset.a; renderTabs(); go(); });
 }
 
@@ -78,7 +84,7 @@ function go() {
 
 function header(sec, title, extra) {
   return `<div class="panel-title"><h2>${title}</h2>${extra || ""}</div>
-          <p class="small" style="margin-top:-6px">${esc(sec.title)} · 📖 ${esc(sec.pages)}</p>`;
+          <p class="small" style="margin-top:-6px">${esc(sec.title)}${sec.thTitle ? " · " + sec.thTitle : ""} · 📖 ${esc(sec.pages)}</p>`;
 }
 
 // A numbered list of every card / question, on the right (below on phones). Tap one to jump to it.
@@ -101,7 +107,7 @@ function Learn(sec) {
   const cards = sec.learn;
   function draw() {
     const c = cards[i];
-    view().innerHTML = `<div class="panel">${header(sec, "📘 Learn")}${withSide(`
+    view().innerHTML = `<div class="panel">${header(sec, U("📘 Learn", "เรียนรู้"))}${withSide(`
       <div class="learn-card">
         <span class="tag ${c.tag === "Example" ? "ex" : ""}">${c.tag === "Example" ? "✏️ Example" : "💡 " + esc(c.tag || "Idea")}</span>
         ${c.page ? `<span class="badge" style="float:right;color:var(--teach)">📖 p.${c.page}</span>` : ""}
@@ -110,10 +116,10 @@ function Learn(sec) {
         <div>${c.html}</div>
       </div>
       <div class="btnrow">
-        <button class="bigbtn grey" id="lp" ${i === 0 ? "disabled" : ""}>⬅ Back</button>
-        <button class="bigbtn" id="ln">${i === cards.length - 1 ? "Done ✅" : "Next ➡"}</button>
+        <button class="bigbtn grey" id="lp" ${i === 0 ? "disabled" : ""}>${U("⬅ Back", "ย้อนกลับ")}</button>
+        <button class="bigbtn" id="ln">${i === cards.length - 1 ? U("Done ✅", "เสร็จแล้ว") : U("Next ➡", "ถัดไป")}</button>
       </div>
-      <div class="dots">Card ${i + 1} of ${cards.length}</div>`, sideList("📘 All cards", cards.map(c => plain(c.title)), i))}</div>`;
+      <div class="dots">Card ${i + 1} of ${cards.length}</div>`, sideList(thaiOn() ? "📘 All cards · ทุกบัตร" : "📘 All cards", cards.map(c => plain(c.title)), i))}</div>`;
     onJump(k => { i = k; draw(); });
     document.getElementById("lp").onclick = () => { i--; draw(); };
     document.getElementById("ln").onclick = () => {
@@ -127,41 +133,50 @@ function Learn(sec) {
 // =============== 2. GUIDED ANSWERS ===============
 function Guided(sec) {
   const qs = sec.questions;
-  let i = 0, shown = 0, hint = false;
+  let i = 0, shown = 0, hint = false, ans = false;
+  // The answer is never shown by itself: the last step hides its final result as "?" until "Show answer" is pressed.
+  const maskLast = h => h.split('<span class="th">').map(part => {
+    const k = part.lastIndexOf("<b>");
+    if (k < 0) return part;
+    const e = part.indexOf("</b>", k);
+    return e < 0 ? part : part.slice(0, k) + '<b class="mask">?</b>' + part.slice(e + 4);
+  }).join('<span class="th">');
   function draw() {
     const q = qs[i];
-    const steps = q.steps.slice(0, shown).map((s, k) => `<div class="step${k === shown - 1 ? " new" : ""}"><b class="n">Step ${k + 1}:</b> ${s}</div>`).join("");
+    const steps = q.steps.slice(0, shown).map((s, k) => `<div class="step${k === shown - 1 ? " new" : ""}"><b class="n">Step ${k + 1}${thaiOn() ? ` (ขั้นที่ ${k + 1})` : ""}:</b> ${k === q.steps.length - 1 && !ans ? maskLast(s) : s}</div>`).join("");
     const done = shown >= q.steps.length;
     let btns = "";
-    if (!hint) btns += `<button class="bigbtn yellow" id="gh">💡 Hint</button>`;
-    if (!done) btns += `<button class="bigbtn" id="gs">${shown === 0 ? "Show Step 1" : "Show next step"}</button>`;
-    view().innerHTML = `<div class="panel">${header(sec, "🧭 Guided Answers",
+    if (!hint) btns += `<button class="bigbtn yellow" id="gh">${U("💡 Hint", "คำใบ้")}</button>`;
+    if (!done) btns += `<button class="bigbtn" id="gs">${shown === 0 ? U("Show Step 1", "ดูขั้นที่ 1") : U("Show next step", "ดูขั้นต่อไป")}</button>`;
+    view().innerHTML = `<div class="panel">${header(sec, U("🧭 Guided Answers", "เฉลยทีละขั้น"),
         `<button class="bigbtn dark no-print" id="gprint">🖨️ Print / Save as PDF</button>`)}
       ${withSide(`<div class="q-card">
-        <div class="q-head"><span>${esc(q.label)}</span><span class="badge">📖 p.${q.page}</span></div>
+        <div class="q-head"><span>${q.label}</span><span class="badge">📖 p.${q.page}</span></div>
         <div class="q-body">
           <div class="q-text">${q.q}</div>
           ${fig(q.fig)}
           ${hint ? `<div class="hint-box">💡 ${q.hint}</div>` : ""}
           ${steps}
-          ${done ? `<div class="answer-box"><div>Answer: <span class="final">${q.answer}</span></div><div class="why">✅ WHY: ${q.why}</div></div>` : ""}
-          <div class="btnrow">${btns}</div>
+          ${ans ? `<div class="answer-box"><div>${U("Answer:", "คำตอบ")} <span class="final">${q.answer}</span></div><div class="why">✅ WHY${thaiOn() ? " (เพราะอะไร)" : ""}: ${q.why}</div></div>` : ""}
+          <div class="btnrow">${btns}<button class="bigbtn ansbtn ${ans ? "grey" : "green"}" id="ga">${ans ? U("🙈 Hide answer", "ซ่อนคำตอบ") : U("👀 Show answer", "ดูคำตอบ")}</button></div>
+          <div class="workspace no-print">✏️ ${U("Working space", "พื้นที่ทดเลข")}</div>
         </div>
       </div>
       <div class="btnrow">
-        <button class="bigbtn grey" id="gp" ${i === 0 ? "disabled" : ""}>⬅ Previous question</button>
-        <button class="bigbtn orange" id="gn" ${i === qs.length - 1 ? "disabled" : ""}>Next question ➡</button>
+        <button class="bigbtn grey" id="gp" ${i === 0 ? "disabled" : ""}>${U("⬅ Previous question", "ข้อก่อนหน้า")}</button>
+        <button class="bigbtn orange" id="gn" ${i === qs.length - 1 ? "disabled" : ""}>${U("Next question ➡", "ข้อถัดไป")}</button>
       </div>
-      <div class="dots">Question ${i + 1} of ${qs.length}</div>`, sideList("🧭 All questions", qs.map(x => `${x.label} (p.${x.page})`), i))}</div>`;
+      <div class="dots">Question ${i + 1} of ${qs.length}</div>`, sideList(thaiOn() ? "🧭 All questions · ทุกข้อ" : "🧭 All questions", qs.map(x => `${plain(x.label)} (p.${x.page})`), i))}</div>`;
     const on = (id, f) => { const el = document.getElementById(id); if (el) el.onclick = f; };
     on("gh", () => { hint = true; draw(); });
     on("gs", () => { shown++; draw(); });
+    on("ga", () => { ans = !ans; draw(); });
     on("gp", () => { i--; reset(); });
     on("gn", () => { i++; reset(); });
     on("gprint", () => printGuided(sec));
     onJump(k => { i = k; reset(); });
   }
-  function reset() { shown = 0; hint = false; draw(); }
+  function reset() { shown = 0; hint = false; ans = false; if (window.DrawPad) DrawPad.clear(); draw(); }
   draw();
 }
 
@@ -219,14 +234,14 @@ function Flash(sec) {
         <div class="face front">${fig(c.fig)}<div>${c.front}</div></div>
         <div class="face back"><div>${c.back}</div></div>
       </div></div>
-      <p class="tapnote">Tap the card to flip it</p>
+      <p class="tapnote">${U("Tap the card to flip it", "แตะบัตรเพื่อพลิก")}</p>
       <div class="btnrow">
-        <button class="bigbtn orange" id="fn">🔁 Still learning</button>
-        <button class="bigbtn green" id="fk">✅ I know it</button>
+        <button class="bigbtn orange" id="fn">${U("🔁 Still learning", "ยังต้องฝึก")}</button>
+        <button class="bigbtn green" id="fk">${U("✅ I know it", "รู้แล้ว")}</button>
       </div>
       <div class="btnrow">
-        <button class="bigbtn grey" id="fp" ${pos === 0 ? "disabled" : ""}>⬅ Back</button>
-        <button class="bigbtn" id="fx">${pos === order.length - 1 ? "Finish 🏁" : "Next ➡"}</button>
+        <button class="bigbtn grey" id="fp" ${pos === 0 ? "disabled" : ""}>${U("⬅ Back", "ย้อนกลับ")}</button>
+        <button class="bigbtn" id="fx">${pos === order.length - 1 ? U("Finish 🏁", "จบ") : U("Next ➡", "ถัดไป")}</button>
       </div>`, sideList(order.length < cards.length ? "🔁 Still learning cards" : "🃏 All cards", names, pos))}</div>`;
     document.getElementById("card").onclick = () => { flipped = !flipped; document.getElementById("card").classList.toggle("flipped", flipped); };
     const move = p => { pos = p; flipped = false; draw(); };
@@ -288,7 +303,7 @@ function Match(sec) {
   view().innerHTML = `<div class="panel">${header(sec, "🧩 Match Game")}
     <p style="text-align:center">Match each pair as fast as you can!</p>
     ${best !== null ? `<p style="text-align:center;font-weight:800">🏅 Your best time: ${best} s</p>` : ""}
-    <div class="btnrow"><button class="bigbtn green" id="ms">Start ▶</button></div></div>`;
+    <div class="btnrow"><button class="bigbtn green" id="ms">${U("Start ▶", "เริ่ม")}</button></div></div>`;
   document.getElementById("ms").onclick = start;
 }
 
@@ -348,7 +363,7 @@ function Quiz(sec) {
       document.getElementById("fb").innerHTML = `
         <div class="feedback ${ok ? "good" : "bad"}">${ok ? `✅ Correct! +${gained}${streak >= 2 ? ` 🔥 Streak ${streak}` : ""}` : (k < 0 ? "⏰ Time's up!" : "❌ Not quite.")}</div>
         ${ok ? "" : `<p style="text-align:center">The answer is <b>${right}</b>.</p>`}
-        <div class="btnrow"><button class="bigbtn" id="qn">${i < qs.length - 1 ? "Next ➡" : "See my score 🏁"}</button></div>`;
+        <div class="btnrow"><button class="bigbtn" id="qn">${i < qs.length - 1 ? U("Next ➡", "ถัดไป") : U("See my score 🏁", "ดูคะแนน")}</button></div>`;
       document.getElementById("qn").onclick = () => { i++; i < qs.length ? ask() : end(); };
     }
   }
@@ -365,7 +380,7 @@ function Quiz(sec) {
   }
   view().innerHTML = `<div class="panel">${header(sec, "⚡ Speed Quiz")}
     <p style="text-align:center">10 questions · 20 seconds each<br>Answer fast for more points. Get them right in a row for a 🔥 streak bonus!</p>
-    <div class="btnrow"><button class="bigbtn green" id="qs">Start ▶</button></div></div>`;
+    <div class="btnrow"><button class="bigbtn green" id="qs">${U("Start ▶", "เริ่ม")}</button></div></div>`;
   document.getElementById("qs").onclick = start;
 }
 
