@@ -231,17 +231,22 @@ f_sph = F(sphere(160, 115, 85, YELLOW) + [{"t": "dot", "p": [160, 115]}, seg([16
 f_pyr = F(square_pyramid(160, 200, 180, 170, PINK) + [txt(250, 215, "base", 15), txt(160, 20, "vertex", 15)])
 f_prism = F(tri_prism(50, 70, 110, 100, 150, GREEN))
 
+def PHOTO(name, label):
+    """A picture of real objects made in Canva: img/unit08/objects-<name>.jpg"""
+    return {"img": f"img/unit08/objects-{name}.jpg", "alt": label, "label": label}
+
+
 learn81 = [
     L("Idea", "Cubes (Let's Recall)", "<p>A <b>cube</b> has <b>6 square faces</b>. All the faces are the same size.</p>", f_cube, 48),
-    L("Example", "Objects that are cubes", "<p>A dice 🎲 and a square wooden crate are cubes.</p><p>Every face is a square of the same size.</p>", f_cube, 48),
+    L("Example", "Objects that are cubes", "<p>A dice 🎲 and a square wooden crate are cubes.</p><p>Every face is a square of the same size.</p>", PHOTO("cubes", "a dice and a wooden crate"), 48),
     L("Idea", "Cuboids (Let's Recall)", "<p>A <b>cuboid</b> can have <b>6 rectangular faces</b>.</p><p>It can also have <b>4 rectangular faces and 2 square faces</b>.</p>", f_cuboid, 48),
-    L("Example", "Objects that are cuboids", "<p>A sponge and a juice carton are cuboids.</p><p>Their faces are rectangles.</p>", f_cuboid, 48),
+    L("Example", "Objects that are cuboids", "<p>A sponge and a juice carton are cuboids.</p><p>Their faces are rectangles.</p>", PHOTO("cuboids", "a sponge and a juice carton"), 48),
     L("Idea", "Cone", "<p>A solid <b>cone</b> has <b>1 flat face</b> (a circle) and <b>1 curved face</b>.</p><p>It has 1 vertex (the point).</p>", f_cone, 49),
-    L("Example", "Objects that are cones", "<p>An ice cream cone 🍦 and a party hat 🎉 are cones.</p>", f_cone, 49),
+    L("Example", "Objects that are cones", "<p>An ice cream cone 🍦 and a party hat 🎉 are cones.</p>", PHOTO("cones", "an ice cream cone and a party hat"), 49),
     L("Idea", "Cylinder", "<p>A solid <b>cylinder</b> has <b>2 flat faces</b> (circles) and <b>1 curved face</b>.</p>", f_cyl, 49),
-    L("Example", "Objects that are cylinders", "<p>A can of drink 🥫, a chalk pastel and an oil drum are cylinders.</p>", f_cyl, 49),
+    L("Example", "Objects that are cylinders", "<p>A can of drink 🥫, a chalk pastel and an oil drum are cylinders.</p>", PHOTO("cylinders", "a can, a chalk pastel and an oil drum"), 49),
     L("Idea", "Sphere", "<p>A <b>sphere</b> is perfectly round. It has <b>no flat face</b>.</p><p>Every point on it is the same distance (the radius) from the center. Half a sphere is a <b>hemisphere</b>.</p>", f_sph, 50),
-    L("Example", "Objects that are spheres", "<p>A basketball 🏀 and a soccer ball ⚽ are spheres.</p>", f_sph, 50),
+    L("Example", "Objects that are spheres", "<p>A basketball 🏀 and a soccer ball ⚽ are spheres.</p>", PHOTO("spheres", "a basketball and a soccer ball"), 50),
     L("Idea", "Pyramid", "<p>A <b>pyramid</b> has a flat <b>base</b>. Its other faces are <b>triangles</b> that meet at one point, the <b>vertex</b>.</p>"
       "<p>The base can be any shape with straight edges: a triangle, a square, a trapezium, a hexagon…</p>", f_pyr, 50),
     L("Example", "Naming pyramids", "<p>The base gives the name.</p><p>Square base → <b>square pyramid</b> (4 triangle faces).<br>Triangle base → <b>triangular pyramid</b> (3 other triangle faces).</p>", f_pyr, 50),

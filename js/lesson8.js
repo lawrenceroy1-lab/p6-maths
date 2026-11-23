@@ -133,6 +133,7 @@ const WHY = {
 };
 // Pictures of solids and objects (all from the Unit 8 page) and their right answers
 const PICS = [["L0.0", "Cube"], ["L0.2", "Cuboid"], ["L0.4", "Cone"], ["L0.6", "Cylinder"], ["L0.8", "Sphere"], ["L0.10", "Pyramid"], ["L0.13", "Prism"],
+  ["L0.1", "Cube"], ["L0.3", "Cuboid"], ["L0.5", "Cone"], ["L0.7", "Cylinder"], ["L0.9", "Sphere"],
   ["Q0.0", "Pyramid"], ["Q0.1", "Cylinder"], ["Q0.2", "Sphere"], ["Q0.3", "Prism"], ["Q0.4", "Sphere"], ["Q0.5", "Cone"], ["Q0.6", "Cylinder"], ["Q0.7", "Cylinder"], ["Q0.8", "Pyramid"]];
 const NETS = [["L1.1", "Cube"], ["L1.4", "Cuboid"], ["L1.7", "Prism"], ["L1.8", "Pyramid"], ["L1.9", "Pyramid"], ["L1.10", "Cylinder"], ["L1.11", "Cone"]];
 const CLUES = [
