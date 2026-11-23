@@ -296,3 +296,19 @@ table.lb tr.me td { background: #FFF8D6; }
 .stat span { font-size: .7em; color: var(--muted); font-weight: 700; }
 .lb-tabs select { font: inherit; font-size: .75em; padding: 6px 10px; border-radius: 10px; border: 2px solid var(--line); }
 .modal .linkbtn { color: var(--teach); }
+
+/* Numbered list of cards / questions on the right (below on phones) */
+.with-side { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+.side-main { min-width: 0; }
+.sidelist { background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 8px; max-height: 300px; overflow-y: auto; }
+.sidelist h3 { font-size: .8em; margin: 4px 6px 8px; color: var(--title); }
+.sidelist button { display: flex; align-items: flex-start; gap: 8px; width: 100%; text-align: left; border: 0; background: none; padding: 6px 8px; border-radius: 10px; font-weight: 700; font-size: .72em; color: var(--ink); line-height: 1.3; }
+.sidelist button:hover { background: var(--teach-bg); }
+.sidelist button .n { min-width: 28px; height: 28px; border-radius: 50%; background: var(--teach-bg); color: var(--title); display: inline-flex; align-items: center; justify-content: center; font-weight: 900; flex-shrink: 0; }
+.sidelist button.on { background: var(--question-bg); outline: 2px solid var(--question); }
+.sidelist button.on .n { background: var(--question); color: #fff; }
+@media (min-width: 900px) {
+  .with-side { grid-template-columns: minmax(0, 1fr) 260px; align-items: start; }
+  .sidelist { position: sticky; top: 12px; max-height: calc(100vh - 24px); }
+}
+@media print { .sidelist { display: none !important; } .with-side { display: block; } }

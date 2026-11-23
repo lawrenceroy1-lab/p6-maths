@@ -32,7 +32,7 @@ async function Practice() {
   let bank;
   try { bank = await loadBank(); } catch (e) { return noBank(); }
   const seenKey = `practiceSeen_${UNIT_ID}`;
-  let round = [], i = 0, right = 0, wrong = [];
+  let round = [], i = 0, right = 0, wrong = [], picks = [];
 
   function intro() {
     const seen = store.get(seenKey, []);
@@ -48,20 +48,26 @@ async function Practice() {
     const old = shuffle(bank.filter(q => seen.has(q.id)));
     return fresh.concat(old).slice(0, PRACTICE_N);
   }
-  function start(qs) { round = qs.map(prep); i = 0; right = 0; wrong = []; ask(); }
+  function start(qs) { round = qs.map(prep); i = 0; right = 0; wrong = []; picks = []; ask(); }
 
   function ask() {
     const q = round[i];
+    const marks = round.map((_, j) => picks[j] === undefined ? "" : round[j].opts[picks[j]].ok ? "✅" : "❌");
     view().innerHTML = `<div class="panel">${unitHead("✏️ Practice", `Question ${i + 1} of ${round.length}`)}
-      <div class="progress"><div style="width:${(i / round.length) * 100}%"></div></div>
+      <div class="progress"><div style="width:${(picks.filter(x => x !== undefined).length / round.length) * 100}%"></div></div>${withSide(`
       <div class="q-card"><div class="q-head"><span>Question ${i + 1}</span><span class="badge">📖 ${esc(q.src)}</span></div>
       <div class="q-body"><div class="q-text">${q.q}</div>${fig(q.fig)}
         <div class="popts">${q.opts.map((o, k) => `<button class="popt" data-k="${k}"><b class="let">${LETTERS[k]}</b><span>${o.o}</span></button>`).join("")}</div>
-        <div id="pfb"></div></div></div></div>`;
+        <div id="pfb"></div></div></div>
+      <div class="btnrow"><button class="bigbtn grey" id="pBack" ${i === 0 ? "disabled" : ""}>⬅ Back</button></div>`,
+      sideList("✏️ This round", round.map((x, j) => short(x.q, 38)), i, marks))}</div>`;
     view().querySelectorAll(".popt").forEach(b => b.onclick = () => choose(+b.dataset.k));
+    document.getElementById("pBack").onclick = () => { i--; ask(); };
+    onJump(j => { i = j; ask(); });
+    if (picks[i] !== undefined) choose(picks[i], true);   // already answered: show it again, it can't be changed
   }
 
-  function choose(k) {
+  function choose(k, review) {
     const q = round[i];
     const ok = q.opts[k].ok;
     view().querySelectorAll(".popt").forEach((b, j) => {
@@ -70,7 +76,7 @@ async function Practice() {
       else if (j === k) b.classList.add("wrong");
       else b.classList.add("dim");
     });
-    if (ok) right++; else wrong.push(round[i]);
+    if (!review) { picks[i] = k; if (ok) right++; else wrong.push(round[i]); }
     const seen = new Set(store.get(seenKey, []));
     seen.add(q.id);
     store.set(seenKey, [...seen]);
@@ -78,9 +84,14 @@ async function Practice() {
     document.getElementById("pfb").innerHTML = ok
       ? `<div class="fb-box good">✅ <b>Correct!</b> ${q.why}</div>`
       : `<div class="fb-box bad">❌ <b>Not quite.</b> The right answer is <b><u>${ans}</u></b>.<div class="why">💡 ${q.why}</div></div>`;
-    document.getElementById("pfb").innerHTML += `<div class="btnrow"><button class="bigbtn" id="pNext">${i < round.length - 1 ? "Next question ➡" : "See how I did 🏁"}</button></div>`;
-    document.getElementById("pNext").onclick = () => { i++; i < round.length ? ask() : end(); };
-    document.getElementById("pfb").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    document.getElementById("pfb").innerHTML += `<div class="btnrow"><button class="bigbtn" id="pNext">${round.some((_, j) => picks[j] === undefined) ? "Next question ➡" : "See how I did 🏁"}</button></div>`;
+    document.getElementById("pNext").onclick = () => {
+      const next = round.findIndex((_, j) => j > i && picks[j] === undefined);
+      const any = round.findIndex((_, j) => picks[j] === undefined);
+      i = next >= 0 ? next : any;
+      i >= 0 ? ask() : end();
+    };
+    if (!review) document.getElementById("pfb").scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
   function end() {

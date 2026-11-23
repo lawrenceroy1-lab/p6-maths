@@ -81,13 +81,27 @@ function header(sec, title, extra) {
           <p class="small" style="margin-top:-6px">${esc(sec.title)} · 📖 ${esc(sec.pages)}</p>`;
 }
 
+// A numbered list of every card / question, on the right (below on phones). Tap one to jump to it.
+const plain = h => String(h || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+const short = (h, n = 46) => { const t = plain(h); return t.length > n ? t.slice(0, n - 1) + "…" : t; };
+function sideList(title, names, cur, marks) {
+  return `<nav class="sidelist no-print" aria-label="${esc(title)}"><h3>${title}</h3>${names.map((nm, k) =>
+    `<button class="${k === cur ? "on" : ""}" data-j="${k}"><span class="n">${k + 1}</span><span>${esc(nm)}${marks && marks[k] ? " " + marks[k] : ""}</span></button>`).join("")}</nav>`;
+}
+function withSide(main, side) { return `<div class="with-side"><div class="side-main">${main}</div>${side}</div>`; }
+function onJump(f) {
+  view().querySelectorAll(".sidelist button").forEach(b => b.onclick = () => { f(+b.dataset.j); window.scrollTo({ top: 0, behavior: "smooth" }); });
+  const on = view().querySelector(".sidelist button.on");
+  if (on && on.parentElement.scrollHeight > on.parentElement.clientHeight) on.parentElement.scrollTop = on.offsetTop - 80;
+}
+
 // =============== 1. LEARN ===============
 function Learn(sec) {
   let i = 0;
   const cards = sec.learn;
   function draw() {
     const c = cards[i];
-    view().innerHTML = `<div class="panel">${header(sec, "📘 Learn")}
+    view().innerHTML = `<div class="panel">${header(sec, "📘 Learn")}${withSide(`
       <div class="learn-card">
         <span class="tag ${c.tag === "Example" ? "ex" : ""}">${c.tag === "Example" ? "✏️ Example" : "💡 " + esc(c.tag || "Idea")}</span>
         ${c.page ? `<span class="badge" style="float:right;color:var(--teach)">📖 p.${c.page}</span>` : ""}
@@ -99,7 +113,8 @@ function Learn(sec) {
         <button class="bigbtn grey" id="lp" ${i === 0 ? "disabled" : ""}>⬅ Back</button>
         <button class="bigbtn" id="ln">${i === cards.length - 1 ? "Done ✅" : "Next ➡"}</button>
       </div>
-      <div class="dots">Card ${i + 1} of ${cards.length}</div></div>`;
+      <div class="dots">Card ${i + 1} of ${cards.length}</div>`, sideList("📘 All cards", cards.map(c => plain(c.title)), i))}</div>`;
+    onJump(k => { i = k; draw(); });
     document.getElementById("lp").onclick = () => { i--; draw(); };
     document.getElementById("ln").onclick = () => {
       if (i < cards.length - 1) { i++; draw(); }
@@ -122,8 +137,7 @@ function Guided(sec) {
     if (!done) btns += `<button class="bigbtn" id="gs">${shown === 0 ? "Show Step 1" : "Show next step"}</button>`;
     view().innerHTML = `<div class="panel">${header(sec, "🧭 Guided Answers",
         `<button class="bigbtn dark no-print" id="gprint">🖨️ Print / Save as PDF</button>`)}
-      <div class="q-pick">${qs.map((x, k) => `<button class="${k === i ? "on" : ""}" data-k="${k}" title="${esc(x.label)}">${k + 1}</button>`).join("")}</div>
-      <div class="q-card">
+      ${withSide(`<div class="q-card">
         <div class="q-head"><span>${esc(q.label)}</span><span class="badge">📖 p.${q.page}</span></div>
         <div class="q-body">
           <div class="q-text">${q.q}</div>
@@ -138,14 +152,14 @@ function Guided(sec) {
         <button class="bigbtn grey" id="gp" ${i === 0 ? "disabled" : ""}>⬅ Previous question</button>
         <button class="bigbtn orange" id="gn" ${i === qs.length - 1 ? "disabled" : ""}>Next question ➡</button>
       </div>
-      <div class="dots">Question ${i + 1} of ${qs.length}</div></div>`;
+      <div class="dots">Question ${i + 1} of ${qs.length}</div>`, sideList("🧭 All questions", qs.map(x => `${x.label} (p.${x.page})`), i))}</div>`;
     const on = (id, f) => { const el = document.getElementById(id); if (el) el.onclick = f; };
     on("gh", () => { hint = true; draw(); });
     on("gs", () => { shown++; draw(); });
     on("gp", () => { i--; reset(); });
     on("gn", () => { i++; reset(); });
     on("gprint", () => printGuided(sec));
-    view().querySelectorAll(".q-pick button").forEach(b => b.onclick = () => { i = +b.dataset.k; reset(); });
+    onJump(k => { i = k; reset(); });
   }
   function reset() { shown = 0; hint = false; draw(); }
   draw();
@@ -173,24 +187,34 @@ function printGuided(sec) {
 }
 
 // =============== 3. FLASHCARDS ===============
+// Always in the same order. Back and Next, plus a numbered list to jump to any card.
 function Flash(sec) {
-  let deck = sec.flash.slice(), know = [], learning = [], flipped = false;
+  const cards = sec.flash;
+  let order = cards.map((_, k) => k);    // which cards are in this round (all, or only "Still learning")
+  let pos = 0, flipped = false;
+  const mark = {};                       // card number -> "know" or "learn"
+  const icon = k => mark[k] === "know" ? "✅" : mark[k] === "learn" ? "🔁" : "";
+  const count = m => Object.values(mark).filter(v => v === m).length;
   function draw() {
-    if (!deck.length) {
+    if (pos >= order.length) {
+      const learning = cards.map((_, k) => k).filter(k => mark[k] === "learn");
       view().innerHTML = `<div class="panel">${header(sec, "🃏 Flashcards")}
         <div class="bigscore">🎉</div>
-        <p style="text-align:center"><b class="pile-know">I know it: ${know.length}</b> · <b class="pile-learn">Still learning: ${learning.length}</b></p>
+        <p style="text-align:center"><b class="pile-know">I know it: ${count("know")}</b> · <b class="pile-learn">Still learning: ${count("learn")}</b></p>
         <div class="btnrow">
-          ${learning.length ? `<button class="bigbtn orange" id="fl">Practise "Still learning" again</button>` : ""}
+          <button class="bigbtn grey" id="fb">⬅ Back to the last card</button>
+          ${learning.length ? `<button class="bigbtn orange" id="fl">Practise "Still learning" again (${learning.length})</button>` : ""}
           <button class="bigbtn" id="fa">Start again with all cards</button></div></div>`;
+      document.getElementById("fb").onclick = () => { pos = order.length - 1; draw(); };
       const fl = document.getElementById("fl");
-      if (fl) fl.onclick = () => { deck = shuffle(learning); learning = []; draw(); };
-      document.getElementById("fa").onclick = () => { deck = sec.flash.slice(); know = []; learning = []; draw(); };
+      if (fl) fl.onclick = () => { order = learning; pos = 0; draw(); };
+      document.getElementById("fa").onclick = () => { order = cards.map((_, k) => k); Object.keys(mark).forEach(k => delete mark[k]); pos = 0; draw(); };
       return;
     }
-    const c = deck[0];
-    view().innerHTML = `<div class="panel">${header(sec, "🃏 Flashcards", `<button class="bigbtn dark" id="fs">🔀 Shuffle</button>`)}
-      <div class="piles"><span>Cards left: ${deck.length}</span><span class="pile-know">✅ I know it: ${know.length}</span><span class="pile-learn">🔁 Still learning: ${learning.length}</span></div>
+    const k = order[pos], c = cards[k];
+    const names = order.map(j => short(cards[j].front, 40) + (icon(j) ? " " + icon(j) : ""));
+    view().innerHTML = `<div class="panel">${header(sec, "🃏 Flashcards")}${withSide(`
+      <div class="piles"><span>Card ${pos + 1} of ${order.length}</span><span class="pile-know">✅ I know it: ${count("know")}</span><span class="pile-learn">🔁 Still learning: ${count("learn")}</span></div>
       <div class="flash-area"><div class="flash ${flipped ? "flipped" : ""}" id="card">
         <div class="face front">${fig(c.fig)}<div>${c.front}</div></div>
         <div class="face back"><div>${c.back}</div></div>
@@ -199,11 +223,18 @@ function Flash(sec) {
       <div class="btnrow">
         <button class="bigbtn orange" id="fn">🔁 Still learning</button>
         <button class="bigbtn green" id="fk">✅ I know it</button>
-      </div></div>`;
+      </div>
+      <div class="btnrow">
+        <button class="bigbtn grey" id="fp" ${pos === 0 ? "disabled" : ""}>⬅ Back</button>
+        <button class="bigbtn" id="fx">${pos === order.length - 1 ? "Finish 🏁" : "Next ➡"}</button>
+      </div>`, sideList(order.length < cards.length ? "🔁 Still learning cards" : "🃏 All cards", names, pos))}</div>`;
     document.getElementById("card").onclick = () => { flipped = !flipped; document.getElementById("card").classList.toggle("flipped", flipped); };
-    document.getElementById("fs").onclick = () => { deck = shuffle(deck); flipped = false; draw(); };
-    document.getElementById("fk").onclick = () => { know.push(deck.shift()); flipped = false; draw(); };
-    document.getElementById("fn").onclick = () => { learning.push(deck.shift()); flipped = false; draw(); };
+    const move = p => { pos = p; flipped = false; draw(); };
+    document.getElementById("fk").onclick = () => { mark[k] = "know"; move(pos + 1); };
+    document.getElementById("fn").onclick = () => { mark[k] = "learn"; move(pos + 1); };
+    document.getElementById("fp").onclick = () => move(pos - 1);
+    document.getElementById("fx").onclick = () => move(pos + 1);
+    onJump(move);
   }
   draw();
 }
