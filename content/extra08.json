@@ -1,0 +1,70 @@
+{
+  "8-1": {
+    "explore": "solid",
+    "facts": [
+      ["Cone: 1 flat face (circle), 1 curved face, 1 vertex.", "กรวย: หน้าแบน 1 หน้า (วงกลม) หน้าโค้ง 1 หน้า จุดยอด 1 จุด"],
+      ["Cylinder: 2 flat faces (circles) and 1 curved face.", "ทรงกระบอก: หน้าแบน 2 หน้า (วงกลม) และหน้าโค้ง 1 หน้า"],
+      ["Sphere: no flat face.", "ทรงกลม: ไม่มีหน้าแบน"],
+      ["Pyramid: a base and triangle faces that meet at one vertex. The base gives the name.", "พีระมิด: มีฐานและหน้าสามเหลี่ยมที่พบกันที่จุดยอดเดียว ชื่อมาจากฐาน"],
+      ["Prism: the same shape at both ends, rectangles in between.", "ปริซึม: รูปร่างเหมือนกันที่ปลายทั้งสองข้าง มีสี่เหลี่ยมผืนผ้าอยู่ระหว่างกลาง"]
+    ],
+    "mistakes": [
+      ["Calling a cone a pyramid. A pyramid has flat triangle faces; a cone has one curved face.", "เรียกกรวยว่าพีระมิด พีระมิดมีหน้าสามเหลี่ยมแบน กรวยมีหน้าโค้ง 1 หน้า"],
+      ["Mixing up a pyramid and a prism. Pyramid: a point at the top. Prism: the same shape at both ends.", "สับสนพีระมิดกับปริซึม พีระมิด: มีปลายแหลมด้านบน ปริซึม: รูปร่างเหมือนกันที่ปลายทั้งสอง"],
+      ["Naming a pyramid by its sides instead of its base.", "เรียกชื่อพีระมิดตามด้านข้างแทนที่จะเรียกตามฐาน"]
+    ],
+    "words": [
+      ["solid (3D shape)", "รูปเรขาคณิตสามมิติ", "a shape you can hold", "รูปทรงที่จับได้"],
+      ["face", "หน้า", "a flat or curved surface", "พื้นผิวแบนหรือโค้ง"],
+      ["edge", "ขอบ (สัน)", "where 2 faces meet", "ที่ที่หน้า 2 หน้าพบกัน"],
+      ["vertex (vertices)", "จุดยอด", "a corner point", "จุดที่เป็นมุม"],
+      ["cone", "กรวย", "circle base, curved face, 1 point", "ฐานวงกลม หน้าโค้ง ปลายแหลม 1 จุด"],
+      ["cylinder", "ทรงกระบอก", "2 circles and a curved face", "วงกลม 2 หน้าและหน้าโค้ง"],
+      ["sphere", "ทรงกลม", "round all over", "กลมทุกด้าน"],
+      ["pyramid", "พีระมิด", "triangles meeting at a vertex", "สามเหลี่ยมพบกันที่จุดยอด"],
+      ["prism", "ปริซึม", "same shape at both ends", "รูปร่างเหมือนกันที่ปลายทั้งสอง"],
+      ["hemisphere", "ครึ่งทรงกลม", "half a sphere", "ครึ่งหนึ่งของทรงกลม"]
+    ]
+  },
+  "8-2": {
+    "explore": "net",
+    "facts": [
+      ["A net is a flat shape that folds up into a solid.", "รูปคลี่คือรูปแบนที่พับแล้วได้รูปทรงสามมิติ"],
+      ["Cube net: 6 squares. Cuboid net: 6 rectangles in 3 pairs.", "รูปคลี่ลูกบาศก์: สี่เหลี่ยมจัตุรัส 6 รูป รูปคลี่ทรงสี่เหลี่ยมมุมฉาก: สี่เหลี่ยมผืนผ้า 6 รูปเป็น 3 คู่"],
+      ["Triangular prism net: 3 rectangles + 2 triangles at opposite ends.", "รูปคลี่ปริซึมสามเหลี่ยม: สี่เหลี่ยมผืนผ้า 3 รูป + สามเหลี่ยม 2 รูปที่ปลายคนละข้าง"],
+      ["Pyramid net: the base with a triangle on every edge.", "รูปคลี่พีระมิด: ฐานที่มีสามเหลี่ยมติดอยู่ทุกขอบ"],
+      ["Cylinder net: 1 rectangle + 2 circles. Cone net: a fan shape + 1 circle.", "รูปคลี่ทรงกระบอก: สี่เหลี่ยมผืนผ้า 1 รูป + วงกลม 2 รูป รูปคลี่กรวย: รูปพัด + วงกลม 1 รูป"]
+    ],
+    "mistakes": [
+      ["Thinking any 6 squares make a cube net. Fold it in your head: no 2 squares may land on the same face.", "คิดว่าสี่เหลี่ยมจัตุรัส 6 รูปแบบไหนก็เป็นรูปคลี่ลูกบาศก์ ลองพับในใจ ต้องไม่มี 2 รูปทับหน้าเดียวกัน"],
+      ["Putting both triangles of a prism net on the same side.", "วางสามเหลี่ยมทั้งสองของรูปคลี่ปริซึมไว้ด้านเดียวกัน"],
+      ["Forgetting a face. Count the faces of the solid, then count the shapes in the net.", "ลืมหน้าไปหน้าหนึ่ง ให้นับหน้าของรูปทรง แล้วนับรูปในรูปคลี่"]
+    ],
+    "words": [
+      ["net", "รูปคลี่", "a flat shape that folds into a solid", "รูปแบนที่พับเป็นรูปทรงสามมิติ"],
+      ["fold", "พับ", "bend along an edge", "งอตามขอบ"],
+      ["square", "รูปสี่เหลี่ยมจัตุรัส", "4 equal sides, 4 right angles", "ด้านเท่ากัน 4 ด้าน มุมฉาก 4 มุม"],
+      ["rectangle", "รูปสี่เหลี่ยมผืนผ้า", "opposite sides equal, 4 right angles", "ด้านตรงข้ามยาวเท่ากัน มุมฉาก 4 มุม"],
+      ["fan shape (sector)", "รูปพัด (เซกเตอร์)", "rolls into a cone", "ม้วนเป็นกรวย"]
+    ]
+  },
+  "8-ch": {
+    "explore": "solid",
+    "facts": [
+      ["For cubes, prisms and pyramids: faces + vertices - edges = 2.", "สำหรับลูกบาศก์ ปริซึม และพีระมิด: หน้า + จุดยอด - ขอบ = 2"],
+      ["Cube: 6 faces, 8 vertices, 12 edges.", "ลูกบาศก์: 6 หน้า 8 จุดยอด 12 ขอบ"],
+      ["Triangular prism: 5 faces, 6 vertices, 9 edges.", "ปริซึมสามเหลี่ยม: 5 หน้า 6 จุดยอด 9 ขอบ"],
+      ["Square pyramid: 5 faces, 5 vertices, 8 edges.", "พีระมิดฐานสี่เหลี่ยมจัตุรัส: 5 หน้า 5 จุดยอด 8 ขอบ"]
+    ],
+    "mistakes": [
+      ["Counting the same edge twice. Mark each one as you count it.", "นับขอบเดียวกันสองครั้ง ให้ทำเครื่องหมายทุกขอบที่นับแล้ว"],
+      ["Forgetting the hidden faces and edges at the back (the dotted lines).", "ลืมหน้าและขอบที่ซ่อนอยู่ด้านหลัง (เส้นประ)"]
+    ],
+    "words": [
+      ["faces (F)", "หน้า", "flat surfaces", "พื้นผิวแบน"],
+      ["edges (E)", "ขอบ", "lines where faces meet", "เส้นที่หน้ามาพบกัน"],
+      ["vertices (V)", "จุดยอด", "corner points", "จุดที่เป็นมุม"],
+      ["hidden edge", "ขอบที่มองไม่เห็น", "drawn as a dotted line", "วาดเป็นเส้นประ"]
+    ]
+  }
+}

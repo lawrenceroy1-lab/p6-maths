@@ -1,0 +1,129 @@
+{
+  "7-1": {
+    "explore": "triangle",
+    "facts": [
+      ["Sort by SIDES: equilateral (3 equal), isosceles (2 equal), scalene (none equal).", "แบ่งตามด้าน: ด้านเท่า (เท่ากัน 3 ด้าน) หน้าจั่ว (เท่ากัน 2 ด้าน) ด้านไม่เท่า (ไม่เท่ากันเลย)"],
+      ["Sort by ANGLES: acute (all less than 90°), right (one 90°), obtuse (one more than 90°).", "แบ่งตามมุม: มุมแหลม (ทุกมุมเล็กกว่า 90°) มุมฉาก (มีมุม 90° หนึ่งมุม) มุมป้าน (มีมุมหนึ่งใหญ่กว่า 90°)"],
+      ["Equal sides are opposite equal angles.", "ด้านที่ยาวเท่ากันอยู่ตรงข้ามกับมุมที่เท่ากัน"],
+      ["Every equilateral triangle has three 60° angles, so it is also acute.", "รูปสามเหลี่ยมด้านเท่าทุกรูปมีมุม 60° สามมุม จึงเป็นรูปสามเหลี่ยมมุมแหลมด้วย"]
+    ],
+    "mistakes": [
+      ["Saying a triangle is 'acute' because ONE angle is small. All three angles must be less than 90°.", "บอกว่าเป็นมุมแหลมเพราะมีมุมเล็กแค่มุมเดียว ต้องเล็กกว่า 90° ทั้งสามมุม"],
+      ["Forgetting that a triangle can have two names, one for its sides and one for its angles.", "ลืมว่ารูปสามเหลี่ยมมีได้สองชื่อ ชื่อหนึ่งตามด้าน อีกชื่อตามมุม"],
+      ["Thinking the base is always at the bottom of the picture. The base is the side opposite the vertex angle.", "คิดว่าฐานต้องอยู่ข้างล่างเสมอ ฐานคือด้านที่อยู่ตรงข้ามกับมุมยอด"]
+    ],
+    "words": [
+      ["equilateral triangle", "รูปสามเหลี่ยมด้านเท่า", "3 equal sides", "ด้านเท่ากัน 3 ด้าน"],
+      ["isosceles triangle", "รูปสามเหลี่ยมหน้าจั่ว", "2 equal sides", "ด้านเท่ากัน 2 ด้าน"],
+      ["scalene triangle", "รูปสามเหลี่ยมด้านไม่เท่า", "no equal sides", "ไม่มีด้านเท่ากัน"],
+      ["acute angle", "มุมแหลม", "less than 90°", "เล็กกว่า 90°"],
+      ["right angle", "มุมฉาก", "exactly 90°", "เท่ากับ 90°"],
+      ["obtuse angle", "มุมป้าน", "more than 90°, less than 180°", "ใหญ่กว่า 90° แต่เล็กกว่า 180°"],
+      ["vertex", "จุดยอด", "a corner point", "จุดที่เป็นมุม"],
+      ["base", "ฐาน", "the side opposite the vertex angle", "ด้านที่อยู่ตรงข้ามกับมุมยอด"],
+      ["height", "ความสูง", "a line from the vertex at 90° to the base", "เส้นจากจุดยอดที่ตั้งฉากกับฐาน"]
+    ]
+  },
+  "7-2": {
+    "explore": "sum",
+    "facts": [
+      ["The 3 angles of any triangle add up to 180°.", "มุมทั้ง 3 ของรูปสามเหลี่ยมใด ๆ รวมกันได้ 180°"],
+      ["Missing angle = 180° - first angle - second angle.", "มุมที่หายไป = 180° - มุมแรก - มุมที่สอง"],
+      ["Isosceles: each base angle = (180° - vertex angle) ÷ 2.", "หน้าจั่ว: มุมที่ฐานแต่ละมุม = (180° - มุมยอด) ÷ 2"],
+      ["In a right triangle, the other 2 angles add up to 90°.", "ในรูปสามเหลี่ยมมุมฉาก อีก 2 มุมรวมกันได้ 90°"],
+      ["Angles on a straight line add up to 180°.", "มุมบนเส้นตรงรวมกันได้ 180°"]
+    ],
+    "mistakes": [
+      ["Taking away only ONE angle from 180°. Take away both angles you know.", "ลบออกจาก 180° แค่มุมเดียว ต้องลบมุมที่รู้ทั้งสองมุม"],
+      ["Forgetting to divide by 2 for the base angles of an isosceles triangle.", "ลืมหารด้วย 2 เมื่อหามุมที่ฐานของรูปสามเหลี่ยมหน้าจั่ว"],
+      ["Not checking. Always add your 3 angles: they must make 180°.", "ไม่ตรวจคำตอบ ให้บวกมุมทั้ง 3 เสมอ ต้องได้ 180°"]
+    ],
+    "words": [
+      ["angle sum", "ผลรวมของมุม", "all the angles added together", "มุมทั้งหมดบวกกัน"],
+      ["straight line", "เส้นตรง", "an angle of 180°", "มุม 180°"],
+      ["unknown angle", "มุมที่ไม่รู้ขนาด", "the angle we must find", "มุมที่ต้องหา"],
+      ["base angles", "มุมที่ฐาน", "the 2 angles on the base", "มุม 2 มุมบนฐาน"],
+      ["vertex angle", "มุมยอด", "the angle opposite the base", "มุมที่อยู่ตรงข้ามกับฐาน"]
+    ]
+  },
+  "7-3": {
+    "explore": "triangle",
+    "facts": [
+      ["Always draw a quick sketch with the measurements first.", "วาดรูปคร่าว ๆ พร้อมเขียนขนาดก่อนเสมอ"],
+      ["1 side + 2 angles: draw the side, then an angle at each end.", "รู้ 1 ด้านกับ 2 มุม: ลากด้านก่อน แล้ววาดมุมที่ปลายแต่ละข้าง"],
+      ["2 sides + the angle between: draw a side, draw the angle, measure the second side.", "รู้ 2 ด้านกับมุมระหว่างด้าน: ลากด้านหนึ่ง วาดมุม แล้ววัดด้านที่สอง"],
+      ["3 sides: use a compass to find the third corner.", "รู้ 3 ด้าน: ใช้วงเวียนหามุมที่สาม"]
+    ],
+    "mistakes": [
+      ["Reading the wrong scale on the protractor (50° instead of 130°). Start counting from the 0 on your line.", "อ่านสเกลผิดบนไม้โปรแทรกเตอร์ (50° แทน 130°) ให้นับจาก 0 ที่อยู่บนเส้นของเรา"],
+      ["Not putting the center of the protractor exactly on the corner.", "ไม่ได้วางจุดกึ่งกลางของไม้โปรแทรกเตอร์ที่มุมพอดี"],
+      ["Rubbing out the construction lines. Keep them: they show your working.", "ลบเส้นที่ใช้สร้าง ให้เก็บไว้ เพราะเป็นวิธีทำของเรา"]
+    ],
+    "words": [
+      ["ruler", "ไม้บรรทัด", "draws straight lines, measures cm", "ลากเส้นตรง วัด cm"],
+      ["protractor", "ไม้โปรแทรกเตอร์", "measures and draws angles", "วัดและวาดมุม"],
+      ["set square", "ไม้ฉาก", "draws a right angle", "วาดมุมฉาก"],
+      ["compass", "วงเวียน", "draws circles and arcs", "วาดวงกลมและส่วนโค้ง"],
+      ["sketch", "รูปคร่าว ๆ", "a quick drawing with measurements", "ภาพวาดเร็ว ๆ พร้อมขนาด"],
+      ["construct", "สร้าง", "draw accurately with tools", "วาดอย่างแม่นยำด้วยอุปกรณ์"]
+    ]
+  },
+  "7-4": {
+    "explore": "circle",
+    "facts": [
+      ["Diameter = 2 × radius.", "เส้นผ่านศูนย์กลาง = 2 × รัศมี"],
+      ["Radius = diameter ÷ 2.", "รัศมี = เส้นผ่านศูนย์กลาง ÷ 2"],
+      ["All radii of one circle are the same length. So are all its diameters.", "รัศมีทุกเส้นของวงกลมวงเดียวกันยาวเท่ากัน เส้นผ่านศูนย์กลางก็เช่นกัน"],
+      ["The diameter is the longest chord.", "เส้นผ่านศูนย์กลางคือคอร์ดที่ยาวที่สุด"]
+    ],
+    "mistakes": [
+      ["Mixing up radius and diameter. The radius stops at the center; the diameter goes all the way across.", "สับสนระหว่างรัศมีกับเส้นผ่านศูนย์กลาง รัศมีหยุดที่จุดศูนย์กลาง เส้นผ่านศูนย์กลางลากผ่านไปจนสุด"],
+      ["Calling every line across a circle a diameter. It must pass through the center.", "เรียกทุกเส้นที่ลากผ่านวงกลมว่าเส้นผ่านศูนย์กลาง ต้องผ่านจุดศูนย์กลางเท่านั้น"],
+      ["Doubling when you should halve. Diameter → radius: divide by 2.", "คูณ 2 ในขณะที่ควรหาร 2 จากเส้นผ่านศูนย์กลางเป็นรัศมี: หารด้วย 2"]
+    ],
+    "words": [
+      ["center", "จุดศูนย์กลาง", "the point in the middle", "จุดที่อยู่ตรงกลาง"],
+      ["radius (radii)", "รัศมี", "center to the edge", "จากจุดศูนย์กลางถึงขอบ"],
+      ["diameter", "เส้นผ่านศูนย์กลาง", "edge to edge through the center", "จากขอบถึงขอบผ่านจุดศูนย์กลาง"],
+      ["chord", "คอร์ด", "joins any 2 points on the edge", "เชื่อม 2 จุดใด ๆ บนขอบ"],
+      ["circumference", "เส้นรอบวง", "the distance all the way round", "ระยะทางรอบวงกลม"]
+    ]
+  },
+  "7-5": {
+    "explore": "compass",
+    "facts": [
+      ["The gap between the compass needle and pencil is the radius.", "ระยะห่างระหว่างปลายเหล็กกับดินสอของวงเวียนคือรัศมี"],
+      ["Given the diameter? Halve it first, then open the compass.", "โจทย์ให้เส้นผ่านศูนย์กลาง? แบ่งครึ่งก่อน แล้วค่อยกางวงเวียน"],
+      ["Keep the needle still on the center and turn all the way round.", "จับปลายเหล็กให้นิ่งที่จุดศูนย์กลาง แล้วหมุนจนครบรอบ"]
+    ],
+    "mistakes": [
+      ["Opening the compass to the diameter. The compass always takes the radius.", "กางวงเวียนเท่ากับเส้นผ่านศูนย์กลาง วงเวียนต้องกางเท่ากับรัศมีเสมอ"],
+      ["Letting the compass gap slip while turning. Hold it at the top.", "ปล่อยให้ระยะกางเลื่อนขณะหมุน ให้จับที่ด้านบนของวงเวียน"],
+      ["Stopping before the circle joins up.", "หยุดก่อนที่วงกลมจะบรรจบกัน"]
+    ],
+    "words": [
+      ["compass", "วงเวียน", "a tool for drawing circles", "อุปกรณ์วาดวงกลม"],
+      ["needle (point)", "ปลายเหล็ก", "stays on the center", "วางที่จุดศูนย์กลาง"],
+      ["pencil", "ดินสอ", "draws the circumference", "วาดเส้นรอบวง"],
+      ["arc", "ส่วนโค้ง", "part of a circle", "ส่วนหนึ่งของวงกลม"]
+    ]
+  },
+  "7-ch": {
+    "explore": "sum",
+    "facts": [
+      ["Problem solving: Understand, Plan, Solve, Check.", "การแก้โจทย์ปัญหา: ทำความเข้าใจ วางแผน ลงมือทำ ตรวจสอบ"],
+      ["Mark every angle you find on the picture as you go.", "เขียนมุมที่หาได้ลงในรูปทุกครั้ง"],
+      ["A triangle cannot have 2 right angles or 2 obtuse angles.", "รูปสามเหลี่ยมมีมุมฉาก 2 มุม หรือมุมป้าน 2 มุมไม่ได้"]
+    ],
+    "mistakes": [
+      ["Trying to find the answer in one jump. Find the angles you CAN find first, one at a time.", "พยายามหาคำตอบในขั้นเดียว ให้หามุมที่หาได้ก่อน ทีละมุม"],
+      ["Using the wrong triangle. Say which triangle you are working in.", "ใช้รูปสามเหลี่ยมผิดรูป ให้บอกว่ากำลังใช้รูปสามเหลี่ยมรูปไหน"]
+    ],
+    "words": [
+      ["understand", "ทำความเข้าใจ", "what is given, what to find", "โจทย์ให้อะไร ต้องหาอะไร"],
+      ["plan", "วางแผน", "which facts can I use?", "ใช้ข้อเท็จจริงอะไรได้บ้าง"],
+      ["solve", "ลงมือทำ", "work step by step", "คิดทีละขั้น"],
+      ["check", "ตรวจสอบ", "do the angles make 180°?", "มุมรวมกันได้ 180° หรือไม่"]
+    ]
+  }
+}

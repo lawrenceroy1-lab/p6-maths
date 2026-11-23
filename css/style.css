@@ -330,3 +330,36 @@ figure.photo { margin: 10px auto; text-align: center; }
 figure.photo img.diagram.photo { width: 300px; max-width: 100%; height: auto; margin: 0 auto; border-radius: 12px; }
 figure.photo figcaption { font-weight: 900; color: #37474f; margin-top: 2px; }
 .flash .face figure.photo img { width: 180px; }
+
+/* Explore tab */
+.ex-box { margin: 10px 0 16px; }
+.ex { background: #fff; border: 3px solid var(--teach); border-radius: var(--radius); padding: 12px; }
+.ex-tip { font-weight: 800; margin: 2px 0 8px; }
+.ex-btns { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; align-items: center; }
+.chip { border: 2px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 12px; font-weight: 800; font-size: .72em; color: var(--ink); cursor: pointer; }
+.chip.on { background: var(--title); border-color: var(--title); color: #fff; }
+.chip .th { color: inherit; }
+.ex-svg { display: block; width: 100%; max-width: 560px; height: auto; margin: 6px auto; touch-action: none; user-select: none; }
+.ex-3d { cursor: grab; background: #FAFBFF; border-radius: 14px; }
+.ex-h { cursor: grab; }
+.ex-lab { font-weight: 900; font-size: 15px; text-anchor: middle; paint-order: stroke; stroke: #fff; stroke-width: 4px; }
+.ex-len { font-weight: 800; font-size: 14px; text-anchor: middle; fill: #1565c0; paint-order: stroke; stroke: #fff; stroke-width: 4px; }
+.ex-cap { font-weight: 800; font-size: 14px; text-anchor: middle; fill: #37474f; }
+.ex-info { margin-top: 6px; }
+.ex-row { margin: 6px 0; font-weight: 700; }
+.ex-name { color: var(--title); }
+.ex-count { display: flex; gap: 18px; flex-wrap: wrap; font-size: 1.1em; }
+.ex-slider { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; flex-wrap: wrap; }
+.ex-slider input { width: 180px; }
+.ex-cards { display: grid; gap: 12px; }
+.ex-card { border-radius: 14px; padding: 10px 14px; border: 3px solid var(--line); background: #fff; }
+.ex-card h3 { margin: 4px 0 8px; }
+.ex-card ul { margin: 0; padding-left: 22px; }
+.ex-card li { margin: 6px 0; font-weight: 700; }
+.ex-card.facts { border-color: var(--teach); background: var(--teach-bg); }
+.ex-card.warn { border-color: #e53935; background: #ffebee; }
+.wordbank { width: 100%; font-size: .85em; }
+.act.seen::after { content: "✓"; position: absolute; top: 4px; right: 6px; font-size: .8em; color: var(--answer); font-weight: 900; }
+.act { position: relative; }
+@media (min-width: 900px) { .ex-cards { grid-template-columns: 1fr 1fr; } .ex-card.words { grid-column: 1 / -1; } }
+@media print { .ex-box { display: none !important; } }

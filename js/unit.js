@@ -2,13 +2,14 @@
 
 const params = new URLSearchParams(location.search);
 const UNIT_ID = params.get("u") || "07";
-let DATA = null, RAW = null;     // RAW = the English data; DATA = with Thai lines added
+let DATA = null, RAW = null, EXTRA = {};   // EXTRA = content/extraXX.json (explorers, key facts, mistakes, words)     // RAW = the English data; DATA = with Thai lines added
 let secIdx = 0;
 let act = "learn";
 let cleanup = null;          // stops timers when leaving an activity
 
 const ACTS = [
   { id: "learn",   e: "📘", name: "Learn", th: "เรียนรู้" },
+  { id: "explore", e: "🔬", name: "Explore", th: "สำรวจ" },
   { id: "guided",  e: "🧭", name: "Guided Answers", th: "เฉลยทีละขั้น" },
   { id: "flash",   e: "🃏", name: "Flashcards", th: "บัตรคำ" },
   { id: "match",   e: "🧩", name: "Match Game", th: "เกมจับคู่" },
@@ -24,6 +25,7 @@ fetch(`content/unit${UNIT_ID}.json`, { cache: "no-cache" })
   .then(r => { if (!r.ok) throw new Error(); return r.json(); })
   .then(async d => {
     await loadThai(UNIT_ID);
+    EXTRA = await fetch(`content/extra${UNIT_ID}.json`, { cache: "no-cache" }).then(r => r.ok ? r.json() : {}).catch(() => ({}));
     RAW = d;
     DATA = thaiUnit(RAW);
     document.title = `Unit ${Number(d.unit)}: ${d.title} | T. Roy`;
@@ -65,8 +67,11 @@ function renderTabs() {
   const acts = document.getElementById("acts");
   acts.style.display = mode ? "none" : "";
   if (act === "battle" && !isTeacher()) act = "learn";       // Class Battle is for the teacher's projector
-  acts.innerHTML = ACTS.filter(a => a.id !== "battle" || isTeacher()).map(a =>
-    `<button class="act ${a.id === act ? "on" : ""}" data-a="${a.id}"><span class="e">${a.e}</span>${U(a.name, a.th)}</button>`).join("");
+  const secId = DATA.sections[secIdx].id, hasEx = !!EXTRA[secId];
+  if (act === "explore" && !hasEx) act = "learn";
+  const seen = new Set(store.get(`seen_${UNIT_ID}`, []));
+  acts.innerHTML = ACTS.filter(a => (a.id !== "battle" || isTeacher()) && (a.id !== "explore" || hasEx)).map(a =>
+    `<button class="act ${a.id === act ? "on" : ""} ${seen.has(secId + ":" + a.id) ? "seen" : ""}" data-a="${a.id}"><span class="e">${a.e}</span>${U(a.name, a.th)}</button>`).join("");
   document.querySelectorAll(".act").forEach(b => b.onclick = () => { act = b.dataset.a; renderTabs(); go(); });
 }
 
@@ -77,7 +82,8 @@ function go() {
   else if (mode === "test") UnitTest();
   else {
     const sec = DATA.sections[secIdx];
-    ({ learn: Learn, guided: Guided, flash: Flash, match: Match, quiz: Quiz, battle: Battle })[act](sec);
+    const seen = new Set(store.get(`seen_${UNIT_ID}`, [])); seen.add(sec.id + ":" + act); store.set(`seen_${UNIT_ID}`, [...seen]);
+    ({ learn: Learn, explore: ExploreTab, guided: Guided, flash: Flash, match: Match, quiz: Quiz, battle: Battle })[act](sec);
   }
   window.scrollTo({ top: document.getElementById("unitBar").offsetTop - 10, behavior: "smooth" });
 }
@@ -128,6 +134,29 @@ function Learn(sec) {
     };
   }
   draw();
+}
+
+// =============== EXPLORE: interactive picture + key facts + common mistakes + word bank ===============
+function loadScript(src) { return new Promise((ok, no) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = no; document.head.appendChild(s); }); }
+async function ExploreTab(sec) {
+  const x = EXTRA[sec.id];
+  const th = (en, t) => (thaiOn() && t ? `${en}<span class="th">${t}</span>` : en);
+  view().innerHTML = `<div class="panel">${header(sec, U("🔬 Explore", "สำรวจ"), `<button class="bigbtn dark no-print" id="exPrint">${U("🖨️ Print key facts", "พิมพ์สรุป")}</button>`)}
+    <div id="exBox" class="ex-box"><p>Loading…</p></div>
+    <div class="ex-cards">
+      <div class="ex-card facts"><h3>📌 ${U("Key facts", "สรุปสาระสำคัญ")}</h3><ul>${x.facts.map(f => `<li>${th(f[0], f[1])}</li>`).join("")}</ul></div>
+      <div class="ex-card warn"><h3>⚠️ ${U("Watch out! Common mistakes", "ระวัง! ข้อผิดพลาดที่พบบ่อย")}</h3><ul>${x.mistakes.map(f => `<li>${th(f[0], f[1])}</li>`).join("")}</ul></div>
+      <div class="ex-card words"><h3>🗣️ ${U("Word bank", "คลังคำศัพท์")}</h3>
+        <table class="t wordbank"><tr><th>English</th><th>ไทย</th><th>${U("Meaning", "ความหมาย")}</th></tr>
+        ${x.words.map(w => `<tr><td><b>${w[0]}</b></td><td><b>${w[1]}</b></td><td>${th(w[2], w[3])}</td></tr>`).join("")}</table></div>
+    </div></div>`;
+  document.getElementById("exPrint").onclick = () => window.print();
+  try {
+    if (!window.Explore) await loadScript("js/explore.js?v=24");
+    const box = document.getElementById("exBox");
+    if (!box) return;
+    ({ triangle: () => Explore.triangle(box), sum: () => Explore.triangle(box, "sum"), circle: () => Explore.circle(box), compass: () => Explore.compass(box), solid: () => Explore.solid(box), net: () => Explore.net(box) })[x.explore]();
+  } catch (e) { document.getElementById("exBox").innerHTML = "<p>Could not load the explorer. Please check the internet and reload.</p>"; }
 }
 
 // =============== 2. GUIDED ANSWERS ===============
