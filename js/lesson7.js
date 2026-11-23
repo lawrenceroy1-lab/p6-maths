@@ -93,27 +93,64 @@ const SLIDES = [
   { s: 4, e: "🎉", t: "Great job! Time to play", p: 46, html: "<p>Triangles: equilateral, isosceles, scalene. Acute, right, obtuse.</p><p>Angles in a triangle: 180°.</p><p>Circles: center, radius, diameter, chord.</p><p><button class='bigbtn dark' id='goGames'>🎮 Play the class games</button></p>" },
 ];
 
+
+// Thai for each slide, in the same order: title, text, "Your turn" question, answer.
+const SLIDE_TH = [
+  { t: "รูปสามเหลี่ยมคืออะไร", h: "มี 3 ด้านที่เป็นเส้นตรง มี 3 มุม แต่ละมุมมีขนาดของมุม" },
+  { t: "ดูที่ด้าน", h: "เราแบ่งรูปสามเหลี่ยมตามด้านได้ นับด้านที่ยาวเท่ากัน ขีดเล็ก ๆ บอกว่าด้านไหนยาวเท่ากัน" },
+  { t: "ด้านเท่า: เท่ากันทั้ง 3", h: "ด้าน 3 ด้านยาวเท่ากัน มุม 3 มุมเท่ากัน ทุกมุมเท่ากับ 60°", a: "ด้านหนึ่งยาว 5 cm อีก 2 ด้านยาวเท่าไร", n: "5 cm และ 5 cm ทั้ง 3 ด้านยาวเท่ากัน!" },
+  { t: "หน้าจั่ว: เท่ากัน 2", h: "ด้าน 2 ด้านยาวเท่ากัน มุม 2 มุมเท่ากัน มุมที่เท่ากันอยู่ข้างล่าง ตรงข้ามกับด้านที่ยาวเท่ากัน", a: "มุมล่างมุมหนึ่งเท่ากับ 70° อีกมุมล่างเท่าไร", n: "70° เท่ากัน!" },
+  { t: "ด้านไม่เท่า: ไม่เท่ากันเลย", h: "ทั้ง 3 ด้านยาวไม่เท่ากัน ทั้ง 3 มุมไม่เท่ากัน ไม่มีขีดเลย", a: "ด้านยาว 3 cm, 4 cm และ 6 cm เป็นรูปสามเหลี่ยมชนิดใด", n: "ด้านไม่เท่า ไม่มี 2 ด้านไหนยาวเท่ากัน" },
+  { t: "ทีนี้ดูที่มุม", h: "มุมแหลม: เล็กและแหลม น้อยกว่า 90° · มุมฉาก: มุมสี่เหลี่ยม เท่ากับ 90° พอดี เหมือนมุมหนังสือ · มุมป้าน: ใหญ่และกว้าง มากกว่า 90°" },
+  { t: "รูปสามเหลี่ยมมุมแหลม", h: "ทั้ง 3 มุมเล็ก (น้อยกว่า 90°) 60°, 70° และ 50° เล็กทุกมุม" },
+  { t: "รูปสามเหลี่ยมมุมฉาก", h: "มี 1 มุมเป็นมุมฉาก 90° สี่เหลี่ยมเล็ก ๆ บอกว่าเป็นมุมฉาก อีก 2 มุมรวมกันได้ 90°: 30° + 60° = 90°", a: "รูปสามเหลี่ยมมุมฉากมีมุม 35° อีกมุมเล็กเท่าไร", n: "90° - 35° = 55°" },
+  { t: "รูปสามเหลี่ยมมุมป้าน", h: "มี 1 มุมที่ใหญ่และกว้าง (มากกว่า 90°) 120° มากกว่า 90°" },
+  { t: "สามเหลี่ยมรูปเดียว มี 2 ชื่อ", h: "ชื่อที่ 1: ดูที่ด้าน ชื่อที่ 2: ดูที่มุม 90°, 45°, 45°: เป็นทั้งรูปสามเหลี่ยมมุมฉากและหน้าจั่ว!", a: "มุมคือ 120°, 30° และ 30° มี 2 ชื่ออะไร", n: "มุมป้าน (120° ใหญ่) และหน้าจั่ว (มี 2 มุมเท่ากัน)" },
+  { t: "เลขมหัศจรรย์: 180°", h: "ตัดมุมทั้ง 3 ของรูปสามเหลี่ยมกระดาษ วางเรียงกันจะได้เส้นตรง เส้นตรงเท่ากับ 180° มุมทั้ง 3 ของทุกรูปสามเหลี่ยมจึงรวมกันได้ 180°" },
+  { t: "มาตรวจสอบกัน", h: "60° + 60° + 60° = 180° ✓ · 90° + 30° + 60° = 180° ✓ · 120° + 30° + 30° = 180° ✓ ใช้ได้เสมอ!" },
+  { t: "หามุมที่หายไป", h: "ขั้นที่ 1: เริ่มจาก 180° ขั้นที่ 2: ลบมุมแรก 180° - 50° = 130° ขั้นที่ 3: ลบมุมที่สอง 130° - 60° = 70°" },
+  { t: "ถึงตาเธอแล้ว!", h: "มุมสองมุมคือ 30° และ 50° เริ่มจาก 180° ลบ 30° แล้วลบ 50°", a: "มุมที่หายไปเท่าไร", n: "180° - 30° = 150° แล้ว 150° - 50° = 100°" },
+  { t: "เคล็ดลับหน้าจั่ว", h: "มุมยอด 40° มุมล่าง 2 มุมเท่ากัน ขั้นที่ 1: 180° - 40° = 140° ขั้นที่ 2: แบ่ง 140° เป็น 2 ส่วนเท่ากัน: 140° ÷ 2 = 70° มุมล่างแต่ละมุมเท่ากับ 70°", a: "มุมยอด 68° มุมล่างแต่ละมุมเท่าไร", n: "180° - 68° = 112° แล้ว 112° ÷ 2 = 56°" },
+  { t: "เส้นตรง = 180°", h: "มุมบนเส้นตรงรวมกันได้ 180° ถ้าส่วนหนึ่งเท่ากับ 60° อีกส่วนเท่ากับ 180° - 60° = 120°", a: "ส่วนหนึ่งเท่ากับ 60° อีกส่วนเท่าไร", n: "180° - 60° = 120°" },
+  { t: "อุปกรณ์วาดรูปของเรา", h: "📏 ไม้บรรทัด: ลากเส้นตรงและวัด cm · 🌈 ไม้โปรแทรกเตอร์: วัดและวาดมุม · 📐 ไม้ฉาก: วาดมุมฉาก (90°) · ✏️ วาดรูปคร่าว ๆ ก่อนเสมอ!" },
+  { t: "สร้างรูปสามเหลี่ยมทีละขั้น", h: "1. ลากเส้น BC ยาว 5 cm 2. วางไม้โปรแทรกเตอร์ที่ B วาด 50° 3. วางที่ C วาด 45° 4. เส้นทั้งสองตัดกัน เรียกว่า A เสร็จแล้ว! 🎉" },
+  { t: "ทำมุมฉากด้วยไม้ฉาก", h: "1. ลาก YZ ยาว 5 cm 2. วางไม้ฉากบนเส้นที่ Y ลากขึ้นตรง ๆ: นั่นคือ 90° 3. วัดขึ้นไป 5 cm ทำจุด X 4. ลากเชื่อม X กับ Z" },
+  { t: "จุดศูนย์กลาง", h: "จุดศูนย์กลางคือจุดที่อยู่ตรงกลางของวงกลมพอดี เรามักเรียกว่า O" },
+  { t: "รัศมี", h: "รัศมีลากจากจุดศูนย์กลางไปถึงขอบ เหมือนพิซซ่า: จากตรงกลางถึงขอบ" },
+  { t: "เส้นผ่านศูนย์กลาง", h: "เส้นผ่านศูนย์กลางลากจากขอบถึงขอบ ผ่านจุดศูนย์กลาง เท่ากับรัศมี 2 เส้นต่อกันเป็นเส้นตรง" },
+  { t: "คอร์ด", h: "คอร์ดลากจากขอบถึงขอบ แต่ไม่ผ่านจุดศูนย์กลาง เส้นผ่านศูนย์กลางคือคอร์ดที่ยาวที่สุด" },
+  { t: "รัศมีและเส้นผ่านศูนย์กลาง", h: "เส้นผ่านศูนย์กลาง = 2 × รัศมี · รัศมี = เส้นผ่านศูนย์กลาง ÷ 2 · รัศมี 4 cm ➡ เส้นผ่านศูนย์กลาง 2 × 4 = 8 cm", a: "เส้นผ่านศูนย์กลาง 15 m รัศมีเท่าไร", n: "15 ÷ 2 = 7.5 m" },
+  { t: "วงเวียน", h: "วงเวียนมีปลายเหล็กและดินสอ ระยะห่างระหว่างสองปลายคือรัศมี ใช้ไม้บรรทัดวัดระยะกาง" },
+  { t: "สร้างวงกลมทีละขั้น", h: "1. ทำจุดศูนย์กลาง O 2. กางวงเวียนเท่ากับรัศมี (ใช้ไม้บรรทัด) 3. วางปลายเหล็กที่ O 4. หมุนวงเวียนจนครบรอบ ให้ปลายบรรจบกัน!" },
+  { t: "โจทย์ให้เส้นผ่านศูนย์กลาง? แบ่งครึ่ง!", h: "กางวงเวียนตามรัศมี ไม่ใช่เส้นผ่านศูนย์กลาง เส้นผ่านศูนย์กลาง 4 cm ➡ รัศมี 4 ÷ 2 = 2 cm กางวงเวียน 2 cm", a: "ต้องวาดวงกลมที่มีเส้นผ่านศูนย์กลาง 10 cm ต้องกางวงเวียนเท่าไร", n: "10 ÷ 2 = 5 cm" },
+  { t: "เก่งมาก! ได้เวลาเล่นเกมแล้ว", h: "รูปสามเหลี่ยม: ด้านเท่า หน้าจั่ว ด้านไม่เท่า มุมแหลม มุมฉาก มุมป้าน · มุมในรูปสามเหลี่ยม: 180° · วงกลม: จุดศูนย์กลาง รัศมี เส้นผ่านศูนย์กลาง คอร์ด" },
+];
+const SEC_TH = ["7.1 ชนิดของรูปสามเหลี่ยม", "7.2 มุมของรูปสามเหลี่ยม", "7.3 การสร้างรูปสามเหลี่ยม", "7.4 ส่วนต่าง ๆ ของวงกลม", "7.5 การสร้างวงกลม"];
+const OPT_TH = { Equilateral: "ด้านเท่า", Isosceles: "หน้าจั่ว", Scalene: "ด้านไม่เท่า", Acute: "มุมแหลม", Right: "มุมฉาก", Obtuse: "มุมป้าน",
+  Center: "จุดศูนย์กลาง", Radius: "รัศมี", Diameter: "เส้นผ่านศูนย์กลาง", Chord: "คอร์ด", "👍 True": "จริง", "👎 False": "เท็จ" };
+const TH = (en, th) => (th ? `${en}<span class="th">${th}</span>` : en);
+
 let cur = 0;
 function lesson() {
-  const sl = SLIDES[cur];
+  const sl = SLIDES[cur], T = SLIDE_TH[cur];
   view().innerHTML = `
-    <div class="jump">${SECS.map((t, i) => `<button data-s="${i}" class="${sl.s === i ? "on" : ""}">${t}</button>`).join("")}</div>
+    <div class="jump">${SECS.map((t, i) => `<button data-s="${i}" class="${sl.s === i ? "on" : ""}">${TH(t, SEC_TH[i])}</button>`).join("")}</div>
     <div class="slide">
-      <span class="sec">${SECS[sl.s]}</span> <span class="badge">📖 p.${sl.p}</span>
-      <h2>${sl.e} ${sl.t}</h2>
-      <div class="two"><div class="big">${sl.html}</div>${sl.fig ? pic(sl.fig) : "<div></div>"}</div>
-      ${sl.ask ? `<div class="turn">🙋 Your turn: ${sl.ask}<div class="reveal"><button class="bigbtn" id="reveal">👀 Show answer</button></div></div>` : ""}
+      <span class="sec">${SECS[sl.s]} · ${SEC_TH[sl.s]}</span> <span class="badge">📖 p.${sl.p}</span>
+      <h2>${sl.e} ${TH(sl.t, T.t)}</h2>
+      <div class="two"><div class="big">${sl.html}<p class="th">${T.h}</p></div>${sl.fig ? pic(sl.fig) : "<div></div>"}</div>
+      ${sl.ask ? `<div class="turn">🙋 Your turn: ${TH(sl.ask, "ถึงตาเธอ: " + T.a)}<div class="reveal"><button class="bigbtn" id="reveal">${TH("👀 Show answer", "ดูคำตอบ")}</button></div></div>` : ""}
     </div>
     <div class="slide-nav">
-      <button class="bigbtn" id="prev" ${cur === 0 ? "disabled" : ""}>⬅ Back</button>
+      <button class="bigbtn" id="prev" ${cur === 0 ? "disabled" : ""}>${TH("⬅ Back", "ย้อนกลับ")}</button>
       <span class="count">${cur + 1} / ${SLIDES.length}</span>
-      <button class="bigbtn dark" id="next" ${cur === SLIDES.length - 1 ? "disabled" : ""}>Next ➡</button>
+      <button class="bigbtn dark" id="next" ${cur === SLIDES.length - 1 ? "disabled" : ""}>${TH("Next ➡", "ถัดไป")}</button>
     </div>`;
   view().querySelectorAll(".jump button").forEach(b => b.onclick = () => { cur = SLIDES.findIndex(x => x.s === Number(b.dataset.s)); lesson(); });
   document.getElementById("prev").onclick = () => { if (cur > 0) { cur--; lesson(); } };
   document.getElementById("next").onclick = () => { if (cur < SLIDES.length - 1) { cur++; lesson(); } };
   const rv = document.getElementById("reveal");
-  if (rv) rv.onclick = () => { rv.parentElement.outerHTML = `<div class="ans">✅ ${sl.ans}</div>`; };
+  if (rv) rv.onclick = () => { rv.parentElement.outerHTML = `<div class="ans">✅ ${TH(sl.ans, T.n)}</div>`; };
   const gg = document.getElementById("goGames");
   if (gg) gg.onclick = () => setMode("games");
 }
@@ -134,7 +171,7 @@ const GAMES = {
     if (k === "Equilateral") { fig = triSpec(60, 60, { ticks: "all", fill: "#FFE0B2" }); why = "All 3 sides have a tick mark, so all 3 are the same."; }
     if (k === "Isosceles") { const b = pick([40, 50, 65, 70]); fig = triSpec(b, b, { ticks: "two", fill: "#C8E6C9" }); why = "2 sides have tick marks, so 2 sides are the same."; }
     if (k === "Scalene") { const b = pick([35, 40, 45]), c = pick([65, 70, 75]); fig = triSpec(b, c, { fill: "#BBDEFB" }); why = "No tick marks: all 3 sides are different."; }
-    return { q: "What kind of triangle is this? (Look at the tick marks.)", fig, options: shuffle(["Equilateral", "Isosceles", "Scalene"]), right: k, why };
+    return { q: "What kind of triangle is this? (Look at the tick marks.) · รูปสามเหลี่ยมนี้เป็นชนิดใด (ดูขีดบนด้าน)", fig, options: shuffle(["Equilateral", "Isosceles", "Scalene"]), right: k, why };
   } },
   angles: { e: "📐", name: "Small, square or big?", desc: "Is it an acute, right or obtuse triangle?", make() {
     const k = pick(["Acute", "Right", "Obtuse"]);
@@ -144,13 +181,13 @@ const GAMES = {
     if (k === "Obtuse") { b = rnd(20, 35, 5); c = rnd(20, 35, 5); }
     const a = 180 - b - c;
     const why = k === "Acute" ? `${a}°, ${b}° and ${c}° are all less than 90°.` : k === "Right" ? "It has a square corner: 90°." : `${a}° is more than 90°.`;
-    return { q: "What kind of triangle is this? (Look at the angles.)", fig: triSpec(b, c, { angles: true, fill: "#FFF59D" }), options: shuffle(["Acute", "Right", "Obtuse"]), right: k, why };
+    return { q: "What kind of triangle is this? (Look at the angles.) · รูปสามเหลี่ยมนี้เป็นชนิดใด (ดูที่มุม)", fig: triSpec(b, c, { angles: true, fill: "#FFF59D" }), options: shuffle(["Acute", "Right", "Obtuse"]), right: k, why };
   } },
   missing: { e: "🔍", name: "Find the missing angle", desc: "Start with 180°, take away the 2 angles.", make() {
     let b, c;
     do { b = rnd(30, 70, 10); c = rnd(30, 70, 10); } while (b + c > 130);
     const a = 180 - b - c;
-    return { q: `Two angles are ${b}° and ${c}°. What is the missing angle?`, fig: triSpec(b, c, { angles: true, hide: "A", fill: "#FFE0B2" }),
+    return { q: `Two angles are ${b}° and ${c}°. What is the missing angle? · มุมสองมุมคือ ${b}° และ ${c}° มุมที่หายไปเท่าไร`, fig: triSpec(b, c, { angles: true, hide: "A", fill: "#FFE0B2" }),
       options: opts(`${a}°`, [`${180 - b}°`, `${b + c}°`, `${a + 10}°`, `${a - 10}°`]), right: `${a}°`, why: `180° - ${b}° = ${180 - b}°, then ${180 - b}° - ${c}° = ${a}°.` };
   } },
   circle: { e: "⭕", name: "Circle parts", desc: "Center, radius, diameter or chord? Plus × 2 and ÷ 2.", make() {
@@ -159,15 +196,15 @@ const GAMES = {
       const k = pick(["center", "radius", "diameter", "chord"]);
       const why = { center: "The dot in the very middle is the center.", radius: "It goes from the center to the edge.", diameter: "It goes edge to edge, through the center.", chord: "It goes edge to edge, but not through the center." }[k];
       const name = k[0].toUpperCase() + k.slice(1);
-      return { q: "What is the red part called?", fig: circleSpec(k, { rot: rnd(0, 90, 15) }), options: shuffle(["Center", "Radius", "Diameter", "Chord"]), right: name, why };
+      return { q: "What is the red part called? · ส่วนสีแดงเรียกว่าอะไร", fig: circleSpec(k, { rot: rnd(0, 90, 15) }), options: shuffle(["Center", "Radius", "Diameter", "Chord"]), right: name, why };
     }
     if (t === "r2d") {
       const r = rnd(2, 12);
-      return { q: `The radius is ${r} cm. What is the diameter?`, fig: circleSpec("radius", { labels: { radius: `${r} cm` } }),
+      return { q: `The radius is ${r} cm. What is the diameter? · รัศมี ${r} cm เส้นผ่านศูนย์กลางยาวเท่าไร`, fig: circleSpec("radius", { labels: { radius: `${r} cm` } }),
         options: opts(`${2 * r} cm`, [`${r / 2} cm`, `${r} cm`, `${r + 2} cm`]), right: `${2 * r} cm`, why: `Diameter = 2 × radius = 2 × ${r} = ${2 * r} cm.` };
     }
     const d = rnd(4, 30, 2);
-    return { q: `The diameter is ${d} cm. What is the radius?`, fig: circleSpec("diameter", { labels: { diameter: `${d} cm` } }),
+    return { q: `The diameter is ${d} cm. What is the radius? · เส้นผ่านศูนย์กลาง ${d} cm รัศมียาวเท่าไร`, fig: circleSpec("diameter", { labels: { diameter: `${d} cm` } }),
       options: opts(`${d / 2} cm`, [`${2 * d} cm`, `${d} cm`, `${d - 2} cm`]), right: `${d / 2} cm`, why: `Radius = diameter ÷ 2 = ${d} ÷ 2 = ${d / 2} cm.` };
   } },
   tf: { e: "👍", name: "True or false?", desc: "Thumbs up or thumbs down!", make() {
@@ -198,9 +235,9 @@ let G = null;   // { game, teams:[{name, pts}], turn, n, total, q, done }
 let gPick = "sides", nTeams = 2;
 function gamesMenu() {
   view().innerHTML = `
-    <div class="panel"><h2>🎮 Pick a game</h2>
+    <div class="panel"><h2>🎮 Pick a game · เลือกเกม</h2>
       <div class="games">${Object.entries(GAMES).map(([id, g]) => `<button class="gcard ${id === gPick ? "on" : ""}" data-g="${id}"><div class="gt">${g.e} ${g.name}</div>${g.desc}</button>`).join("")}</div>
-      <h2 style="margin-top:16px">👥 How many teams?</h2>
+      <h2 style="margin-top:16px">👥 How many teams? · กี่ทีม</h2>
       <div class="btnrow">${[2, 3, 4].map(n => `<button class="bigbtn ${n === nTeams ? "dark" : ""}" data-n="${n}">${n} teams</button>`).join("")}</div>
       <div class="team-setup">${Array.from({ length: nTeams }, (_, i) => `<input id="tn${i}" value="Team ${i + 1}" aria-label="Team ${i + 1} name">`).join("")}</div>
       <p class="small">Each team gets 3 questions, one at a time. Tap the team's answer. Right = 1 point.</p>
@@ -235,7 +272,7 @@ function drawQ() {
   view().innerHTML = `${board()}
     <div class="turnbar team t${G.turn}">🎯 ${esc(team.name)}'s turn · Question ${G.n + 1} of ${G.total}</div>
     <div class="battle-q">${esc(q.q)}${q.fig ? pic(q.fig) : ""}</div>
-    <div class="opts" style="margin-top:12px">${q.options.map((o, i) => `<button class="opt c${i}" data-o="${esc(o)}"><span class="shape">${shapes[i]}</span> ${esc(o)}</button>`).join("")}</div>
+    <div class="opts" style="margin-top:12px">${q.options.map((o, i) => `<button class="opt c${i}" data-o="${esc(o)}"><span class="shape">${shapes[i]}</span> <span>${esc(o)}${OPT_TH[o] ? `<span class="th">${OPT_TH[o]}</span>` : ""}</span></button>`).join("")}</div>
     <div id="res"></div>
     <div class="btnrow"><button class="linkbtn" id="quitG">⬅ Back to the game list</button></div>`;
   view().querySelectorAll(".opt").forEach(b => b.onclick = () => answer(b.dataset.o));
@@ -249,8 +286,8 @@ function answer(o) {
   if (ok) G.teams[G.turn].pts++;
   view().querySelectorAll(".opt").forEach(b => { b.disabled = true; if (b.dataset.o === G.q.right) b.classList.add("right"); else b.classList.add("dim"); });
   view().querySelector(".scoreboard").outerHTML = board();
-  document.getElementById("res").innerHTML = `<div class="result ${ok ? "ok" : "no"}">${ok ? "✅ Right! +1 point" : `❌ Not this time. The answer is ${esc(G.q.right)}.`}<div class="small">${esc(G.q.why)}</div></div>
-    <div class="btnrow"><button class="bigbtn dark" id="nextG">${G.n + 1 >= G.total ? "🏆 See the winner" : "Next team ➡"}</button></div>`;
+  document.getElementById("res").innerHTML = `<div class="result ${ok ? "ok" : "no"}">${ok ? "✅ Right! +1 point · ถูกต้อง! ได้ 1 คะแนน" : `❌ Not this time. The answer is ${esc(G.q.right)}.`}<div class="small">${esc(G.q.why)}</div></div>
+    <div class="btnrow"><button class="bigbtn dark" id="nextG">${G.n + 1 >= G.total ? "🏆 See the winner · ดูผู้ชนะ" : "Next team ➡ · ทีมต่อไป"}</button></div>`;
   document.getElementById("nextG").onclick = () => { G.n++; G.turn = (G.turn + 1) % G.teams.length; nextQ(); };
   document.getElementById("nextG").focus();
 }
