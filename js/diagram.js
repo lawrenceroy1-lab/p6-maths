@@ -21,6 +21,7 @@ const Diagram = (() => {
 
   function render(spec) {
     if (!spec) return "";
+    if (spec.img) return `<figure class="photo"><img class="diagram photo" src="${esc(spec.img)}" alt="${esc(spec.alt || "")}" loading="lazy">${spec.label ? `<figcaption>${esc(spec.label)}</figcaption>` : ""}</figure>`;
     const out = [];
     const w = spec.w || 300, h = spec.h || 220;
     for (const it of spec.items || []) {

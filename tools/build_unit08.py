@@ -250,37 +250,40 @@ learn81 = [
 ]
 
 
-def obj_fig(items, label):
+def obj_fig(items, label, photo=None):
+    """A real object. With photo, the website shows the picture img/unit08/<photo>.jpg (made in Canva) instead of the drawing."""
+    if photo:
+        return {"img": f"img/unit08/{photo}.jpg", "alt": label, "label": label}
     return F(items + [txt(160, 228, label, 17)], 320, 240)
 
 
 q81 = []
 dl = [
-    ("Do and Learn (a)", obj_fig(tri_pyramid(160, 190, 200, 170, "#90CAF9"), "a puzzle toy"), "Triangular pyramid",
+    ("Do and Learn (a)", obj_fig(tri_pyramid(160, 190, 200, 170, "#90CAF9"), "a puzzle toy", "puzzle-toy"), "Triangular pyramid",
      ["Look at the base: it is a <b>triangle</b>.", "All the other faces are triangles that meet at one point (a vertex).",
       "A pyramid with a triangle base is a <b>triangular pyramid</b>."], "Its base is a triangle and its triangle faces meet at a vertex."),
-    ("Do and Learn (b)", obj_fig(cylinder(160, 50, 55, 15, 140, "#FFCC80"), "a glass of juice"), "Cylinder",
+    ("Do and Learn (b)", obj_fig(cylinder(160, 50, 55, 15, 140, "#FFCC80"), "a glass of juice", "glass-of-juice"), "Cylinder",
      ["The top and the bottom are flat circles: <b>2 flat faces</b>.", "The side is curved: <b>1 curved face</b>.",
       "2 flat circle faces and 1 curved face make a <b>cylinder</b>."], "A cylinder has 2 flat faces and 1 curved face."),
-    ("Do and Learn (c)", obj_fig(sphere(160, 115, 85, "#E6EE9C", False) + [{"t": "ell", "c": [160, 115], "rx": 85, "ry": 40, "half": "front"}], "a tennis ball"), "Sphere",
+    ("Do and Learn (c)", obj_fig(sphere(160, 115, 85, "#E6EE9C", False) + [{"t": "ell", "c": [160, 115], "rx": 85, "ry": 40, "half": "front"}], "a tennis ball", "tennis-ball"), "Sphere",
      ["The ball is round all over.", "It has <b>no flat face</b>.", "A round solid with no flat face is a <b>sphere</b>."], "A sphere is perfectly round with no flat face."),
 ]
 for lab, fg, ans, steps, why in dl:
     q81.append(Q(lab, 51, "Name the type of solid figure of the object below.", "Count the flat faces. Are any faces curved?", steps, ans, why, fg))
 
 ex1 = [
-    ("(a)", "sandwich", "prism", obj_fig(tri_prism(70, 80, 120, 100, 120, "#FFE082"), "sandwich"),
+    ("(a)", "sandwich", "prism", obj_fig(tri_prism(70, 80, 120, 100, 120, "#FFE082"), "sandwich", "sandwich"),
      ["The 2 ends are triangles of the same shape and size.", "The other faces are rectangles.", "So it is a <b>prism</b> (a triangular prism)."],
      "A prism has the same shape at opposite ends."),
-    ("(b)", "snooker ball", "sphere", obj_fig(sphere(160, 115, 85, "#424242", False) + [{"t": "circle", "c": [160, 105], "r": 28, "fill": "#fff"}, txt(160, 116, "8", 30)], "snooker ball"),
+    ("(b)", "snooker ball", "sphere", obj_fig(sphere(160, 115, 85, "#424242", False) + [{"t": "circle", "c": [160, 105], "r": 28, "fill": "#fff"}, txt(160, 116, "8", 30)], "snooker ball", "snooker-ball"),
      ["The ball is round all over.", "It has no flat face.", "So it is a <b>sphere</b>."], "A sphere has no flat faces."),
-    ("(c)", "ice cream", "cone", obj_fig(cone(160, 215, 50, 60, 18, "#FFCC80", flip=True) + [{"t": "circle", "c": [160, 38], "r": 45, "fill": "#FFF8E1"}], "ice cream"),
+    ("(c)", "ice cream", "cone", obj_fig(cone(160, 215, 50, 60, 18, "#FFCC80", flip=True) + [{"t": "circle", "c": [160, 38], "r": 45, "fill": "#FFF8E1"}], "ice cream", "ice-cream"),
      ["The wafer has 1 circle face at the top.", "It has 1 curved face that comes to a point.", "So it is a <b>cone</b>."], "A cone has 1 flat circle face, 1 curved face and 1 vertex."),
-    ("(d)", "oil drum", "cylinder", obj_fig(cylinder(160, 45, 60, 16, 145, "#7B1FA2") + [txt(160, 130, "OIL", 26, color="#fff")], "oil drum"),
+    ("(d)", "oil drum", "cylinder", obj_fig(cylinder(160, 45, 60, 16, 145, "#7B1FA2") + [txt(160, 130, "OIL", 26, color="#fff")], "oil drum", "oil-drum"),
      ["The top and bottom are flat circles: 2 flat faces.", "The side is curved: 1 curved face.", "So it is a <b>cylinder</b>."], "2 circle faces and 1 curved face make a cylinder."),
-    ("(e)", "milk tin", "cylinder", obj_fig(cylinder(160, 55, 55, 15, 130, "#CFD8DC"), "milk tin"),
+    ("(e)", "milk tin", "cylinder", obj_fig(cylinder(160, 55, 55, 15, 130, "#CFD8DC"), "milk tin", "milk-tin"),
      ["The top and bottom are flat circles: 2 flat faces.", "The side is curved: 1 curved face.", "So it is a <b>cylinder</b>."], "2 circle faces and 1 curved face make a cylinder."),
-    ("(f)", "gift box", "pyramid", obj_fig(tri_pyramid(160, 195, 220, 170, "#4FC3F7"), "gift box"),
+    ("(f)", "gift box", "pyramid", obj_fig(tri_pyramid(160, 195, 220, 170, "#4FC3F7"), "gift box", "gift-box"),
      ["The box has a flat base.", "The other faces are triangles that meet at one point at the top.", "So it is a <b>pyramid</b>."], "A pyramid's triangle faces meet at a vertex."),
 ]
 for part, obj, ans, fg, steps, why in ex1:
