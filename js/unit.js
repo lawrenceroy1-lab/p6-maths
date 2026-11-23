@@ -152,7 +152,7 @@ async function ExploreTab(sec) {
     </div></div>`;
   document.getElementById("exPrint").onclick = () => window.print();
   try {
-    if (!window.Explore) await loadScript("js/explore.js?v=24");
+    if (!window.Explore) await loadScript("js/explore.js?v=25");
     const box = document.getElementById("exBox");
     if (!box) return;
     ({ triangle: () => Explore.triangle(box), sum: () => Explore.triangle(box, "sum"), circle: () => Explore.circle(box), compass: () => Explore.compass(box), solid: () => Explore.solid(box), net: () => Explore.net(box) })[x.explore]();

@@ -298,8 +298,8 @@ const Explore = (() => {
       }
     }
     draw();
-    const tick = () => { if (!el.isConnected) return; if (st.auto) { st.yaw += 0.01; draw(); } requestAnimationFrame(tick); };
-    requestAnimationFrame(tick);
+    const tick = () => { if (!el.isConnected) return; if (st.auto) { st.yaw += 0.02; draw(); } setTimeout(tick, 50); };
+    setTimeout(tick, 50);
   }
 
   // ================= NETS (fold and unfold) =================
@@ -330,8 +330,8 @@ const Explore = (() => {
     sl.oninput = () => { st.t = sl.value / 100; draw(); };
     play.onclick = () => {
       const target = st.t < 0.99 ? 1 : 0, from = st.t, t0 = performance.now();
-      const step = now => { const k = Math.min(1, (now - t0) / 1600); st.t = from + (target - from) * (1 - Math.cos(Math.PI * k)) / 2; sl.value = Math.round(st.t * 100); draw(); if (k < 1 && el.isConnected) requestAnimationFrame(step); };
-      requestAnimationFrame(step);
+      const step = () => { const k = Math.min(1, (performance.now() - t0) / 1600); st.t = from + (target - from) * (1 - Math.cos(Math.PI * k)) / 2; sl.value = Math.round(st.t * 100); draw(); if (k < 1 && el.isConnected) setTimeout(step, 30); };
+      step();
     };
     viewDrag(svg, st, () => draw());
     function draw() {
