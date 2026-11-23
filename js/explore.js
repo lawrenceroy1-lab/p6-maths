@@ -89,6 +89,7 @@ const Explore = (() => {
       svg.querySelectorAll(".ex-h").forEach(h => draggable(svg, h, (x, y) => { P[h.dataset.k] = [clamp(Math.round(x / 5) * 5, 20, 380), clamp(Math.round(y / 5) * 5, 20, 270)]; draw(); }));
       info.innerHTML = `<div class="ex-row"><b>${T("Sides", "ด้าน")}:</b> ${s.c} cm, ${s.a} cm, ${s.b} cm ➡ <b class="ex-name">${T(bySide[0], bySide[1])}</b> <span class="small">(${bySide[2]} · ${bySide[3]})</span></div>
         <div class="ex-row"><b>${T("Angles", "มุม")}:</b> <span style="color:${COL.A}">${ra}°</span> + <span style="color:${COL.B}">${rb}°</span> + <span style="color:${COL.C}">${rc}°</span> = <b>180°</b> ➡ <b class="ex-name">${T(byAng[0], byAng[1])}</b> <span class="small">(${byAng[2]} · ${byAng[3]})</span></div>`;
+      if (mode === "perim") { const P3 = [s.a, s.b, s.c].map(Number); info.innerHTML += `<div class="ex-row"><b>${T("Perimeter", "ความยาวรอบรูป")}</b> = ${s.c} + ${s.a} + ${s.b} = <b>${f1(P3[0] + P3[1] + P3[2])} cm</b></div>`; }
       if (line) {
         let a0 = 0;
         line.innerHTML = `<line x1="40" y1="120" x2="360" y2="120" stroke="#1f2a44" stroke-width="3"/>` +
@@ -365,5 +366,256 @@ const Explore = (() => {
     draw();
   }
 
-  return { triangle, circle, compass, solid, net };
+  // ================= TRIANGLE AREA (base and height) =================
+  function tarea(el) {
+    const PX = 34, Y0 = 250, X0 = 40; // 34 px = 1 cm, base on y = 250
+    let b = 6, h = 4, ax = 3; // apex x (cm from the left end of the base)
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${T("👆 Drag the top corner left and right. Change the base and height with the sliders.", "ลากมุมบนไปทางซ้ายขวา เปลี่ยนฐานและความสูงด้วยแถบเลื่อน")}</p>
+      <div class="ex-btns">
+        <label class="ex-slider">${T("Base", "ฐาน")} <input type="range" data-k="b" min="2" max="8" step="1" value="${b}"> <b class="vb"></b></label>
+        <label class="ex-slider">${T("Height", "ความสูง")} <input type="range" data-k="h" min="1" max="6" step="1" value="${h}"> <b class="vh"></b></label>
+        <button class="chip" data-r="1">${T("Show related rectangle", "แสดงสี่เหลี่ยมผืนผ้าที่เกี่ยวข้อง")}</button></div>
+      <svg class="ex-svg" viewBox="0 0 400 280"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info");
+    let rect = false;
+    el.querySelectorAll("input").forEach(i => i.oninput = () => { if (i.dataset.k === "b") b = +i.value; else h = +i.value; ax = Math.min(ax, b + 2); draw(); });
+    el.querySelector("[data-r]").onclick = e => { rect = !rect; e.currentTarget.classList.toggle("on", rect); draw(); };
+    function draw() {
+      const L = [X0, Y0], R = [X0 + b * PX, Y0], A = [X0 + ax * PX, Y0 - h * PX], F = [A[0], Y0];
+      let g = "";
+      for (let x = 0; x <= 10; x++) g += `<line x1="${X0 + x * PX}" y1="${Y0 - 7 * PX}" x2="${X0 + x * PX}" y2="${Y0}" stroke="#e3e8f0"/>`;
+      for (let y = 0; y <= 7; y++) g += `<line x1="${X0}" y1="${Y0 - y * PX}" x2="${X0 + 10 * PX}" y2="${Y0 - y * PX}" stroke="#e3e8f0"/>`;
+      const outside = ax < 0 || ax > b;
+      svg.innerHTML = g +
+        (rect ? `<rect x="${X0}" y="${Y0 - h * PX}" width="${b * PX}" height="${h * PX}" fill="#BBDEFB" fill-opacity=".5" stroke="#1E88E5" stroke-width="2" stroke-dasharray="6 5"/>` : "") +
+        (outside ? `<line x1="${Math.min(L[0], F[0])}" y1="${Y0}" x2="${Math.max(R[0], F[0])}" y2="${Y0}" stroke="#1f2a44" stroke-width="2" stroke-dasharray="5 5"/>` : "") +
+        `<polygon points="${L} ${R} ${A}" fill="#FFF59D" stroke="#1f2a44" stroke-width="3" stroke-linejoin="round"/>
+        <line x1="${A[0]}" y1="${A[1]}" x2="${F[0]}" y2="${F[1]}" stroke="#E53935" stroke-width="3" stroke-dasharray="7 5"/>
+        <polyline points="${F[0]},${Y0 - 12} ${F[0] + (ax > b / 2 ? -12 : 12)},${Y0 - 12} ${F[0] + (ax > b / 2 ? -12 : 12)},${Y0}" fill="none" stroke="#E53935" stroke-width="2"/>
+        <text x="${(L[0] + R[0]) / 2}" y="${Y0 + 22}" class="ex-len">${T("base", "ฐาน").replace(/<[^>]+>/g, " ")} ${b} cm</text>
+        <text x="${A[0] + 10}" y="${Y0 - h * PX / 2}" class="ex-len" fill="#E53935" style="text-anchor:start">${h} cm</text>
+        <circle class="ex-h" cx="${A[0]}" cy="${A[1]}" r="13" fill="#E53935" stroke="#fff" stroke-width="3"/>`;
+      draggable(svg, svg.querySelector(".ex-h"), x => { ax = clamp(Math.round((x - X0) / PX * 2) / 2, -1, 10 - 0.5); draw(); });
+      el.querySelector(".vb").textContent = `${b} cm`; el.querySelector(".vh").textContent = `${h} cm`;
+      const area = b * h / 2;
+      info.innerHTML = `<div class="ex-row"><b>${T("Area of the triangle", "พื้นที่รูปสามเหลี่ยม")}</b> = ½ × ${b} × ${h} = ½ × ${b * h} = <b>${f1(area)} cm²</b></div>
+        ${rect ? `<div class="ex-row">${T(`Related rectangle = ${b} × ${h} = ${b * h} cm². The triangle is exactly half of it.`, `สี่เหลี่ยมผืนผ้าที่เกี่ยวข้อง = ${b} × ${h} = ${b * h} cm² รูปสามเหลี่ยมเป็นครึ่งหนึ่งพอดี`)}</div>` : ""}
+        <div class="ex-row small">${outside ? T("The height is outside the triangle, but it still meets the base line at 90°.", "ความสูงอยู่นอกรูปสามเหลี่ยม แต่ยังตั้งฉากกับแนวฐาน") : T("Move the top corner: the area does not change, because the base and height stay the same!", "เลื่อนมุมบน: พื้นที่ไม่เปลี่ยน เพราะฐานและความสูงเท่าเดิม!")}</div>`;
+    }
+    draw();
+  }
+
+  // ================= POLYGONS: interior angles / perimeter =================
+  function polygon(el, mode) {
+    let n = 5, s = 4;
+    const NAMES = { 3: ["triangle", "สามเหลี่ยม"], 4: ["quadrilateral", "สี่เหลี่ยม"], 5: ["pentagon", "ห้าเหลี่ยม"], 6: ["hexagon", "หกเหลี่ยม"], 7: ["heptagon", "เจ็ดเหลี่ยม"], 8: ["octagon", "แปดเหลี่ยม"], 9: ["nonagon", "เก้าเหลี่ยม"], 10: ["decagon", "สิบเหลี่ยม"] };
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${mode === "perim" ? T("Change the number of sides and the side length.", "เปลี่ยนจำนวนด้านและความยาวด้าน") : T("Change the number of sides. Watch the polygon split into triangles from one corner.", "เปลี่ยนจำนวนด้าน ดูรูปหลายเหลี่ยมแบ่งเป็นรูปสามเหลี่ยมจากมุมเดียว")}</p>
+      <div class="ex-btns"><label class="ex-slider">${T("Sides", "จำนวนด้าน")} <input type="range" data-k="n" min="3" max="10" value="${n}"> <b class="vn"></b></label>
+      ${mode === "perim" ? `<label class="ex-slider">${T("Each side", "ความยาวแต่ละด้าน")} <input type="range" data-k="s" min="1" max="12" step="0.5" value="${s}"> <b class="vs"></b></label>` : ""}</div>
+      <svg class="ex-svg" viewBox="0 0 400 300"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info");
+    el.querySelectorAll("input").forEach(i => i.oninput = () => { if (i.dataset.k === "n") n = +i.value; else s = +i.value; draw(); });
+    function draw() {
+      const R = 115, C = [200, 155], off = -Math.PI / 2 - Math.PI / n;
+      const P = Array.from({ length: n }, (_, i) => [C[0] + R * Math.cos(off + 2 * Math.PI * i / n), C[1] + R * Math.sin(off + 2 * Math.PI * i / n) + (n % 2 ? 12 : 0)]);
+      let o = "";
+      if (mode !== "perim") for (let i = 1; i < n - 1; i++) o += `<polygon points="${P[0]} ${P[i]} ${P[i + 1]}" fill="${SHADE[i % SHADE.length]}" fill-opacity=".75" stroke="#1f2a44" stroke-width="1.5"/>`;
+      o += `<polygon points="${P.join(" ")}" fill="${mode === "perim" ? "#FFF59D" : "none"}" stroke="#1f2a44" stroke-width="3" stroke-linejoin="round"/>`;
+      if (mode === "perim") P.forEach((p, i) => { const q = P[(i + 1) % n], mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2, dx = mx - C[0], dy = my - C[1], L = Math.hypot(dx, dy); o += `<text x="${mx + dx / L * 20}" y="${my + dy / L * 20 + 5}" class="ex-len">${f1(s)}</text>`; });
+      else for (let i = 1; i < n - 1; i++) { const cx = (P[0][0] + P[i][0] + P[i + 1][0]) / 3, cy = (P[0][1] + P[i][1] + P[i + 1][1]) / 3; o += `<text x="${cx}" y="${cy + 5}" class="ex-lab">180°</text>`; }
+      svg.innerHTML = o;
+      el.querySelector(".vn").textContent = n;
+      const nm = T(NAMES[n][0], NAMES[n][1]);
+      if (mode === "perim") {
+        el.querySelector(".vs").textContent = `${f1(s)} cm`;
+        info.innerHTML = `<div class="ex-row"><b class="ex-name">${T("Regular", "ปกติ")} ${nm}</b>: ${n} ${T("equal sides", "ด้านยาวเท่ากัน")}</div>
+          <div class="ex-row"><b>${T("Perimeter", "ความยาวรอบรูป")}</b> = ${f1(s)} × ${n} = <b>${f1(s * n)} cm</b></div>
+          <div class="ex-row small">${T("Equal sides? Multiply instead of adding them one by one.", "ด้านยาวเท่ากัน? ใช้การคูณแทนการบวกทีละด้าน")}</div>`;
+      } else {
+        const sum = (n - 2) * 180, each = sum / n;
+        info.innerHTML = `<div class="ex-row"><b class="ex-name">${nm}</b>: ${n} ${T("sides", "ด้าน")} ➡ ${n - 2} ${T("triangles", "รูปสามเหลี่ยม")}</div>
+          <div class="ex-row"><b>${T("Sum of interior angles", "ผลรวมของมุมภายใน")}</b> = ${n - 2} × 180° = <b>${sum.toLocaleString("en-US")}°</b></div>
+          <div class="ex-row">${T("Regular polygon: each angle", "รูปหลายเหลี่ยมด้านเท่ามุมเท่า: แต่ละมุม")} = ${sum.toLocaleString("en-US")}° ÷ ${n} = <b>${Number.isInteger(each) ? each : "≈ " + f1(each)}°</b></div>`;
+      }
+    }
+    draw();
+  }
+
+  // ================= AREA BY SPLITTING =================
+  function split(el) {
+    const U = 30, O = [55, 250];
+    const SH = {
+      "L-shape|รูปตัว L": { outline: [[0, 0], [6, 0], [6, 2], [2, 2], [2, 5], [0, 5]], parts: [["rect", [[0, 0], [6, 0], [6, 2], [0, 2]], "6 × 2", 12], ["rect", [[0, 2], [2, 2], [2, 5], [0, 5]], "2 × 3", 6]] },
+      "House|รูปบ้าน": { outline: [[0, 0], [4, 0], [4, 4], [2, 7], [0, 4]], parts: [["rect", [[0, 0], [4, 0], [4, 4], [0, 4]], "4 × 4", 16], ["tri", [[0, 4], [4, 4], [2, 7]], "½ × 4 × 3", 6]] },
+      "Trapezium|สี่เหลี่ยมคางหมู": { outline: [[0, 0], [6, 0], [4, 3], [0, 3]], parts: [["rect", [[0, 0], [4, 0], [4, 3], [0, 3]], "4 × 3", 12], ["tri", [[4, 0], [6, 0], [4, 3]], "½ × 2 × 3", 3]] },
+      "Take away|ลบออก": { outline: [[0, 0], [8, 0], [8, 5], [0, 5]], cut: [[4, 5], [8, 5], [8, 2]], parts: [["rect", [[0, 0], [8, 0], [8, 5], [0, 5]], "8 × 5", 40], ["tri", [[4, 5], [8, 5], [8, 2]], "½ × 4 × 3", -6]] },
+    };
+    let key = "L-shape|รูปตัว L", show = false;
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${T("Pick a shape, then tap ✂️ Split it. Each square on the grid is 1 cm².", "เลือกรูป แล้วแตะ ✂️ แบ่งรูป แต่ละช่องตารางคือ 1 cm²")}</p>
+      <div class="ex-btns">${Object.keys(SH).map(k => `<button class="chip ${k === key ? "on" : ""}" data-k="${k}">${T(...k.split("|"))}</button>`).join("")}<button class="bigbtn green" id="exSplit">${T("✂️ Split it", "แบ่งรูป")}</button></div>
+      <svg class="ex-svg" viewBox="0 0 400 275"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info");
+    el.querySelectorAll("[data-k]").forEach(b => b.onclick = () => { key = b.dataset.k; show = false; el.querySelectorAll("[data-k]").forEach(x => x.classList.toggle("on", x === b)); draw(); });
+    el.querySelector("#exSplit").onclick = () => { show = !show; draw(); };
+    const pt = p => [O[0] + p[0] * U, O[1] - p[1] * U];
+    function draw() {
+      const S = SH[key];
+      let g = "";
+      for (let x = 0; x <= 10; x++) g += `<line x1="${O[0] + x * U}" y1="${O[1] - 7 * U}" x2="${O[0] + x * U}" y2="${O[1]}" stroke="#e3e8f0"/>`;
+      for (let y = 0; y <= 7; y++) g += `<line x1="${O[0]}" y1="${O[1] - y * U}" x2="${O[0] + 10 * U}" y2="${O[1] - y * U}" stroke="#e3e8f0"/>`;
+      let o = g;
+      if (!show) {
+        o += `<polygon points="${S.outline.map(pt).join(" ")}" fill="#FFE0B2" stroke="#1f2a44" stroke-width="3"/>`;
+        if (S.cut) o += `<polygon points="${S.cut.map(pt).join(" ")}" fill="#fff" stroke="#1f2a44" stroke-width="3"/>`;
+      } else S.parts.forEach((p, i) => {
+        const pts = p[1].map(pt), cx = pts.reduce((a, q) => a + q[0], 0) / pts.length, cy = pts.reduce((a, q) => a + q[1], 0) / pts.length;
+        o += `<polygon points="${pts.join(" ")}" fill="${p[3] < 0 ? "#fff" : SHADE[i]}" stroke="#1f2a44" stroke-width="2.5" ${p[3] < 0 ? 'stroke-dasharray="6 4"' : ""}/>
+          <text x="${cx}" y="${cy + 5}" class="ex-lab">${String.fromCharCode(65 + i)}</text>`;
+      });
+      svg.innerHTML = o;
+      const total = S.parts.reduce((a, p) => a + p[3], 0);
+      info.innerHTML = show
+        ? S.parts.map((p, i) => `<div class="ex-row">${String.fromCharCode(65 + i)}: ${p[2]} = ${Math.abs(p[3])} cm² ${p[3] < 0 ? T("(take away)", "(ลบออก)") : ""}</div>`).join("") +
+          `<div class="ex-row"><b>${T("Total area", "พื้นที่ทั้งหมด")}</b> = ${S.parts.map(p => Math.abs(p[3])).join(S.parts.some(p => p[3] < 0) ? " - " : " + ")} = <b>${total} cm²</b></div>`
+        : `<div class="ex-row">${T("How would you split this shape into rectangles and triangles?", "จะแบ่งรูปนี้เป็นสี่เหลี่ยมผืนผ้าและสามเหลี่ยมอย่างไร")}</div>`;
+    }
+    draw();
+  }
+
+  // ================= CIRCUMFERENCE (roll the circle) =================
+  function circum(el) {
+    const PX = 50; let d = 2, t = 0, timer = null;
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${T("Press ▶ Roll: the wheel turns once. The line it leaves is the circumference.", "กด ▶ กลิ้ง: ล้อหมุน 1 รอบ เส้นที่ได้คือเส้นรอบวง")}</p>
+      <div class="ex-btns"><label class="ex-slider">${T("Diameter", "เส้นผ่านศูนย์กลาง")} <input type="range" min="1" max="3" step="0.5" value="${d}"> <b class="vd"></b></label>
+      <button class="bigbtn green" id="exRoll">${T("▶ Roll", "กลิ้ง")}</button></div>
+      <svg class="ex-svg" viewBox="0 0 560 240"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info");
+    el.querySelector("input").oninput = e => { d = +e.target.value; t = 0; draw(); };
+    el.querySelector("#exRoll").onclick = () => { clearTimeout(timer); t = 0; const t0 = performance.now(); const step = () => { t = Math.min(1, (performance.now() - t0) / 2400); draw(); if (t < 1 && el.isConnected) timer = setTimeout(step, 30); }; step(); };
+    function draw() {
+      const r = d * PX / 2, X0 = 82, Y = 200, C = Math.PI * d * PX, cx = X0 + C * t, ang = 2 * Math.PI * t;
+      const dot = [cx - r * Math.sin(ang), Y - r + r * Math.cos(ang)];
+      let o = `<line x1="10" y1="${Y}" x2="550" y2="${Y}" stroke="#90A4AE" stroke-width="2"/>`;
+      for (let k = 1; k <= 3; k++) o += `<line x1="${X0 + k * d * PX}" y1="${Y + 6}" x2="${X0 + k * d * PX}" y2="${Y + 18}" stroke="#1E88E5" stroke-width="2"/><text x="${X0 + (k - 0.5) * d * PX}" y="${Y + 32}" class="ex-len">d</text>`;
+      o += `<line x1="${X0}" y1="${Y}" x2="${cx}" y2="${Y}" stroke="#E53935" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="${cx}" cy="${Y - r}" r="${r}" fill="#E3F2FD" stroke="#1f2a44" stroke-width="3"/>
+        <line x1="${cx - r * Math.cos(ang)}" y1="${Y - r - r * Math.sin(ang)}" x2="${cx + r * Math.cos(ang)}" y2="${Y - r + r * Math.sin(ang)}" stroke="#1E88E5" stroke-width="2"/>
+        <circle cx="${dot[0]}" cy="${dot[1]}" r="7" fill="#E53935"/>`;
+      svg.innerHTML = o;
+      el.querySelector(".vd").textContent = `${f1(d)} cm`;
+      info.innerHTML = `<div class="ex-row">${T("The red line is a bit more than 3 diameters long: that number is π (about 3.14).", "เส้นสีแดงยาวกว่า 3 เท่าของเส้นผ่านศูนย์กลางเล็กน้อย: ตัวเลขนั้นคือ π (ประมาณ 3.14)")}</div>
+        <div class="ex-row"><b>${T("Circumference", "เส้นรอบวง")}</b> = π × d ≈ 3.14 × ${f1(d)} = <b>${(Math.round(314 * d) / 100).toFixed(2).replace(/0$/, "").replace(/\.0$/, "")} cm</b></div>`;
+    }
+    draw();
+  }
+
+  // ================= AREA OF A CIRCLE (slices) =================
+  function carea(el) {
+    let n = 12, r = 2;
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${T("Cut the circle into more slices. The slices make a shape that looks more and more like a rectangle.", "ตัดวงกลมเป็นชิ้นมากขึ้น ชิ้นที่เรียงกันจะดูเหมือนสี่เหลี่ยมผืนผ้ามากขึ้น")}</p>
+      <div class="ex-btns"><label class="ex-slider">${T("Slices", "จำนวนชิ้น")} <input type="range" data-k="n" min="4" max="32" step="2" value="${n}"> <b class="vn"></b></label>
+      <label class="ex-slider">${T("Radius", "รัศมี")} <input type="range" data-k="r" min="1" max="3" step="0.5" value="${r}"> <b class="vr"></b></label></div>
+      <svg class="ex-svg" viewBox="0 0 520 250"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info");
+    el.querySelectorAll("input").forEach(i => i.oninput = () => { if (i.dataset.k === "n") n = +i.value; else r = +i.value; draw(); });
+    function draw() {
+      const R = 75, C = [95, 125], a = 2 * Math.PI / n;
+      let o = "";
+      for (let i = 0; i < n; i++) {
+        const a0 = i * a, a1 = (i + 1) * a;
+        o += `<path d="M${C[0]},${C[1]} L${C[0] + R * Math.cos(a0)},${C[1] + R * Math.sin(a0)} A${R},${R} 0 0 1 ${C[0] + R * Math.cos(a1)},${C[1] + R * Math.sin(a1)} Z" fill="${i % 2 ? "#FFCC80" : "#90CAF9"}" stroke="#fff" stroke-width="1"/>`;
+      }
+      // rearranged: slices alternately pointing up and down
+      const w = R * a, X0 = 215, Yb = 170;
+      for (let i = 0; i < n; i++) {
+        const up = i % 2 === 0, x = X0 + i * w / 2;
+        const tip = up ? [x + w / 2, Yb - R] : [x + w / 2, Yb];
+        const p1 = up ? [x, Yb] : [x, Yb - R], p2 = up ? [x + w, Yb] : [x + w, Yb - R];
+        o += `<path d="M${tip} L${p1} Q${(p1[0] + p2[0]) / 2},${up ? Yb + w * 0.25 : Yb - R - w * 0.25} ${p2} Z" fill="${up ? "#90CAF9" : "#FFCC80"}" stroke="#fff" stroke-width="1"/>`;
+      }
+      const W = (n + 1) * w / 2;
+      o += `<line x1="${X0}" y1="${Yb + 22}" x2="${X0 + W}" y2="${Yb + 22}" stroke="#1E88E5" stroke-width="2"/><text x="${X0 + W / 2}" y="${Yb + 40}" class="ex-len">½ × circumference = π × r</text>
+        <line x1="${X0 + W + 14}" y1="${Yb - R}" x2="${X0 + W + 14}" y2="${Yb}" stroke="#E53935" stroke-width="2"/><text x="${X0 + W + 22}" y="${Yb - R / 2}" class="ex-len" fill="#E53935" style="text-anchor:start">r</text>`;
+      svg.innerHTML = o;
+      el.querySelector(".vn").textContent = n; el.querySelector(".vr").textContent = `${f1(r)} cm`;
+      const area = Math.round(314 * r * r) / 100;
+      info.innerHTML = `<div class="ex-row">${T("Rectangle area = length × height = (π × r) × r", "พื้นที่สี่เหลี่ยมผืนผ้า = ยาว × สูง = (π × r) × r")}</div>
+        <div class="ex-row"><b>${T("Area of a circle", "พื้นที่วงกลม")}</b> = π × r × r ≈ 3.14 × ${f1(r)} × ${f1(r)} = <b>${area} cm²</b></div>`;
+    }
+    draw();
+  }
+
+  // ================= VOLUME (unit cubes) =================
+  function volume(el) {
+    let l = 4, w = 3, h = 2, layers = false;
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${T("Build a cuboid from 1 cm cubes. Each cube is 1 cm³.", "สร้างทรงสี่เหลี่ยมมุมฉากจากลูกบาศก์ขนาด 1 cm แต่ละลูกคือ 1 cm³")}</p>
+      <div class="ex-btns">${[["l", "Length", "ความยาว"], ["w", "Width", "ความกว้าง"], ["h", "Height", "ความสูง"]].map(([k, e, t]) => `<label class="ex-slider">${T(e, t)} <input type="range" data-k="${k}" min="1" max="5" value="${{ l, w, h }[k]}"> <b class="v${k}"></b></label>`).join("")}
+      <button class="chip" data-y="1">${T("Colour the layers", "ระบายสีแต่ละชั้น")}</button></div>
+      <svg class="ex-svg" viewBox="0 0 400 300"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info");
+    el.querySelectorAll("input").forEach(i => i.oninput = () => { ({ l: () => l = +i.value, w: () => w = +i.value, h: () => h = +i.value })[i.dataset.k](); draw(); });
+    el.querySelector("[data-y]").onclick = e => { layers = !layers; e.currentTarget.classList.toggle("on", layers); draw(); };
+    function draw() {
+      const s = 34, dx = s * 0.55, dy = -s * 0.45, ox = 200 - (l * s + w * dx) / 2, oy = 250 - (w * dy) / 2 + 0;
+      const LAY = ["#90CAF9", "#A5D6A7", "#FFCC80", "#F48FB1", "#CE93D8"];
+      let o = "";
+      const cells = [];
+      for (let z = 0; z < h; z++) for (let y = 0; y < w; y++) for (let x = 0; x < l; x++) cells.push([x, y, z]);
+      cells.sort((a, b) => (b[1] - a[1]) || (a[2] - b[2]) || (a[0] - b[0]));
+      for (const [x, y, z] of cells) {
+        const X = ox + x * s + y * dx, Y = oy - z * s + y * dy, f = layers ? LAY[z % 5] : "#FFE082";
+        o += `<polygon points="${X},${Y} ${X + s},${Y} ${X + s},${Y - s} ${X},${Y - s}" fill="${f}" stroke="#1f2a44" stroke-width="1.2"/>
+          <polygon points="${X},${Y - s} ${X + s},${Y - s} ${X + s + dx},${Y - s + dy} ${X + dx},${Y - s + dy}" fill="${f}" style="filter:brightness(1.12)" stroke="#1f2a44" stroke-width="1.2"/>
+          <polygon points="${X + s},${Y} ${X + s + dx},${Y + dy} ${X + s + dx},${Y - s + dy} ${X + s},${Y - s}" fill="${f}" style="filter:brightness(.85)" stroke="#1f2a44" stroke-width="1.2"/>`;
+      }
+      svg.innerHTML = o;
+      ["l", "w", "h"].forEach(k => el.querySelector(".v" + k).textContent = `${{ l, w, h }[k]} cm`);
+      info.innerHTML = `<div class="ex-row">${T("Base area", "พื้นที่ฐาน")} = ${l} × ${w} = ${l * w} cm² · ${T("layers", "จำนวนชั้น")}: ${h}</div>
+        <div class="ex-row"><b>${T("Volume", "ปริมาตร")}</b> = ${l} × ${w} × ${h} = <b>${l * w * h} cm³</b> (${l * w * h} ${T("cubes", "ลูกบาศก์")})</div>`;
+    }
+    draw();
+  }
+
+  // ================= WATER TANK (capacity) =================
+  function tank(el) {
+    let L = 40, W = 25, H = 30, water = 12;
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${T("Change the tank and the water height. Pour in 1 litre at a time.", "เปลี่ยนขนาดถังและความสูงของน้ำ เทน้ำเพิ่มครั้งละ 1 ลิตร")}</p>
+      <div class="ex-btns">${[["L", "Length", "ความยาว", 10, 50], ["W", "Width", "ความกว้าง", 10, 40], ["H", "Height", "ความสูง", 10, 40]].map(([k, e, t, a, b]) => `<label class="ex-slider">${T(e, t)} <input type="range" data-k="${k}" min="${a}" max="${b}" step="5" value="${{ L, W, H }[k]}"> <b class="v${k}"></b></label>`).join("")}
+      <button class="bigbtn" id="exPour">${T("🚰 Pour in 1 ℓ", "เทน้ำ 1 ℓ")}</button><button class="chip" id="exEmpty">${T("Empty", "เทออกหมด")}</button></div>
+      <svg class="ex-svg" viewBox="0 0 400 290"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info");
+    el.querySelectorAll("input").forEach(i => i.oninput = () => { ({ L: () => L = +i.value, W: () => W = +i.value, H: () => H = +i.value })[i.dataset.k](); water = Math.min(water, H); draw(); });
+    el.querySelector("#exPour").onclick = () => { water = Math.min(H, water + 1000 / (L * W)); draw(); };
+    el.querySelector("#exEmpty").onclick = () => { water = 0; draw(); };
+    const r2 = x => Math.round(x * 100) / 100;
+    function draw() {
+      const k = 5, w = L * k, h = H * k, d = W * k * 0.45, ox = 200 - (w + d) / 2, oy = 250;
+      const wh = water * k;
+      const box = (y0, hh, fill, op) => `<polygon points="${ox},${y0} ${ox + w},${y0} ${ox + w},${y0 - hh} ${ox},${y0 - hh}" fill="${fill}" fill-opacity="${op}"/>
+        <polygon points="${ox},${y0 - hh} ${ox + w},${y0 - hh} ${ox + w + d},${y0 - hh - d * 0.6} ${ox + d},${y0 - hh - d * 0.6}" fill="${fill}" fill-opacity="${op * 0.9}"/>
+        <polygon points="${ox + w},${y0} ${ox + w + d},${y0 - d * 0.6} ${ox + w + d},${y0 - hh - d * 0.6} ${ox + w},${y0 - hh}" fill="${fill}" fill-opacity="${op * 0.8}"/>`;
+      svg.innerHTML = (wh > 0 ? box(oy, wh, "#4FC3F7", 0.75) : "") +
+        `<polyline points="${ox},${oy - h} ${ox},${oy} ${ox + w},${oy} ${ox + w + d},${oy - d * 0.6} ${ox + w + d},${oy - h - d * 0.6} ${ox + d},${oy - h - d * 0.6} ${ox},${oy - h} ${ox + w},${oy - h} ${ox + w + d},${oy - h - d * 0.6}" fill="none" stroke="#1f2a44" stroke-width="2.5"/>
+        <line x1="${ox + w}" y1="${oy}" x2="${ox + w}" y2="${oy - h}" stroke="#1f2a44" stroke-width="2.5"/>
+        <polyline points="${ox},${oy} ${ox + d},${oy - d * 0.6} ${ox + w + d},${oy - d * 0.6}" fill="none" stroke="#1f2a44" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <line x1="${ox + d}" y1="${oy - d * 0.6}" x2="${ox + d}" y2="${oy - h - d * 0.6}" stroke="#1f2a44" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="${ox + w / 2}" y="${oy + 20}" class="ex-len">${L} cm</text><text x="${ox + w + d / 2 + 16}" y="${oy - d * 0.3 + 10}" class="ex-len">${W} cm</text><text x="${ox - 8}" y="${oy - h / 2}" class="ex-len" style="text-anchor:end">${H} cm</text>`;
+      ["L", "W", "H"].forEach(q => el.querySelector(".v" + q).textContent = `${{ L, W, H }[q]} cm`);
+      const cap = L * W * H, vol = r2(L * W * water);
+      info.innerHTML = `<div class="ex-row">${T("Base area", "พื้นที่ฐาน")} = ${L} × ${W} = ${(L * W).toLocaleString("en-US")} cm² · ${T("water height", "ความสูงของน้ำ")} = ${r2(water)} cm</div>
+        <div class="ex-row"><b>${T("Water", "ปริมาตรน้ำ")}</b> = ${(L * W).toLocaleString("en-US")} × ${r2(water)} = <b>${vol.toLocaleString("en-US")} cm³</b> = ${r2(vol / 1000)} ℓ</div>
+        <div class="ex-row">${T("Capacity (full)", "ความจุ (เต็มถัง)")} = ${L} × ${W} × ${H} = ${cap.toLocaleString("en-US")} cm³ = ${r2(cap / 1000)} ℓ ${water >= H ? "· " + T("FULL!", "เต็มแล้ว!") : ""}</div>
+        <div class="ex-row small">1 ℓ = 1,000 cm³</div>`;
+    }
+    draw();
+  }
+
+  return { triangle, circle, compass, solid, net, tarea, polygon, split, circum, carea, volume, tank };
 })();

@@ -1,0 +1,60 @@
+{
+  "12-1": {
+    "explore": "volume",
+    "facts": [
+      ["Volume = the space a solid takes up, in cm³ or m³.", "ปริมาตร = ขนาดของพื้นที่ที่รูปทรงใช้ หน่วยเป็น cm³ หรือ m³"],
+      ["Cuboid: volume = length × width × height. Cube: edge × edge × edge.", "ทรงสี่เหลี่ยมมุมฉาก: ปริมาตร = ยาว × กว้าง × สูง ลูกบาศก์: ขอบ × ขอบ × ขอบ"],
+      ["Volume = base area × height, so height = volume ÷ base area.", "ปริมาตร = พื้นที่ฐาน × ความสูง ดังนั้นความสูง = ปริมาตร ÷ พื้นที่ฐาน"],
+      ["Split a solid into cuboids and add, or take away the missing part.", "แบ่งรูปทรงเป็นทรงสี่เหลี่ยมมุมฉากแล้วบวก หรือลบส่วนที่ขาดออก"],
+      ["1 ℓ = 1,000 cm³. 1 m³ = 1,000,000 cm³.", "1 ℓ = 1,000 cm³ 1 m³ = 1,000,000 cm³"]
+    ],
+    "mistakes": [
+      ["Adding the three lengths instead of multiplying them.", "บวกความยาวทั้งสามแทนการคูณ"],
+      ["Writing cm² for volume. Volume uses cm³.", "เขียน cm² สำหรับปริมาตร ปริมาตรใช้ cm³"],
+      ["Counting the same part twice when splitting a solid.", "นับส่วนเดียวกันสองครั้งเมื่อแบ่งรูปทรง"]
+    ],
+    "words": [
+      ["volume", "ปริมาตร", "the space inside a solid", "ขนาดของพื้นที่ภายในรูปทรง"],
+      ["capacity", "ความจุ", "how much a container holds", "ภาชนะบรรจุได้เท่าไร"],
+      ["cubic centimetre (cm³)", "ลูกบาศก์เซนติเมตร", "a 1 cm cube", "ลูกบาศก์ขนาด 1 cm"],
+      ["base area", "พื้นที่ฐาน", "length × width", "ยาว × กว้าง"],
+      ["cuboid", "ทรงสี่เหลี่ยมมุมฉาก", "a box shape", "รูปทรงกล่อง"],
+      ["litre (ℓ)", "ลิตร", "1,000 cm³", "1,000 cm³"]
+    ]
+  },
+  "12-2": {
+    "explore": "tank",
+    "facts": [
+      ["Water volume = base area × water height.", "ปริมาตรน้ำ = พื้นที่ฐาน × ความสูงของน้ำ"],
+      ["Water height = water volume ÷ base area.", "ความสูงของน้ำ = ปริมาตรน้ำ ÷ พื้นที่ฐาน"],
+      ["ℓ to cm³: × 1,000. cm³ to ℓ: ÷ 1,000.", "ℓ เป็น cm³: × 1,000 cm³ เป็น ℓ: ÷ 1,000"],
+      ["Time to fill = capacity ÷ litres per minute.", "เวลาที่ใช้เติม = ความจุ ÷ ลิตรต่อนาที"]
+    ],
+    "mistakes": [
+      ["Using the tank's full height when the tank is not full.", "ใช้ความสูงทั้งหมดของถังทั้งที่น้ำยังไม่เต็ม"],
+      ["Forgetting to change litres into cm³ before dividing.", "ลืมเปลี่ยนลิตรเป็น cm³ ก่อนหาร"],
+      ["Forgetting that a block inside the tank takes up space.", "ลืมว่าก้อนที่อยู่ในถังใช้พื้นที่ด้วย"]
+    ],
+    "words": [
+      ["tank", "ถัง", "a container for water", "ภาชนะใส่น้ำ"],
+      ["water level", "ระดับน้ำ", "how high the water is", "น้ำสูงเท่าไร"],
+      ["pour", "เท", "make water flow in or out", "ทำให้น้ำไหลเข้าหรือออก"],
+      ["full", "เต็ม", "cannot hold any more", "ใส่เพิ่มไม่ได้แล้ว"],
+      ["overflow", "ล้น", "water goes over the top", "น้ำไหลเกินขอบ"]
+    ]
+  },
+  "12-ch": {
+    "explore": "tank",
+    "facts": [
+      ["Water keeps its volume when it is poured into another tank.", "น้ำมีปริมาตรเท่าเดิมเมื่อเทลงในถังอื่น"],
+      ["Same volume, smaller base → the water stands higher.", "ปริมาตรเท่ากัน ฐานเล็กลง → น้ำสูงขึ้น"]
+    ],
+    "mistakes": [
+      ["Thinking the water height stays the same in a different tank.", "คิดว่าความสูงของน้ำเท่าเดิมในถังที่ต่างกัน"]
+    ],
+    "words": [
+      ["guess and check", "เดาและตรวจสอบ", "try a number, then check it", "ลองตัวเลขแล้วตรวจสอบ"],
+      ["base area", "พื้นที่ฐาน", "length × width", "ยาว × กว้าง"]
+    ]
+  }
+}

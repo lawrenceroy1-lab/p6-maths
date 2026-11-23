@@ -1,0 +1,80 @@
+{
+  "9-1": {
+    "explore": "perim",
+    "facts": [
+      ["Perimeter = the distance all the way around = add all 3 sides.", "ความยาวรอบรูป = ระยะทางรอบรูปทั้งหมด = บวกทั้ง 3 ด้าน"],
+      ["Equilateral triangle: perimeter = side × 3.", "รูปสามเหลี่ยมด้านเท่า: ความยาวรอบรูป = ความยาวด้าน × 3"],
+      ["Missing side = perimeter - the 2 sides you know.", "ด้านที่หายไป = ความยาวรอบรูป - 2 ด้านที่รู้"],
+      ["Perimeter is a length, so its unit is cm or m (not cm²).", "ความยาวรอบรูปเป็นความยาว หน่วยจึงเป็น cm หรือ m (ไม่ใช่ cm²)"]
+    ],
+    "mistakes": [
+      ["Adding only 2 sides. A triangle has 3 sides: tick each side as you add it.", "บวกแค่ 2 ด้าน รูปสามเหลี่ยมมี 3 ด้าน ให้ขีดทุกด้านที่บวกแล้ว"],
+      ["Mixing units. Change m to cm (× 100) before adding.", "ใช้หน่วยปนกัน เปลี่ยน m เป็น cm (× 100) ก่อนบวก"],
+      ["Writing cm² for a perimeter. Perimeter uses cm.", "เขียน cm² สำหรับความยาวรอบรูป ความยาวรอบรูปใช้ cm"]
+    ],
+    "words": [
+      ["perimeter", "ความยาวรอบรูป", "the distance around a shape", "ระยะทางรอบรูป"],
+      ["side", "ด้าน", "a straight edge of a shape", "เส้นตรงที่เป็นขอบของรูป"],
+      ["equilateral triangle", "รูปสามเหลี่ยมด้านเท่า", "3 equal sides", "ด้านเท่ากัน 3 ด้าน"],
+      ["isosceles triangle", "รูปสามเหลี่ยมหน้าจั่ว", "2 equal sides", "ด้านเท่ากัน 2 ด้าน"],
+      ["centimetre (cm)", "เซนติเมตร", "a unit of length", "หน่วยความยาว"]
+    ]
+  },
+  "9-2": {
+    "explore": "tarea",
+    "facts": [
+      ["Area of a triangle = ½ × base × height.", "พื้นที่รูปสามเหลี่ยม = ½ × ฐาน × ความสูง"],
+      ["A triangle is half of its related rectangle (same base and height).", "รูปสามเหลี่ยมเป็นครึ่งหนึ่งของสี่เหลี่ยมผืนผ้าที่มีฐานและความสูงเท่ากัน"],
+      ["The height meets the base at a right angle. It can be inside, a side, or outside the triangle.", "ความสูงตั้งฉากกับฐาน อาจอยู่ข้างใน เป็นด้าน หรืออยู่นอกรูปสามเหลี่ยม"],
+      ["Triangles with the same base and height have the same area.", "รูปสามเหลี่ยมที่มีฐานและความสูงเท่ากัน มีพื้นที่เท่ากัน"],
+      ["Area units are square units: cm², m².", "หน่วยของพื้นที่เป็นหน่วยตาราง: cm², m²"]
+    ],
+    "mistakes": [
+      ["Forgetting the ½. Base × height gives the rectangle, not the triangle.", "ลืม ½ ฐาน × ความสูงคือพื้นที่สี่เหลี่ยมผืนผ้า ไม่ใช่รูปสามเหลี่ยม"],
+      ["Using a slanted side as the height. The height must make a right angle with the base.", "ใช้ด้านที่เอียงเป็นความสูง ความสูงต้องตั้งฉากกับฐาน"],
+      ["Writing cm instead of cm² for area.", "เขียน cm แทน cm² สำหรับพื้นที่"]
+    ],
+    "words": [
+      ["area", "พื้นที่", "the space inside a shape", "ขนาดของพื้นที่ภายในรูป"],
+      ["base", "ฐาน", "the side the height stands on", "ด้านที่ความสูงตั้งอยู่"],
+      ["height", "ความสูง", "at a right angle to the base", "ตั้งฉากกับฐาน"],
+      ["related rectangle", "สี่เหลี่ยมผืนผ้าที่เกี่ยวข้อง", "same base and height as the triangle", "ฐานและความสูงเท่ากับรูปสามเหลี่ยม"],
+      ["square centimetre (cm²)", "ตารางเซนติเมตร", "a unit of area", "หน่วยของพื้นที่"],
+      ["shaded part", "ส่วนที่แรเงา", "the coloured part we must find", "ส่วนที่ระบายสีที่ต้องหา"]
+    ]
+  },
+  "9-3": {
+    "explore": "tarea",
+    "facts": [
+      ["Around the edge (fence, frame, border) → perimeter. Covering the inside (paint, tiles) → area.", "รอบขอบ (รั้ว กรอบ ขอบ) → ความยาวรอบรูป ปิดพื้นที่ข้างใน (ทาสี ปูกระเบื้อง) → พื้นที่"],
+      ["1 m = 100 cm. Change units first.", "1 m = 100 cm เปลี่ยนหน่วยก่อน"],
+      ["Shaded area: add the pieces, or take the white part away from the whole.", "พื้นที่แรเงา: บวกชิ้นส่วนเข้าด้วยกัน หรือนำส่วนสีขาวลบออกจากทั้งหมด"]
+    ],
+    "mistakes": [
+      ["Finding the area when the question asks for the perimeter (or the other way round).", "หาพื้นที่เมื่อโจทย์ถามความยาวรอบรูป (หรือกลับกัน)"],
+      ["Not drawing a picture. Draw it and write the numbers on it.", "ไม่วาดรูป ให้วาดรูปและเขียนตัวเลขลงไป"]
+    ],
+    "words": [
+      ["word problem", "โจทย์ปัญหา", "a maths story to solve", "เรื่องราวทางคณิตศาสตร์ที่ต้องแก้"],
+      ["metre (m)", "เมตร", "100 cm", "100 cm"],
+      ["square metre (m²)", "ตารางเมตร", "a unit of area", "หน่วยของพื้นที่"],
+      ["total", "ทั้งหมด", "everything added together", "ทุกอย่างรวมกัน"]
+    ]
+  },
+  "9-ch": {
+    "explore": "tarea",
+    "facts": [
+      ["Perimeter = add all the sides (cm, m). Area = ½ × base × height (cm², m²).", "ความยาวรอบรูป = บวกทุกด้าน (cm, m) พื้นที่ = ½ × ฐาน × ความสูง (cm², m²)"],
+      ["Square of area 100 cm²: 10 × 10 = 100, so each side is 10 cm.", "สี่เหลี่ยมจัตุรัสพื้นที่ 100 cm²: 10 × 10 = 100 แต่ละด้านจึงยาว 10 cm"],
+      ["Check your answer by working backward.", "ตรวจคำตอบโดยคิดย้อนกลับ"]
+    ],
+    "mistakes": [
+      ["Mixing up which length is the base and which is the height.", "สับสนว่าความยาวไหนเป็นฐาน ความยาวไหนเป็นความสูง"],
+      ["Stopping after the first step. Read the question again: what must you find?", "หยุดหลังขั้นแรก อ่านโจทย์อีกครั้ง: ต้องหาอะไร"]
+    ],
+    "words": [
+      ["work backward", "คิดย้อนกลับ", "start from the answer", "เริ่มจากคำตอบ"],
+      ["check", "ตรวจสอบ", "make sure the answer is right", "ดูว่าคำตอบถูกต้อง"]
+    ]
+  }
+}

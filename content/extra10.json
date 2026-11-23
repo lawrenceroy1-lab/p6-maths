@@ -1,0 +1,96 @@
+{
+  "10-1": {
+    "explore": "angles",
+    "facts": [
+      ["Sum of interior angles = (number of sides - 2) × 180°.", "ผลรวมของมุมภายใน = (จำนวนด้าน - 2) × 180°"],
+      ["Triangle 180°, quadrilateral 360°, pentagon 540°, hexagon 720°, octagon 1,080°.", "สามเหลี่ยม 180° สี่เหลี่ยม 360° ห้าเหลี่ยม 540° หกเหลี่ยม 720° แปดเหลี่ยม 1,080°"],
+      ["Regular polygon: each angle = sum ÷ number of sides.", "รูปหลายเหลี่ยมด้านเท่ามุมเท่า: แต่ละมุม = ผลรวม ÷ จำนวนด้าน"],
+      ["Parallelogram: opposite angles are equal; angles next to each other add up to 180°.", "สี่เหลี่ยมด้านขนาน: มุมตรงข้ามเท่ากัน มุมที่อยู่ติดกันรวมกันได้ 180°"],
+      ["Angles around a point add up to 360°.", "มุมรอบจุดรวมกันได้ 360°"]
+    ],
+    "mistakes": [
+      ["Using 180° for a quadrilateral. A quadrilateral is 2 triangles: 360°.", "ใช้ 180° กับรูปสี่เหลี่ยม รูปสี่เหลี่ยมเท่ากับสามเหลี่ยม 2 รูป: 360°"],
+      ["Counting triangles wrongly. From one corner you get (sides - 2) triangles.", "นับรูปสามเหลี่ยมผิด จากมุมเดียวจะได้ (จำนวนด้าน - 2) รูป"],
+      ["Forgetting to subtract every known angle.", "ลืมลบมุมที่รู้ทุกมุม"]
+    ],
+    "words": [
+      ["polygon", "รูปหลายเหลี่ยม", "a flat shape with straight sides", "รูปแบนที่มีด้านตรง"],
+      ["interior angle", "มุมภายใน", "an angle inside the polygon", "มุมที่อยู่ข้างในรูปหลายเหลี่ยม"],
+      ["regular polygon", "รูปหลายเหลี่ยมด้านเท่ามุมเท่า", "all sides and angles equal", "ทุกด้านและทุกมุมเท่ากัน"],
+      ["quadrilateral", "รูปสี่เหลี่ยม", "4 sides", "4 ด้าน"],
+      ["pentagon", "รูปห้าเหลี่ยม", "5 sides", "5 ด้าน"],
+      ["hexagon", "รูปหกเหลี่ยม", "6 sides", "6 ด้าน"],
+      ["octagon", "รูปแปดเหลี่ยม", "8 sides", "8 ด้าน"],
+      ["parallelogram", "รูปสี่เหลี่ยมด้านขนาน", "2 pairs of parallel sides", "ด้านขนาน 2 คู่"],
+      ["reflex angle", "มุมกลับ", "more than 180°", "มากกว่า 180°"]
+    ]
+  },
+  "10-2": {
+    "explore": "pperim",
+    "facts": [
+      ["Perimeter of a polygon = add all its sides.", "ความยาวรอบรูปของรูปหลายเหลี่ยม = บวกทุกด้าน"],
+      ["Equal sides: multiply. 6 sides of 10.5 cm = 10.5 × 6 = 63 cm.", "ด้านเท่ากัน: ใช้การคูณ 6 ด้าน ด้านละ 10.5 cm = 10.5 × 6 = 63 cm"],
+      ["1 m = 100 cm.", "1 m = 100 cm"]
+    ],
+    "mistakes": [
+      ["Missing a side. Tick each side as you add it.", "ลืมด้านหนึ่ง ให้ขีดทุกด้านที่บวกแล้ว"],
+      ["Adding the inside lines. Perimeter is only the outside edge.", "บวกเส้นที่อยู่ข้างใน ความยาวรอบรูปคือขอบด้านนอกเท่านั้น"]
+    ],
+    "words": [
+      ["perimeter", "ความยาวรอบรูป", "the distance around", "ระยะทางรอบรูป"],
+      ["regular", "ด้านเท่ามุมเท่า", "all sides equal", "ทุกด้านยาวเท่ากัน"],
+      ["difference", "ผลต่าง", "how much more or less", "มากกว่าหรือน้อยกว่าเท่าไร"]
+    ]
+  },
+  "10-3": {
+    "explore": "split",
+    "facts": [
+      ["Split a polygon into rectangles, squares and triangles. Find each area, then add.", "แบ่งรูปหลายเหลี่ยมเป็นสี่เหลี่ยมผืนผ้า สี่เหลี่ยมจัตุรัส และสามเหลี่ยม หาพื้นที่แต่ละส่วนแล้วบวกกัน"],
+      ["Or find a big rectangle and take away the missing parts.", "หรือหาพื้นที่สี่เหลี่ยมผืนผ้าใหญ่ แล้วลบส่วนที่ขาดออก"],
+      ["Area of a trapezium = ½ × (sum of the parallel sides) × height.", "พื้นที่รูปสี่เหลี่ยมคางหมู = ½ × (ผลบวกของด้านคู่ขนาน) × ความสูง"],
+      ["Regular polygon from the middle: one triangle × the number of triangles.", "รูปหลายเหลี่ยมด้านเท่าที่แบ่งจากจุดกลาง: พื้นที่สามเหลี่ยม 1 รูป × จำนวนรูป"]
+    ],
+    "mistakes": [
+      ["Counting the same part twice when the pieces overlap.", "นับส่วนเดียวกันสองครั้งเมื่อชิ้นส่วนซ้อนกัน"],
+      ["Using the wrong length for a part. Work out the missing lengths first.", "ใช้ความยาวผิดสำหรับส่วนหนึ่ง ให้หาความยาวที่หายไปก่อน"]
+    ],
+    "words": [
+      ["split", "แบ่ง", "cut into parts", "ตัดเป็นส่วน ๆ"],
+      ["trapezium", "รูปสี่เหลี่ยมคางหมู", "one pair of parallel sides", "มีด้านขนาน 1 คู่"],
+      ["take away", "ลบออก", "subtract", "การลบ"],
+      ["composite shape", "รูปประกอบ", "a shape made of simple shapes", "รูปที่ประกอบด้วยรูปง่าย ๆ"]
+    ]
+  },
+  "10-4": {
+    "explore": "split",
+    "facts": [
+      ["Read, draw, solve, check.", "อ่าน วาด แก้ ตรวจสอบ"],
+      ["Regular polygon: one side = perimeter ÷ number of sides.", "รูปหลายเหลี่ยมด้านเท่า: ความยาว 1 ด้าน = ความยาวรอบรูป ÷ จำนวนด้าน"],
+      ["Working backward: square of 144 m² has sides of 12 m (12 × 12 = 144).", "คิดย้อนกลับ: สี่เหลี่ยมจัตุรัสพื้นที่ 144 m² มีด้านยาว 12 m (12 × 12 = 144)"]
+    ],
+    "mistakes": [
+      ["Using the perimeter rule for an area question.", "ใช้วิธีหาความยาวรอบรูปกับโจทย์ที่ถามพื้นที่"],
+      ["Forgetting the unit in the answer.", "ลืมเขียนหน่วยในคำตอบ"]
+    ],
+    "words": [
+      ["fence", "รั้ว", "goes around: perimeter", "ล้อมรอบ: ความยาวรอบรูป"],
+      ["tile", "กระเบื้อง", "covers the inside: area", "ปิดพื้นที่ข้างใน: พื้นที่"],
+      ["cost", "ราคา", "how much money", "ใช้เงินเท่าไร"]
+    ]
+  },
+  "10-ch": {
+    "explore": "angles",
+    "facts": [
+      ["Angles: triangle 180°, quadrilateral 360°, pentagon 540°, hexagon 720°.", "มุม: สามเหลี่ยม 180° สี่เหลี่ยม 360° ห้าเหลี่ยม 540° หกเหลี่ยม 720°"],
+      ["The height of a triangle meets the base at a right angle.", "ความสูงของรูปสามเหลี่ยมตั้งฉากกับฐาน"]
+    ],
+    "mistakes": [
+      ["Using a slanted side as the height.", "ใช้ด้านที่เอียงเป็นความสูง"],
+      ["Mixing up area (cm²) and perimeter (cm).", "สับสนระหว่างพื้นที่ (cm²) กับความยาวรอบรูป (cm)"]
+    ],
+    "words": [
+      ["sum", "ผลรวม", "the total", "ผลรวมทั้งหมด"],
+      ["each", "แต่ละ", "one of them", "หนึ่งในนั้น"]
+    ]
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "11-1": {
+    "explore": "circum",
+    "facts": [
+      ["π (pi) = circumference ÷ diameter ≈ 3.14 or 22/7.", "π (พาย) = เส้นรอบวง ÷ เส้นผ่านศูนย์กลาง ≈ 3.14 หรือ 22/7"],
+      ["Circumference = π × diameter = 2 × π × radius.", "เส้นรอบวง = π × เส้นผ่านศูนย์กลาง = 2 × π × รัศมี"],
+      ["Use the π the question gives: 22/7 or 3.14.", "ใช้ค่า π ตามที่โจทย์กำหนด: 22/7 หรือ 3.14"],
+      ["Semicircle perimeter = half the circumference + the diameter.", "ความยาวรอบรูปครึ่งวงกลม = ครึ่งหนึ่งของเส้นรอบวง + เส้นผ่านศูนย์กลาง"],
+      ["Quarter circle perimeter = ¼ of the circumference + 2 radii.", "ความยาวรอบรูปเสี้ยววงกลม = ¼ ของเส้นรอบวง + รัศมี 2 เส้น"]
+    ],
+    "mistakes": [
+      ["Using the radius in π × d. If you have the radius, use 2 × π × r.", "ใช้รัศมีใน π × d ถ้ารู้รัศมี ให้ใช้ 2 × π × r"],
+      ["Forgetting the straight edges of a semicircle or quarter circle.", "ลืมเส้นตรงของครึ่งวงกลมหรือเสี้ยววงกลม"],
+      ["Using 3.14 when the question says 22/7.", "ใช้ 3.14 เมื่อโจทย์บอกให้ใช้ 22/7"]
+    ],
+    "words": [
+      ["circumference", "เส้นรอบวง", "the distance around a circle", "ระยะทางรอบวงกลม"],
+      ["pi (π)", "พาย", "about 3.14 or 22/7", "ประมาณ 3.14 หรือ 22/7"],
+      ["diameter", "เส้นผ่านศูนย์กลาง", "across the circle through the center", "ผ่านวงกลมโดยผ่านจุดศูนย์กลาง"],
+      ["radius", "รัศมี", "center to the edge", "จากจุดศูนย์กลางถึงขอบ"],
+      ["semicircle", "ครึ่งวงกลม", "half a circle", "ครึ่งหนึ่งของวงกลม"],
+      ["quarter circle", "เสี้ยววงกลม", "a quarter of a circle", "หนึ่งในสี่ของวงกลม"],
+      ["arc", "ส่วนโค้ง", "part of the circumference", "ส่วนหนึ่งของเส้นรอบวง"]
+    ]
+  },
+  "11-2": {
+    "explore": "carea",
+    "facts": [
+      ["Area of a circle = π × radius × radius.", "พื้นที่วงกลม = π × รัศมี × รัศมี"],
+      ["Given the diameter? Halve it to get the radius first.", "โจทย์ให้เส้นผ่านศูนย์กลาง? แบ่งครึ่งเพื่อหารัศมีก่อน"],
+      ["Semicircle area = ½ × π × r × r. Quarter circle = ¼ × π × r × r.", "พื้นที่ครึ่งวงกลม = ½ × π × r × r เสี้ยววงกลม = ¼ × π × r × r"],
+      ["Ring (shaded) = big circle - small circle.", "วงแหวน (ส่วนแรเงา) = วงกลมใหญ่ - วงกลมเล็ก"]
+    ],
+    "mistakes": [
+      ["Using the diameter in π × r × r.", "ใช้เส้นผ่านศูนย์กลางใน π × r × r"],
+      ["Doing π × r × 2 instead of π × r × r.", "คิด π × r × 2 แทน π × r × r"],
+      ["Writing cm instead of cm² for area.", "เขียน cm แทน cm² สำหรับพื้นที่"]
+    ],
+    "words": [
+      ["area", "พื้นที่", "the space inside", "ขนาดของพื้นที่ข้างใน"],
+      ["ring", "วงแหวน", "the part between 2 circles", "ส่วนระหว่างวงกลม 2 วง"],
+      ["in terms of π", "ในรูปของ π", "leave π in the answer", "เขียน π ไว้ในคำตอบ"]
+    ]
+  },
+  "11-3": {
+    "explore": "circum",
+    "facts": [
+      ["Around the edge (fence, trim, wheel turning) → circumference. Covering the inside → area.", "รอบขอบ (รั้ว ขอบตกแต่ง ล้อหมุน) → เส้นรอบวง ปิดพื้นที่ข้างใน → พื้นที่"],
+      ["In 1 turn a wheel rolls its circumference.", "ล้อหมุน 1 รอบ เคลื่อนที่ได้เท่ากับเส้นรอบวง"],
+      ["Distance = circumference × number of turns.", "ระยะทาง = เส้นรอบวง × จำนวนรอบ"]
+    ],
+    "mistakes": [
+      ["Using area for a wheel distance question.", "ใช้พื้นที่กับโจทย์ระยะทางของล้อ"],
+      ["Forgetting the straight parts of a running track.", "ลืมส่วนที่เป็นเส้นตรงของลู่วิ่ง"]
+    ],
+    "words": [
+      ["wheel", "ล้อ", "rolls its circumference each turn", "เคลื่อนที่เท่ากับเส้นรอบวงทุกรอบ"],
+      ["turn", "รอบ", "one complete spin", "หมุนครบ 1 รอบ"],
+      ["track", "ลู่วิ่ง", "a running path", "ทางวิ่ง"]
+    ]
+  },
+  "11-ch": {
+    "explore": "carea",
+    "facts": [
+      ["Circumference = π × d = 2 × π × r. Area = π × r × r.", "เส้นรอบวง = π × d = 2 × π × r พื้นที่ = π × r × r"],
+      ["Double the radius: the area becomes 4 times bigger.", "รัศมีเพิ่มเป็น 2 เท่า: พื้นที่เพิ่มเป็น 4 เท่า"]
+    ],
+    "mistakes": [
+      ["Thinking a pizza twice as wide is only twice as big. Its area is 4 times bigger.", "คิดว่าพิซซ่าที่กว้างเป็น 2 เท่าใหญ่ขึ้นแค่ 2 เท่า พื้นที่ใหญ่ขึ้น 4 เท่า"]
+    ],
+    "words": [
+      ["compare", "เปรียบเทียบ", "find which is bigger", "หาว่าอันไหนใหญ่กว่า"],
+      ["times as big", "ใหญ่กว่า…เท่า", "multiply to compare", "คูณเพื่อเปรียบเทียบ"]
+    ]
+  }
+}
