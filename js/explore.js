@@ -666,5 +666,108 @@ const Explore = (() => {
     draw();
   }
 
-  return { triangle, circle, compass, solid, net, tarea, polygon, split, circum, carea, volume, tank, pattern };
+  // ---------- Unit 14: pie charts ----------
+  const PIE_COL = ["#BBDEFB", "#FFF59D", "#C8E6C9", "#F8BBD0", "#FFE0B2", "#D1C4E9"];
+  const gcd = (x, y) => (y ? gcd(y, x % y) : x);
+  const frac = (v, t) => { const g = gcd(v, t) || 1; return v === t ? "1" : v === 0 ? "0" : `${v / g}/${t / g}`; };
+  const pct = (v, t) => { const x = v / t * 100, r = String(Math.round(x * 100) / 100); return Math.abs(+r - x) > 1e-9 ? "≈" + r : r; };
+  function slicePath(cx, cy, r, a0, a1) {
+    const rad = d => d * Math.PI / 180;
+    if (a1 - a0 >= 359.999) return `M${cx - r},${cy} A${r},${r} 0 1 1 ${cx + r},${cy} A${r},${r} 0 1 1 ${cx - r},${cy} Z`;
+    const s = [cx + r * Math.cos(rad(a0)), cy + r * Math.sin(rad(a0))], e = [cx + r * Math.cos(rad(a1)), cy + r * Math.sin(rad(a1))];
+    return `M${cx},${cy} L${f1(s[0])},${f1(s[1])} A${r},${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${f1(e[0])},${f1(e[1])} Z`;
+  }
+
+  // Change the numbers: the pie chart, the bar graph and the table all change together.
+  function pie(el) {
+    const SETS = [
+      { en: "Favorite pets", th: "สัตว์เลี้ยงที่ชอบ", names: [["Cat", "แมว"], ["Rabbit", "กระต่าย"], ["Hamster", "หนูแฮมสเตอร์"], ["Dog", "สุนัข"]], v: [20, 15, 10, 40] },
+      { en: "T-shirts (6F)", th: "เสื้อยืด (6F)", names: [["Yellow", "เหลือง"], ["Green", "เขียว"], ["Blue", "น้ำเงิน"]], v: [15, 15, 10] },
+      { en: "Theater", th: "โรงละคร", names: [["Men", "ผู้ชาย"], ["Women", "ผู้หญิง"], ["Boys", "เด็กชาย"], ["Girls", "เด็กหญิง"]], v: [60, 45, 55, 20] },
+      { en: "Concert", th: "คอนเสิร์ต", names: [["Adults", "ผู้ใหญ่"], ["Boys", "เด็กชาย"], ["Girls", "เด็กหญิง"]], v: [60, 40, 60] },
+    ];
+    let set = 0, vals = SETS[0].v.slice(), show = "n";
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${T("Pick some data, then press + and - to change the numbers. Watch the pie chart and the bar graph change together.", "เลือกข้อมูล แล้วกด + และ - เพื่อเปลี่ยนจำนวน ดูแผนภูมิรูปวงกลมและกราฟแท่งเปลี่ยนไปพร้อมกัน")}</p>
+      <div class="ex-btns">${SETS.map((s, i) => `<button class="chip${i ? "" : " on"}" data-set="${i}">${T(s.en, s.th)}</button>`).join("")}</div>
+      <div class="ex-btns">${[["n", "Numbers", "จำนวน"], ["f", "Fractions", "เศษส่วน"], ["p", "Percentages", "ร้อยละ"]].map(([k, e, t], i) => `<button class="chip${i ? "" : " on"}" data-show="${k}">${T(e, t)}</button>`).join("")}</div>
+      <div class="ex-pm"></div>
+      <svg class="ex-svg" viewBox="0 0 600 260"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info"), pm = el.querySelector(".ex-pm");
+    el.querySelectorAll("[data-set]").forEach(b => b.onclick = () => { set = +b.dataset.set; vals = SETS[set].v.slice(); el.querySelectorAll("[data-set]").forEach(x => x.classList.toggle("on", x === b)); controls(); draw(); });
+    el.querySelectorAll("[data-show]").forEach(b => b.onclick = () => { show = b.dataset.show; el.querySelectorAll("[data-show]").forEach(x => x.classList.toggle("on", x === b)); draw(); });
+    function controls() {
+      pm.innerHTML = SETS[set].names.map((n, i) => `<span class="ex-slider" style="display:inline-flex;align-items:center;gap:6px;margin:4px 10px 4px 0">
+        <span style="display:inline-block;width:16px;height:16px;border:2px solid #1f2a44;border-radius:4px;background:${PIE_COL[i]}"></span><b>${n[0]}</b>
+        <button class="chip" data-i="${i}" data-d="-5">-</button><b class="pv${i}" style="min-width:2.2em;text-align:center"></b><button class="chip" data-i="${i}" data-d="5">+</button></span>`).join("");
+      pm.querySelectorAll("button").forEach(b => b.onclick = () => { const i = +b.dataset.i; vals[i] = Math.max(0, Math.min(100, vals[i] + +b.dataset.d)); draw(); });
+    }
+    function draw() {
+      const names = SETS[set].names, tot = vals.reduce((a, b) => a + b, 0);
+      names.forEach((n, i) => { const e = pm.querySelector(".pv" + i); if (e) e.textContent = vals[i]; });
+      let o = "", a = -90;
+      const cx = 140, cy = 130, r = 110;
+      if (tot === 0) o += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="#eceff1" stroke="#1f2a44" stroke-width="2.5"/>`;
+      vals.forEach((v, i) => {
+        if (!tot || !v) return;
+        const sw = v / tot * 360;
+        o += `<path d="${slicePath(cx, cy, r, a, a + sw)}" fill="${PIE_COL[i]}" stroke="#1f2a44" stroke-width="2.5"/>`;
+        if (Math.abs(sw - 90) < 1e-6) {
+          const u = d => [Math.cos(d * Math.PI / 180), Math.sin(d * Math.PI / 180)], p = u(a), q = u(a + 90), s = 13;
+          o += `<polyline points="${f1(cx + p[0] * s)},${f1(cy + p[1] * s)} ${f1(cx + (p[0] + q[0]) * s)},${f1(cy + (p[1] + q[1]) * s)} ${f1(cx + q[0] * s)},${f1(cy + q[1] * s)}" fill="none" stroke="#1f2a44" stroke-width="2"/>`;
+        }
+        const m = (a + sw / 2) * Math.PI / 180, rr = sw < 40 ? r * 0.78 : r * 0.58;
+        const lab = show === "n" ? v : show === "f" ? frac(v, tot) : pct(v, tot) + "%";
+        o += `<text x="${f1(cx + rr * Math.cos(m))}" y="${f1(cy + rr * Math.sin(m) + 6)}" class="ex-lab" style="font-size:${sw < 40 ? 13 : 16}px">${lab}</text>`;
+        a += sw;
+      });
+      // bar graph from the same numbers
+      const bx = 320, by = 230, bh = 190, bw = 260 / names.length, mx = Math.max(10, ...vals);
+      const step = mx <= 50 ? 10 : 20, top = Math.ceil(mx / step) * step;
+      for (let k = 0; k <= top; k += step) o += `<line x1="${bx}" y1="${f1(by - bh * k / top)}" x2="590" y2="${f1(by - bh * k / top)}" stroke="#cfd8dc"/><text x="${bx - 6}" y="${f1(by - bh * k / top + 5)}" text-anchor="end" style="font-size:12px;font-weight:700;fill:#37474f">${k}</text>`;
+      vals.forEach((v, i) => {
+        const h = bh * v / top, x = bx + 8 + i * bw;
+        o += `<rect x="${f1(x)}" y="${f1(by - h)}" width="${f1(bw - 16)}" height="${f1(h)}" fill="${PIE_COL[i]}" stroke="#1f2a44" stroke-width="2"/>
+          <text x="${f1(x + bw / 2 - 8)}" y="${by + 20}" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#37474f">${names[i][0]}</text>`;
+      });
+      o += `<line x1="${bx}" y1="30" x2="${bx}" y2="${by}" stroke="#1f2a44" stroke-width="2.5"/><line x1="${bx}" y1="${by}" x2="590" y2="${by}" stroke="#1f2a44" stroke-width="2.5"/>`;
+      svg.innerHTML = o;
+      const rows = names.map((n, i) => `<tr><td>${T(n[0], n[1])}</td><td>${vals[i]}</td><td>${tot ? `${vals[i]}/${tot} = <b>${frac(vals[i], tot)}</b>` : "-"}</td><td>${tot ? `<b>${pct(vals[i], tot)}%</b>` : "-"}</td></tr>`).join("");
+      info.innerHTML = `<table class="t"><tr><th></th><th>${T("Number", "จำนวน")}</th><th>${T("Fraction", "เศษส่วน")}</th><th>${T("Percentage", "ร้อยละ")}</th></tr>${rows}
+        <tr><th>${T("Total", "รวม")}</th><th>${tot}</th><th>1</th><th>100%</th></tr></table>
+        <div class="ex-row">${T("Fraction = part ÷ total. Percentage = fraction × 100%. Bigger number = bigger slice = taller bar.", "เศษส่วน = ส่วนย่อย ÷ ทั้งหมด ร้อยละ = เศษส่วน × 100% จำนวนมากกว่า = ชิ้นใหญ่กว่า = แท่งสูงกว่า")}</div>`;
+    }
+    controls(); draw();
+  }
+
+  // Colour equal parts of a circle and see the fraction and the percentage.
+  function pieparts(el) {
+    let n = 16, on = new Map(), pen = 0;
+    const PEN = [["Cake", "เค้ก"], ["Tart", "ทาร์ต"], ["Cookies", "คุกกี้"], ["Ice cream", "ไอศกรีม"]];
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${T("Choose how many equal parts. Pick a colour, then tap the parts to colour them. Like the Performance Task: Cake 4/16, Tart 1/16, Cookies 6/16, Ice cream 5/16.", "เลือกจำนวนส่วนที่เท่ากัน เลือกสี แล้วแตะส่วนต่าง ๆ เพื่อระบายสี เหมือนงานปฏิบัติ: เค้ก 4/16 ทาร์ต 1/16 คุกกี้ 6/16 ไอศกรีม 5/16")}</p>
+      <div class="ex-btns">${[4, 8, 12, 16].map(k => `<button class="chip${k === n ? " on" : ""}" data-n="${k}">${k} ${T("parts", "ส่วน")}</button>`).join("")}</div>
+      <div class="ex-btns">${PEN.map((p, i) => `<button class="chip${i ? "" : " on"}" data-p="${i}" style="border-left:14px solid ${PIE_COL[[4, 3, 1, 0][i]]}">${T(p[0], p[1])}</button>`).join("")}<button class="chip" data-clear="1">${T("Clear", "ล้าง")}</button></div>
+      <svg class="ex-svg" viewBox="0 0 300 300" style="max-width:340px;touch-action:none"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info");
+    const colOf = p => PIE_COL[[4, 3, 1, 0][p]];
+    el.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { n = +b.dataset.n; on = new Map(); el.querySelectorAll("[data-n]").forEach(x => x.classList.toggle("on", x === b)); draw(); });
+    el.querySelectorAll("[data-p]").forEach(b => b.onclick = () => { pen = +b.dataset.p; el.querySelectorAll("[data-p]").forEach(x => x.classList.toggle("on", x === b)); });
+    el.querySelector("[data-clear]").onclick = () => { on = new Map(); draw(); };
+    function draw() {
+      let o = "";
+      for (let k = 0; k < n; k++) {
+        const a0 = -90 + k * 360 / n;
+        o += `<path data-k="${k}" d="${slicePath(150, 150, 130, a0, a0 + 360 / n)}" fill="${on.has(k) ? colOf(on.get(k)) : "#fff"}" stroke="#1f2a44" stroke-width="2.5" style="cursor:pointer"/>`;
+      }
+      svg.innerHTML = o;
+      svg.querySelectorAll("path").forEach(p => p.onclick = () => { const k = +p.dataset.k; if (on.get(k) === pen) on.delete(k); else on.set(k, pen); draw(); });
+      const rows = PEN.map((p, i) => { const c = [...on.values()].filter(x => x === i).length; return c ? `<div class="ex-row"><span style="display:inline-block;width:14px;height:14px;background:${colOf(i)};border:2px solid #1f2a44;border-radius:3px"></span> ${T(p[0], p[1])}: ${c}/${n} = <b>${frac(c, n)}</b> = <b>${pct(c, n)}%</b></div>` : ""; }).join("");
+      const all = on.size;
+      info.innerHTML = rows + `<div class="ex-row">${T(`Coloured: ${all} of ${n} parts = ${frac(all, n)} = ${pct(all, n)}%`, `ระบายแล้ว: ${all} จาก ${n} ส่วน = ${frac(all, n)} = ${pct(all, n)}%`)}${all === n ? " ✅ " + T("The whole circle = 1 = 100%", "วงกลมทั้งวง = 1 = 100%") : ""}</div>`;
+    }
+    draw();
+  }
+
+  return { triangle, circle, compass, solid, net, tarea, polygon, split, circum, carea, volume, tank, pattern, pie, pieparts };
 })();

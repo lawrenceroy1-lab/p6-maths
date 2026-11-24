@@ -23,6 +23,7 @@ with contextlib.redirect_stdout(io.StringIO()):
     import build_unit11 as U11  # noqa: E402
     import build_unit12 as U12  # noqa: E402
     import build_unit13 as U13  # noqa: E402
+    import build_unit14 as U14  # noqa: E402
 
 GREEN, BLUE, ORANGE, PINK, YELLOW, PURPLE = "#C8E6C9", "#BBDEFB", "#FFE0B2", "#F8BBD0", "#FFF59D", "#D1C4E9"
 
@@ -567,13 +568,69 @@ b13[21]["fig"] = gq(U13, "13-1", "Exercise 5")
 b13[24]["fig"] = gq(U13, "13-ch", "Let's Think Along (a)")
 check(len(b13), 40, "bank 13 size")
 
+# ==================================================================
+# UNIT 14 (Review Q29 to Q32 first, then the unit, then new questions)
+# ==================================================================
+F_ = Fraction
+_buns = U14.pie([(["Coconut buns", "1/3"], 4, YELLOW), (["Chicken", "floss buns"], 3, ORANGE), (["Cheese", "buns"], 100 / 35, BLUE), (["Jam", "buns"], 75 / 35, PINK)], ra=(1,))
+_kumar = U14.pie([(["Transport", "1/9"], 1, BLUE), ("Rent", 5, ORANGE), ("Food", 3, GREEN)])
+_ice = U14.pie([("Chocolate", 50, ORANGE), (["Mint", "12%"], 12, GREEN), ("Vanilla", 13, YELLOW), ("Strawberry", 25, PINK)], ra=(3,))
+_tv = U14.pie([("Cartoon", 40, YELLOW), (["Comedy", "30%"], 30, BLUE), (["Drama", "15%"], 15, PINK), (["Documentary", "15%"], 15, GREEN)])
+b14 = []
+b14_items = [
+    ("Chicken floss buns are 1/4 of the pie chart. What percentage are coconut, cheese and jam buns together?", "75%", ["25%", "70%", "80%"], "1/4 = 25%. 100% - 25% = 75%.", "Review Q29(a), p.262", 100 - 25, 75, _buns),
+    ("Coconut buns are 1/3 of all the buns. 140 coconut buns were sold. How many buns were sold altogether?", "420", ["280", "143", "560"], "1/3 is 140, so 3/3 is 140 × 3 = 420.", "Review Q29(b), p.262", 140 * 3, 420, _buns),
+    ("420 buns were sold. Chicken floss buns are 1/4 of them. How many chicken floss buns?", "105", ["140", "84", "315"], "1/4 × 420 = 420 ÷ 4 = 105.", "Review Q29(c), p.262", 420 // 4, 105, _buns),
+    ("Coconut buns are 1/3 and chicken floss buns are 1/4. What fraction are cheese and jam buns together?", "5/12", ["7/12", "2/7", "1/2"], "1 - 1/3 - 1/4 = 12/12 - 4/12 - 3/12 = 5/12.", "Review Q29(d), p.262", float(1 - F_(1, 3) - F_(1, 4)), float(F_(5, 12)), _buns),
+    ("Jam buns : chicken floss buns = 5 : 7. There are 105 chicken floss buns. How many jam buns?", "75", ["147", "15", "35"], "7 units = 105, 1 unit = 105 ÷ 7 = 15, 5 units = 5 × 15 = 75.", "Review Q29(e), p.262", 105 // 7 * 5, 75, _buns),
+    ("Mr Kumar spent 1/9 of his money on transport and 5 times as much on rent. What fraction was spent on rent?", "5/9", ["5/45", "1/5", "4/9"], "5 × 1/9 = 5/9.", "Review Q30(a), p.263", float(5 * F_(1, 9)), float(F_(5, 9)), _kumar),
+    ("Transport is 1/9 and rent is 5/9. What fraction was spent on food? (simplest form)", "1/3", ["3/9", "4/9", "2/3"], "1 - 5/9 - 1/9 = 3/9 = 1/3.", "Review Q30(b), p.263", float(1 - F_(5, 9) - F_(1, 9)), float(F_(1, 3)), _kumar),
+    ("Chocolate is half of the pie chart. 150 students like chocolate. How many students took part?", "300", ["150", "75", "450"], "Half is 150, so the whole is 150 × 2 = 300.", "Review Q31(a), p.263", 150 * 2, 300, _ice),
+    ("300 students took part. Strawberry is 1/4 of the pie chart. How many like strawberry?", "75", ["150", "100", "60"], "1/4 × 300 = 300 ÷ 4 = 75.", "Review Q31(b), p.263", 300 // 4, 75, _ice),
+    ("300 students took part and 12% like mint. How many like mint?", "36", ["12", "30", "48"], "12/100 × 300 = 36.", "Review Q31, p.263", 12 * 300 // 100, 36, _ice),
+    ("Comedy 30%, Documentary 15%, Drama 15%. What percentage like cartoon?", "40%", ["30%", "60%", "45%"], "100% - 30% - 15% - 15% = 40%.", "Review Q32(a), p.264", 100 - 30 - 15 - 15, 40, _tv),
+    ("Comedy is 30% and documentary is 15%. How many times as many children like comedy as documentary?", "2", ["15", "3", "45"], "30 ÷ 15 = 2.", "Review Q32(b), p.264", 30 // 15, 2, _tv),
+    ("Cartoon is 40% and 240 children like cartoon. How many children took part?", "600", ["960", "340", "400"], "40% is 240, so 1% is 6 and 100% is 600.", "Review Q32(c), p.264", 240 * 100 // 40, 600, _tv),
+    ("Drama 15%, Cartoon 40%. What is the ratio of drama to cartoon?", "3 : 8", ["8 : 3", "15 : 55", "3 : 4"], "15 : 40, divide both by 5: 3 : 8.", "Review Q32(d), p.264", 40 // 5, 8, _tv),
+    ("What is another name for a pie chart?", "Circle graph", ["Bar graph", "Line graph", "Picture graph"], "A pie chart is a circle, so it is also called a circle graph.", "p.231", 1, 1, None),
+    ("T-shirts: Yellow 15, Green 15, Blue 10. Which two colors have slices of the same size?", "Yellow and Green", ["Green and Blue", "Yellow and Blue", "All three"], "Yellow and Green are both 15, so their slices are the same size.", "p.232", 15, 15, U14.fig_shirts),
+    ("Strawberry tarts 1/4, chocolate tarts 1/4. What fraction are pineapple tarts?", "1/2", ["1/4", "1/3", "3/4"], "1 - 1/4 - 1/4 = 1/2.", "p.232", float(1 - F_(1, 4) - F_(1, 4)), 0.5, U14.fig_tarts),
+    ("Janice: food 40%, transport 20%, she saved the rest. What percentage did she save?", "40%", ["60%", "20%", "80%"], "100% - 40% - 20% = 40%.", "p.233", 100 - 40 - 20, 40, U14.fig_janice),
+    ("60 adults out of 160 people. What fraction are adults?", "3/8", ["3/5", "1/4", "6/10"], "60/160: divide top and bottom by 20 = 3/8.", "p.233", float(F_(60, 160)), 0.375, U14.fig_concert_n),
+    ("40 boys out of 160 people. What percentage are boys?", "25%", ["40%", "4%", "20%"], "40/160 = 1/4 = 25%.", "p.233", 40 / 160 * 100, 25, U14.fig_concert_n),
+    ("Beef burgers are a quarter of the pie chart and made 750 baht. How much did all the burgers make?", "3,000 baht", ["1,500 baht", "750 baht", "2,250 baht"], "4 quarters: 750 × 4 = 3,000 baht.", "p.234 (b)", 750 * 4, 3000, U14.fig_burger),
+    ("Chicken and fish burgers made 1,500 baht. Chicken made twice as much as fish. How much did fish make?", "500 baht", ["750 baht", "1,000 baht", "300 baht"], "Fish 1 unit, chicken 2 units: 3 units = 1,500, so 1 unit = 500 baht.", "p.234 (d)", 1500 // 3, 500, U14.fig_burger),
+    ("Theater: Men 60, Women 45. How many more men than women?", "15", ["105", "25", "5"], "60 - 45 = 15.", "Do and Learn (a), p.235", 60 - 45, 15, U14.fig_theater),
+    ("Women (45) is a quarter of the theater pie chart. How many people in total?", "180", ["90", "135", "225"], "45 × 4 = 180.", "Do and Learn (b), p.235", 45 * 4, 180, U14.fig_theater),
+    ("180 people: Men 60, Women 45, Boys 55. How many girls?", "20", ["30", "160", "25"], "180 - 60 - 45 - 55 = 20.", "Do and Learn (c), p.235", 180 - 60 - 45 - 55, 20, U14.fig_theater),
+    ("Blue 10, Green 15, Red 10, Yellow 5 (40 students). What fraction of the pie is Green?", "3/8", ["1/4", "15/25", "1/8"], "15/40: divide top and bottom by 5 = 3/8.", "Exercise 1, p.236", float(F_(15, 40)), 0.375, None),
+    ("Primary 4 and Primary 6 are quarters with 28 students each. Primary 5 is half. How many in Primary 5?", "56", ["28", "84", "112"], "Half = 2 quarters = 28 + 28 = 56.", "Exercise 2, p.237", 28 + 28, 56, U14.fig_chess),
+    ("Angelfish 30 + goldfish 20 is half of the fish. Swordfish 16 is in the other half with guppies. How many guppies?", "34", ["50", "16", "66"], "The other half is also 50: 50 - 16 = 34.", "Exercise 3 (c), p.237", 50 - 16, 34, U14.fig_fish),
+    ("34 out of 100 fish are guppies. What fraction is that in simplest form?", "17/50", ["34/50", "1/3", "17/100"], "34/100: divide top and bottom by 2 = 17/50.", "Exercise 3 (d), p.237", float(F_(34, 100)), float(F_(17, 50)), U14.fig_fish),
+    ("Blue 10% + green 40% = 100 buttons. How many buttons in the box?", "200", ["100", "150", "500"], "50% is 100 buttons, so 100% is 200.", "Exercise 4 (c), p.238", 100 * 2, 200, U14.fig_buttons),
+    ("Green 40%, yellow 30%. What is the ratio of green to yellow?", "4 : 3", ["3 : 4", "40 : 70", "2 : 1"], "40 : 30, divide both by 10: 4 : 3.", "Exercise 4 (e), p.238", 40 // 10, 4, U14.fig_buttons),
+    ("Mary: Books 1/3, Transport 2/12, Food 1/12. What fraction is clothes?", "5/12", ["7/12", "4/12", "1/2"], "1 - 4/12 - 2/12 - 1/12 = 5/12.", "Let's Think Along (a), p.239", float(1 - F_(1, 3) - F_(2, 12) - F_(1, 12)), float(F_(5, 12)), U14.fig_mary),
+    ("Food is 1/12 = 60 baht. Clothes is 5/12. How much was spent on clothes?", "300 baht", ["60 baht", "120 baht", "500 baht"], "1 unit = 60 baht, 5 units = 5 × 60 = 300 baht.", "Let's Think Along (b), p.239", 5 * 60, 300, U14.fig_mary),
+    ("100 out of 320 children like ice cream. What fraction is that?", "5/16", ["5/32", "1/3", "10/16"], "100/320: divide top and bottom by 20 = 5/16.", "Performance Task, p.240", float(F_(100, 320)), float(F_(5, 16)), None),
+    ("Pineapples 50 + papayas 30 + pears 40 make one quarter. A half is pineapples + oranges. How many oranges?", "190", ["240", "120", "70"], "Quarter 120, half 240: 240 - 50 = 190.", "Problem Solving, p.241", 240 - 50, 190, U14.fig_fruit),
+    ("Sandals and boots are the same size slices. In a bar graph, the sandals and boots bars are…", "the same height", ["different heights", "the tallest bars", "not shown"], "Same size slices show the same amount, so the bars are the same height.", "Math Journal, p.243", 1, 1, None),
+    ("A pie chart shows 60 boys and 40 girls. What percentage are girls?", "40%", ["60%", "4%", "66%"], "40 out of 100 = 40%.", "New", 40 / 100 * 100, 40, U14.pie([(["Boys", "60"], 60, BLUE), (["Girls", "40"], 40, PINK)])),
+    ("Emma spends 25% of her money on lunch. She has 200 baht. How much is lunch?", "50 baht", ["25 baht", "75 baht", "150 baht"], "25% = 1/4: 200 ÷ 4 = 50 baht.", "New", 200 // 4, 50, None),
+    ("In a class, 3/8 like football, 1/4 like swimming and the rest like running. What fraction like running?", "3/8", ["5/8", "1/2", "1/8"], "1 - 3/8 - 2/8 = 3/8.", "New", float(1 - F_(3, 8) - F_(1, 4)), 0.375, None),
+    ("A slice is 1/2 of a pie chart of 80 children. How many children is the slice?", "40", ["20", "80", "160"], "1/2 × 80 = 40.", "New", 80 // 2, 40, None),
+]
+for q, ans, wrongs, why, src, a, b_, fg in b14_items:
+    check(round(a, 4), round(b_, 4), f"bank 14 {src}")
+    b14.append(B(q, [ans] + wrongs, why, src, fg))
+check(len(b14), 40, "bank 14 size")
+
 if PROBLEMS:
     print("MATHS CHECK FAILED. Nothing was written:")
     for p in PROBLEMS:
         print("  -", p)
     sys.exit(1)
 root = os.path.join(os.path.dirname(__file__), "..", "content")
-for uid, bank in (("07", b7), ("08", b8), ("09", b9), ("10", b10), ("11", b11), ("12", b12), ("13", b13)):
+for uid, bank in (("07", b7), ("08", b8), ("09", b9), ("10", b10), ("11", b11), ("12", b12), ("13", b13), ("14", b14)):
     with open(os.path.join(root, f"bank{uid}.json"), "w", encoding="utf-8") as fh:
         json.dump({"unit": uid, "questions": bank}, fh, ensure_ascii=False, separators=(",", ":"))
-print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)}, Unit 10: {len(b10)}, Unit 11: {len(b11)}, Unit 12: {len(b12)}, Unit 13: {len(b13)} questions. All checks passed.")
+print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)}, Unit 10: {len(b10)}, Unit 11: {len(b11)}, Unit 12: {len(b12)}, Unit 13: {len(b13)}, Unit 14: {len(b14)} questions. All checks passed.")

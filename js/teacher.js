@@ -85,7 +85,7 @@ function draw() {
       <h2>Teacher tools</h2>
       <p>🔺 <b><a href="lesson7.html">Unit 7 lesson and class games</a></b>: very simple step-by-step slides and 5 easy team games for the projector.</p>
       <p>🧊 <b><a href="lesson8.html">Unit 8 lesson and class games</a></b>: the same for 3D shapes and nets.</p>
-      <p>📚 <b>Units 9 to 13 lessons and class games</b>: ${[9, 10, 11, 12, 13].map(u => `<a href="lesson.html?u=${String(u).padStart(2, "0")}">Unit ${u}</a>`).join(" · ")}</p>
+      <p>📚 <b>Units 9 to 14 lessons and class games</b>: ${[9, 10, 11, 12, 13, 14].map(u => `<a href="lesson.html?u=${String(u).padStart(2, "0")}">Unit ${u}</a>`).join(" · ")}</p>
       <p>🏆 <b>Class Battle</b> (for the projector) is now in every unit section for you only. Students don't see it.</p>
       <p>🖨️ <b>Guided Answers</b> can be printed from any section.</p>
       <p>📋 To fix or add a nickname, edit the <b>Students</b> tab in your Google Sheet.</p>

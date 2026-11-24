@@ -99,6 +99,21 @@ const QUICK = {
       options: opts(String(t), [String(a + n * d), String(t + d), String(n * d), String(t - 1)]), right: String(t),
       why: `The jump is ${d}. Term ${n} has ${n - 1} jumps: ${a} + (${n - 1} × ${d}) = ${t}.` };
   },
+  chart() {
+    const k = Math.random();
+    if (k < 0.25) { const x = pick([15, 20, 25, 30, 45, 60, 75, 120]), t = x * 4;
+      return { q: `A quarter of a pie chart is ${x}. What is the total? · หนึ่งในสี่ของแผนภูมิรูปวงกลมคือ ${x} ทั้งหมดเท่าไร`,
+        options: opts(String(t), [String(x * 2), String(x + 4), String(x * 3), String(t + x)]), right: String(t), why: `4 quarters make the whole circle: ${x} × 4 = ${t}.` }; }
+    if (k < 0.5) { const a = pick([10, 15, 20, 25, 30, 35, 40]), b = pick([10, 15, 20, 25, 30]), c = 100 - a - b;
+      return { q: `Two slices are ${a}% and ${b}%. What percent is the last slice? · สองชิ้นคือ ${a}% และ ${b}% ชิ้นสุดท้ายคิดเป็นร้อยละเท่าไร`,
+        options: opts(`${c}%`, [`${a + b}%`, `${c + 10}%`, `${100 - a}%`, `${Math.abs(a - b)}%`, `${c - 5}%`, `${c + 5}%`]), right: `${c}%`, why: `The whole circle is 100%: 100% - ${a}% - ${b}% = ${c}%.` }; }
+    if (k < 0.75) { const p = pick([10, 20, 25, 40, 50, 75]), t = pick([40, 80, 120, 200, 240, 320, 400]), v = p * t / 100;
+      return { q: `${p}% of ${t} children like football. How many children? · เด็ก ${t} คน ${p}% ชอบฟุตบอล มีกี่คน`,
+        options: opts(String(v), [String(p), String(t - v), String(v * 2), String(v + 10), String(v + 5), String(v + 1)].filter(x => +x > 0)), right: String(v), why: `${p}/100 × ${t} = ${v}.` }; }
+    const F = pick([["1/4", 25], ["1/2", 50], ["3/4", 75], ["1/5", 20], ["2/5", 40], ["3/5", 60], ["1/8", 12.5], ["3/8", 37.5], ["1/10", 10], ["7/10", 70]]);
+    return { q: `A slice is ${F[0]} of the pie chart. What percentage is that? · ชิ้นหนึ่งเป็น ${F[0]} ของแผนภูมิ คิดเป็นร้อยละเท่าไร`,
+      options: opts(`${F[1]}%`, [`${F[0].split("/")[1]}%`, `${F[1] / 2}%`, `${100 - F[1]}%`, `${F[1] + 5}%`, `${F[1] * 2}%`]), right: `${F[1]}%`, why: `${F[0]} × 100% = ${F[1]}%.` };
+  },
 };
 
 const GAMES = {

@@ -1,0 +1,169 @@
+{
+ "icon": "🥧",
+ "th_title": "การนำเสนอข้อมูล",
+ "quick": "chart",
+ "secs": [
+  [
+   "14.1 Pie Charts",
+   "14.1 แผนภูมิรูปวงกลม"
+  ],
+  [
+   "⭐ Challenge",
+   "⭐ โจทย์ท้าทาย"
+  ]
+ ],
+ "slides": [
+  {
+   "s": 0,
+   "e": "📊",
+   "f": "L0.0",
+   "t": "Many ways to show data",
+   "tt": "การนำเสนอข้อมูลได้หลายแบบ",
+   "h": "<p>A <span class='word'>table</span>, a <span class='word'>bar graph</span> or a <span class='word'>pie chart</span>.</p><p>They can all show the same data!</p>",
+   "th": "ตาราง กราฟแท่ง หรือแผนภูมิรูปวงกลม ทั้งหมดแสดงข้อมูลชุดเดียวกันได้",
+   "p": 231
+  },
+  {
+   "s": 0,
+   "e": "🍕",
+   "f": "L0.1",
+   "t": "What is a pie chart?",
+   "tt": "แผนภูมิรูปวงกลมคืออะไร",
+   "h": "<p>A <span class='word'>pie chart</span> is a circle cut into slices, like a pizza.</p><p>More = a <b>bigger</b> slice. Dog (40) has the biggest slice.</p>",
+   "th": "แผนภูมิรูปวงกลมคือวงกลมที่แบ่งเป็นชิ้น ๆ เหมือนพิซซ่า มากกว่า = ชิ้นใหญ่กว่า สุนัข (40) มีชิ้นใหญ่ที่สุด",
+   "a": "Which pet has the smallest slice?",
+   "at": "สัตว์เลี้ยงใดมีชิ้นเล็กที่สุด",
+   "n": "Hamster (10)",
+   "nt": "หนูแฮมสเตอร์ (10)",
+   "p": 231
+  },
+  {
+   "s": 0,
+   "e": "👕",
+   "f": "L0.3",
+   "t": "Same number, same size",
+   "tt": "จำนวนเท่ากัน ขนาดเท่ากัน",
+   "h": "<p>Yellow 15, Green 15, Blue 10.</p><p>Yellow and Green have the <b>same size</b> slices.</p>",
+   "th": "เหลือง 15 เขียว 15 น้ำเงิน 10 เหลืองและเขียวมีชิ้นขนาดเท่ากัน",
+   "p": 232
+  },
+  {
+   "s": 0,
+   "e": "🥧",
+   "f": "L0.4",
+   "t": "The whole circle is 1",
+   "tt": "วงกลมทั้งวงคือ 1",
+   "h": "<p>1/4 + 1/4 + 1/2 = <b>1</b></p><p>The little square means a <span class='word'>quarter</span> (1/4).</p>",
+   "th": "1/4 + 1/4 + 1/2 = 1 สี่เหลี่ยมเล็ก ๆ หมายถึงหนึ่งในสี่ (1/4)",
+   "a": "Two slices are 1/4 each. What is the rest?",
+   "at": "สองชิ้นเป็น 1/4 ชิ้นละ ที่เหลือเป็นเท่าไร",
+   "n": "1 - 1/4 - 1/4 = 1/2",
+   "nt": "1 - 1/4 - 1/4 = 1/2",
+   "p": 232
+  },
+  {
+   "s": 0,
+   "e": "💯",
+   "f": "L0.5",
+   "t": "The whole circle is 100%",
+   "tt": "วงกลมทั้งวงคือ 100%",
+   "h": "<p>Food 40%, transport 20%.</p><p>Savings = 100% - 40% - 20% = <b>40%</b></p>",
+   "th": "อาหาร 40% ค่าเดินทาง 20% เงินออม = 100% - 40% - 20% = 40%",
+   "a": "Food 50%, transport 30%. Savings?",
+   "at": "อาหาร 50% ค่าเดินทาง 30% เงินออมเท่าไร",
+   "n": "100% - 50% - 30% = 20%",
+   "nt": "100% - 50% - 30% = 20%",
+   "p": 233
+  },
+  {
+   "s": 0,
+   "e": "🧮",
+   "f": "L0.6",
+   "t": "Fractions and percentages",
+   "tt": "เศษส่วนและร้อยละ",
+   "h": "<p>40 boys out of 160 people.</p><p>40/160 = <b>1/4</b> = <b>25%</b></p>",
+   "th": "เด็กชาย 40 คนจาก 160 คน 40/160 = 1/4 = 25%",
+   "p": 233
+  },
+  {
+   "s": 0,
+   "e": "🍔",
+   "f": "L0.7",
+   "t": "Find the total",
+   "tt": "หาจำนวนทั้งหมด",
+   "h": "<p>A quarter is 750 baht.</p><p>4 quarters = 750 × 4 = <b>3,000 baht</b></p>",
+   "th": "หนึ่งในสี่คือ 750 บาท 4 ส่วนสี่ = 750 × 4 = 3,000 บาท",
+   "a": "A quarter is 45 people. How many in total?",
+   "at": "หนึ่งในสี่คือ 45 คน ทั้งหมดกี่คน",
+   "n": "45 × 4 = 180",
+   "nt": "45 × 4 = 180",
+   "p": 234
+  },
+  {
+   "s": 0,
+   "e": "🗳️",
+   "f": "L0.9",
+   "t": "Make your own pie chart",
+   "tt": "สร้างแผนภูมิรูปวงกลมของเราเอง",
+   "h": "<p>Ask your class a question. Count the answers.</p><p>Put them in a table, then make a pie chart.</p>",
+   "th": "ถามคำถามเพื่อนในห้อง นับคำตอบ ใส่ในตาราง แล้วสร้างแผนภูมิรูปวงกลม",
+   "p": 235
+  },
+  {
+   "s": 1,
+   "e": "👗",
+   "f": "L1.1",
+   "t": "Units in a pie chart",
+   "tt": "หน่วยในแผนภูมิรูปวงกลม",
+   "h": "<p>Food 1/12 = 1 unit = 60 baht.</p><p>Clothes 5/12 = 5 units = 5 × 60 = <b>300 baht</b></p>",
+   "th": "อาหาร 1/12 = 1 หน่วย = 60 บาท เสื้อผ้า 5/12 = 5 หน่วย = 5 × 60 = 300 บาท",
+   "a": "1 unit = 60 baht. How much are 3 units?",
+   "at": "1 หน่วย = 60 บาท 3 หน่วยเป็นเงินเท่าไร",
+   "n": "3 × 60 = 180 baht",
+   "nt": "3 × 60 = 180 บาท",
+   "p": 239
+  },
+  {
+   "s": 1,
+   "e": "🍊",
+   "f": "L1.2",
+   "t": "Opposite slices",
+   "tt": "ชิ้นที่อยู่ตรงข้ามกัน",
+   "h": "<p>Two straight lines cross at the centre.</p><p>Opposite slices are <b>equal</b>: Apples = Pineapples = 50.</p>",
+   "th": "เส้นตรงสองเส้นตัดกันที่จุดศูนย์กลาง ชิ้นที่อยู่ตรงข้ามกันเท่ากัน: แอปเปิล = สับปะรด = 50",
+   "p": 242
+  }
+ ],
+ "tf": [
+  [
+   "The whole circle of a pie chart is 100%. · วงกลมทั้งวงของแผนภูมิรูปวงกลมคือ 100%",
+   true,
+   "All the slices add up to 100%."
+  ],
+  [
+   "A bigger number has a smaller slice. · จำนวนที่มากกว่ามีชิ้นเล็กกว่า",
+   false,
+   "A bigger number has a bigger slice."
+  ],
+  [
+   "A quarter of a pie chart is 25%. · หนึ่งในสี่ของแผนภูมิรูปวงกลมคือ 25%",
+   true,
+   "1/4 × 100% = 25%."
+  ],
+  [
+   "If half is 50, the total is 100. · ถ้าครึ่งหนึ่งคือ 50 ทั้งหมดคือ 100",
+   true,
+   "50 × 2 = 100."
+  ],
+  [
+   "1/4 + 1/4 + 1/4 = 1 · 1/4 + 1/4 + 1/4 = 1",
+   false,
+   "That is 3/4. You need 4 quarters to make 1."
+  ],
+  [
+   "A pie chart is also called a circle graph. · แผนภูมิรูปวงกลมเรียกอีกชื่อว่ากราฟวงกลม",
+   true,
+   "It is a circle, so it is a circle graph."
+  ]
+ ]
+}

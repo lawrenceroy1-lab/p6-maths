@@ -152,10 +152,10 @@ async function ExploreTab(sec) {
     </div></div>`;
   document.getElementById("exPrint").onclick = () => window.print();
   try {
-    if (!window.Explore) await loadScript("js/explore.js?v=28");
+    if (!window.Explore) await loadScript("js/explore.js?v=29");
     const box = document.getElementById("exBox");
     if (!box) return;
-    ({ triangle: () => Explore.triangle(box), sum: () => Explore.triangle(box, "sum"), circle: () => Explore.circle(box), compass: () => Explore.compass(box), solid: () => Explore.solid(box), net: () => Explore.net(box), perim: () => Explore.triangle(box, "perim"), tarea: () => Explore.tarea(box), angles: () => Explore.polygon(box), pperim: () => Explore.polygon(box, "perim"), split: () => Explore.split(box), circum: () => Explore.circum(box), carea: () => Explore.carea(box), volume: () => Explore.volume(box), tank: () => Explore.tank(box), pattern: () => Explore.pattern(box) })[x.explore]();
+    ({ triangle: () => Explore.triangle(box), sum: () => Explore.triangle(box, "sum"), circle: () => Explore.circle(box), compass: () => Explore.compass(box), solid: () => Explore.solid(box), net: () => Explore.net(box), perim: () => Explore.triangle(box, "perim"), tarea: () => Explore.tarea(box), angles: () => Explore.polygon(box), pperim: () => Explore.polygon(box, "perim"), split: () => Explore.split(box), circum: () => Explore.circum(box), carea: () => Explore.carea(box), volume: () => Explore.volume(box), tank: () => Explore.tank(box), pattern: () => Explore.pattern(box), pie: () => Explore.pie(box), pieparts: () => Explore.pieparts(box) })[x.explore]();
   } catch (e) { document.getElementById("exBox").innerHTML = "<p>Could not load the explorer. Please check the internet and reload.</p>"; }
 }
 
