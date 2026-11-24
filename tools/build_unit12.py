@@ -269,7 +269,9 @@ check(Fr("17.64") * 1000, 17640, "p.203 Q2"); check(Fr(17640, 980), 18, "p.203 Q
 q122.append(Q("Exercise 2", 203, "A rectangular tank with a capacity of 17.64 ℓ has a base area of 980 cm². The tank is ⅔ filled with water. What is the height of the water level in the tank?",
               "Change ℓ to cm³ first (× 1,000). Find the tank's height, then take ⅔ of it.",
               ["17.64 ℓ = 17.64 × 1,000 = <b>17,640 cm³</b>", "Height of tank = 17,640 ÷ 980 = <b>18 cm</b>", "Water height = ⅔ of 18: 18 ÷ 3 = 6, 6 × 2 = <b>12 cm</b>"],
-              "12 cm", "The full tank is 18 cm tall, and the water fills ⅔ of it."))
+              "12 cm", "The full tank is 18 cm tall, and the water fills ⅔ of it.",
+              {"img": "img/unit12/water-tank.jpg", "alt": "a glass rectangular tank partly filled with water",
+               "label": "The water fills only part of the tank. · น้ำเต็มแค่บางส่วนของถัง"}))
 check(36 * 1000, 36000, "p.204 Q3"); check(Fr(36000, 1600), Fr("22.5"), "p.204 Q3 water"); check(Fr("22.5") * 3, Fr("67.5"), "p.204 Q3")
 q122.append(Q("Exercise 3", 204, "A rectangular tank has a square base of side 40 cm. The tank is ⅓ full and contains 36 ℓ of water. Find the height of the tank.",
               "Find the water height, then remember it is only ⅓ of the tank.",
