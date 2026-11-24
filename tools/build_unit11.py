@@ -285,7 +285,9 @@ learn113 = [
       "<p>Covering the <b>inside</b> (paint, paper, grass) → <b>area</b>.</p>", None, 166),
     L("Example", "Emma's paper circle", "<p>Diameter 14 cm, so radius 7 cm. Area ≈ 3.14 × 7 × 7 = <b>153.86 cm²</b></p>", None, 166),
     L("Example", "A circular field", "<p>Diameter 12.5 m. Circumference ≈ 3.14 × 12.5 = <b>39.25 m</b></p>", None, 166),
-    L("Idea", "Wheels", "<p>In <b>1 complete turn</b>, a wheel rolls a distance equal to its <b>circumference</b>.</p><p>Distance = circumference × number of turns</p>", None, 172),
+    L("Idea", "Wheels", "<p>In <b>1 complete turn</b>, a wheel rolls a distance equal to its <b>circumference</b>.</p><p>Distance = circumference × number of turns</p>",
+      {"img": "img/unit11/bicycle-wheel.jpg", "alt": "a bicycle wheel",
+       "label": "1 turn of the wheel = 1 circumference. · ล้อหมุน 1 รอบ = เส้นรอบวง 1 รอบ"}, 172),
     L("Idea", "Running tracks", "<p>The 2 curved ends of a track make <b>1 whole ring</b>. The straight parts are rectangles.</p>"
       "<p>Track area = (big circle - small circle) + the rectangles.</p>", ftrack, 168),
     L("Example", "Track 2 m wide", "<p>Big circle radius 26 m, small circle radius 24 m.</p><p>Curved parts ≈ 3.14 × 26 × 26 - 3.14 × 24 × 24 = 2,122.64 - 1,808.64 = 314 m²</p>"
