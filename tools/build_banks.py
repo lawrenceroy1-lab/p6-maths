@@ -22,6 +22,7 @@ with contextlib.redirect_stdout(io.StringIO()):
     import build_unit10 as U10  # noqa: E402
     import build_unit11 as U11  # noqa: E402
     import build_unit12 as U12  # noqa: E402
+    import build_unit13 as U13  # noqa: E402
 
 GREEN, BLUE, ORANGE, PINK, YELLOW, PURPLE = "#C8E6C9", "#BBDEFB", "#FFE0B2", "#F8BBD0", "#FFF59D", "#D1C4E9"
 
@@ -507,13 +508,72 @@ for q, ans, wrongs, why, src, a, b_ in b12_items:
     b12.append(B(q, [ans] + wrongs, why, src))
 check(len(b12), 40, "bank 12 size")
 
+# ==================================================================
+# UNIT 13 (Review Q27 and Q28 first, then the unit, then new questions)
+# ==================================================================
+def t13(first, jump, n):
+    return first + (n - 1) * jump
+
+
+b13 = []
+b13_items = [
+    ("5, 14, 23, 32, 41, … What is term 62?", "554", ["563", "558", "549"], "The jump is 9. Term 62 has 61 jumps: 5 + (61 × 9) = 5 + 549 = 554.", "Review Q27, p.261", t13(5, 9, 62), 554),
+    ("5, 14, 23, 32, 41, … What is the rule?", "Add 9 each time", ["Add 5 each time", "Add 7 each time", "Multiply by 3"], "14 - 5 = 9, 23 - 14 = 9. The pattern adds 9 each time.", "Review Q27, p.261", 14 - 5, 9),
+    ("1 triangle needs 3 toothpicks, 2 need 6, 3 need 9. How many toothpicks for 28 triangles?", "84", ["81", "31", "56"], "Each triangle needs 3 toothpicks: 28 × 3 = 84.", "Review Q28, p.261", 28 * 3, 84),
+    ("Separate toothpick triangles: 3, 6, 9, 12, … How many toothpicks for 10 triangles?", "30", ["27", "33", "13"], "10 × 3 = 30.", "Review Q28, p.261", 10 * 3, 30),
+    ("Circles in rows of 1, 3, 5, …: Figure 1 = 1, Figure 2 = 4, Figure 3 = 9. Figure 65?", "4,225", ["2,120", "3,225", "130"], "Square numbers: 65 × 65 = 4,225.", "p.215", 65 * 65, 4225),
+    ("4, 10, 16, 22, 28, … What is term 38?", "226", ["232", "228", "222"], "The jump is 6. Term 38 has 37 jumps: 4 + (37 × 6) = 4 + 222 = 226.", "p.216", t13(4, 6, 38), 226),
+    ("What is the sum of all even numbers smaller than 100?", "2,450", ["2,550", "2,500", "2,352"], "24 pairs of 98 = 2,352, plus 98 left over = 2,450.", "p.217", sum(range(2, 100, 2)), 2450),
+    ("How many even numbers are smaller than 100?", "49", ["50", "48", "51"], "50 even numbers from 1 to 100, but 100 itself is not smaller than 100: 50 - 1 = 49.", "p.217", len(range(2, 100, 2)), 49),
+    ("Peter's toothpicks: 1, 4, 7, 10, … How many in Figure 5?", "13", ["14", "16", "12"], "Add 3 each time: 10 + 3 = 13.", "p.219 (a)", t13(1, 3, 5), 13),
+    ("Peter's toothpicks: 1, 4, 7, 10, … How many in Figure 10?", "28", ["31", "30", "27"], "1 + (9 × 3) = 1 + 27 = 28.", "p.219 (b)", t13(1, 3, 10), 28),
+    ("Henry's toothpick triangles: 3, 5, 7, 9, … How many toothpicks in Figure 10?", "21", ["23", "20", "30"], "3 + (9 × 2) = 3 + 18 = 21.", "Do and Learn 1, p.220", t13(3, 2, 10), 21),
+    ("5, 11, 17, 23, 29, … What is term 50?", "299", ["305", "300", "250"], "The jump is 6: 5 + (49 × 6) = 5 + 294 = 299.", "Do and Learn 2(a), p.220", t13(5, 6, 50), 299),
+    ("18, 23, 28, 33, 38, … What is term 99?", "508", ["513", "495", "500"], "The jump is 5: 18 + (98 × 5) = 18 + 490 = 508.", "Do and Learn 2(b), p.220", t13(18, 5, 99), 508),
+    ("Tiles: 1, 3, 5, … (2 more each time). How many tiles in Figure 10?", "19", ["21", "20", "10"], "1 + (9 × 2) = 1 + 18 = 19.", "Hands-On, p.220", t13(1, 2, 10), 19),
+    ("8, 15, 22, 29, 36, … What is the 20th term?", "141", ["148", "140", "160"], "Add 7 each time: 8 + (19 × 7) = 8 + 133 = 141.", "Exercise 1, p.221", t13(8, 7, 20), 141),
+    ("13, 21, 29, 37, 45, … What is the 25th term?", "205", ["213", "200", "325"], "Add 8 each time: 13 + (24 × 8) = 13 + 192 = 205.", "Exercise 2, p.221", t13(13, 8, 25), 205),
+    ("13, 21, 29, 37, 45, … What is the rule?", "Add 8 each time", ["Add 13 each time", "Add 6 each time", "Multiply by 2"], "21 - 13 = 8, 29 - 21 = 8.", "Exercise 2, p.221", 21 - 13, 8),
+    ("What is the sum of all odd numbers smaller than 100?", "2,500", ["2,450", "5,000", "2,550"], "50 odd numbers make 25 pairs of 100: 25 × 100 = 2,500.", "Exercise 3, p.222", sum(range(1, 100, 2)), 2500),
+    ("Odd numbers 1 to 99 are paired: 1 + 99, 3 + 97, … How many pairs?", "25", ["50", "49", "24"], "50 odd numbers ÷ 2 = 25 pairs.", "Exercise 3, p.222", 50 / 2, 25),
+    ("Square tables joined in a row: 1 table 4 seats, 2 tables 6, 3 tables 8. Seats for 30 tables?", "62", ["120", "60", "64"], "2 + (30 × 2) = 2 + 60 = 62.", "Exercise 4, p.222", 2 + 30 * 2, 62),
+    ("Joined tables: rule 2 + (tables × 2). How many seats for 12 tables?", "26", ["24", "48", "28"], "2 + (12 × 2) = 2 + 24 = 26.", "Exercise 4, p.222", 2 + 12 * 2, 26),
+    ("Ravi's toothpicks: 3, 9, 18, 30, 45, … How many in Figure 10?", "165", ["135", "150", "195"], "Add 6, 9, 12, 15, …: 45, 63, 84, 108, 135, 165.", "Exercise 5, p.223", 3 * 55, 165),
+    ("Ravi's toothpicks: 3, 9, 18, 30, … How many in Figure 5?", "45", ["42", "40", "48"], "The jumps grow by 3: + 6, + 9, + 12, then + 15. 30 + 15 = 45.", "Exercise 5, p.223", 30 + 15, 45),
+    ("Siti's boxes: 1, 4, 9, 16, … in total. 20 clips in a box. Which day has 1,280 clips?", "Day 8", ["Day 64", "Day 16", "Day 32"], "1,280 ÷ 20 = 64 boxes, and 8 × 8 = 64.", "Exercise 6, p.224", 1280 / 20, 64),
+    ("Mike's cross tiles: 1, 5, 9, 13, … How many in Figure 5?", "17", ["16", "20", "21"], "Add 4 each time: 13 + 4 = 17.", "Let's Think Along (a), p.225", t13(1, 4, 5), 17),
+    ("Mike's cross tiles: 1, 5, 9, 13, … How many in Figure 10?", "37", ["40", "41", "36"], "1 + (9 × 4) = 1 + 36 = 37.", "Let's Think Along (b), p.225", t13(1, 4, 10), 37),
+    ("John had 100 baht and saved 40 baht more each day until he had 420 baht. How many days?", "8", ["10", "11", "7"], "420 - 100 = 320, and 320 ÷ 40 = 8.", "Problem Solving, p.227", (420 - 100) / 40, 8),
+    ("Square patterns: 1, 4, 9, 16, … How many in Figure 100?", "10,000", ["1,000", "200", "400"], "100 × 100 = 10,000.", "Math Journal, p.229", 100 * 100, 10000),
+    ("Dean has 50 baht, then saves 30 baht each day from Day 2. How much on Day 10?", "320 baht", ["350 baht", "300 baht", "800 baht"], "50 + (9 × 30) = 50 + 270 = 320 baht.", "Math in Real Life, p.230", t13(50, 30, 10), 320),
+    ("3, 7, 11, 15, … What is term 10?", "39", ["43", "40", "35"], "Add 4 each time: 3 + (9 × 4) = 3 + 36 = 39.", "New", t13(3, 4, 10), 39),
+    ("2, 7, 12, 17, … What is term 20?", "97", ["102", "100", "95"], "Add 5 each time: 2 + (19 × 5) = 2 + 95 = 97.", "New", t13(2, 5, 20), 97),
+    ("7, 10, 13, 16, … What is term 30?", "94", ["97", "90", "100"], "Add 3 each time: 7 + (29 × 3) = 7 + 87 = 94.", "New", t13(7, 3, 30), 94),
+    ("6, 15, 24, 33, … What is term 12?", "105", ["114", "108", "99"], "Add 9 each time: 6 + (11 × 9) = 6 + 99 = 105.", "New", t13(6, 9, 12), 105),
+    ("How many jumps are there from term 1 to term 45?", "44", ["45", "46", "90"], "The jumps are always 1 less than the term number: 45 - 1 = 44.", "New", 45 - 1, 44),
+    ("Which number pattern adds 7 each time?", "4, 11, 18, 25", ["7, 14, 21, 29", "4, 11, 17, 24", "1, 7, 49, 343"], "11 - 4 = 7, 18 - 11 = 7, 25 - 18 = 7.", "New", 25 - 18, 7),
+    ("Peter's toothpick squares: 1, 4, 7, 10, … Which Figure uses 31 toothpicks?", "Figure 11", ["Figure 10", "Figure 31", "Figure 12"], "31 - 1 = 30, 30 ÷ 3 = 10 groups, so it is Figure 10 + 1 = Figure 11.", "New", t13(1, 3, 11), 31),
+    ("10, 20, 30, 40, … What is term 15?", "150", ["140", "160", "25"], "10 + (14 × 10) = 10 + 140 = 150.", "New", t13(10, 10, 15), 150),
+    ("Square numbers: 1, 4, 9, 16, 25, … What is the 12th square number?", "144", ["24", "121", "132"], "12 × 12 = 144.", "New", 12 * 12, 144),
+    ("Lily saves 20 baht on Day 1 and 15 baht more each day after. How much does she have on Day 8?", "125 baht", ["140 baht", "120 baht", "160 baht"], "20 + (7 × 15) = 20 + 105 = 125 baht.", "New", t13(20, 15, 8), 125),
+    ("1 + 2 + 3 + … + 20 = ? (Pair them: 1 + 20, 2 + 19, …)", "210", ["200", "420", "220"], "10 pairs of 21: 10 × 21 = 210.", "New", sum(range(1, 21)), 210),
+]
+for q, ans, wrongs, why, src, a, b_ in b13_items:
+    check(round(a, 4), b_, f"bank 13 {src}")
+    b13.append(B(q, [ans] + wrongs, why, src))
+b13[10]["fig"] = gq(U13, "13-1", "Do and Learn 1")
+b13[19]["fig"] = gq(U13, "13-1", "Exercise 4")
+b13[21]["fig"] = gq(U13, "13-1", "Exercise 5")
+b13[24]["fig"] = gq(U13, "13-ch", "Let's Think Along (a)")
+check(len(b13), 40, "bank 13 size")
+
 if PROBLEMS:
     print("MATHS CHECK FAILED. Nothing was written:")
     for p in PROBLEMS:
         print("  -", p)
     sys.exit(1)
 root = os.path.join(os.path.dirname(__file__), "..", "content")
-for uid, bank in (("07", b7), ("08", b8), ("09", b9), ("10", b10), ("11", b11), ("12", b12)):
+for uid, bank in (("07", b7), ("08", b8), ("09", b9), ("10", b10), ("11", b11), ("12", b12), ("13", b13)):
     with open(os.path.join(root, f"bank{uid}.json"), "w", encoding="utf-8") as fh:
         json.dump({"unit": uid, "questions": bank}, fh, ensure_ascii=False, separators=(",", ":"))
-print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)}, Unit 10: {len(b10)}, Unit 11: {len(b11)}, Unit 12: {len(b12)} questions. All checks passed.")
+print(f"OK: banks written. Unit 7: {len(b7)}, Unit 8: {len(b8)}, Unit 9: {len(b9)}, Unit 10: {len(b10)}, Unit 11: {len(b11)}, Unit 12: {len(b12)}, Unit 13: {len(b13)} questions. All checks passed.")
