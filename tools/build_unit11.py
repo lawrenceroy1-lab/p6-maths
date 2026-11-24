@@ -318,7 +318,9 @@ check(r2(2 * P7 * Fr("26.5")), 166.57, "p.171 Q1")
 q113.append(Q("Exercise 1", 171, "The radius of a circular dining table is 26.5 cm. If we want to decorate the circumference of the table with a piece of cloth skirting, how long should this cloth be? (Take π ≈ 22/7.) Correct your answer to 2 decimal places.",
               "The cloth goes all the way round, so find the circumference.",
               ["Circumference = 2 × π × radius ≈ 2 × 22/7 × 26.5", "2 × 26.5 = 53 (the diameter)", "22 × 53 = 1,166", "1,166 ÷ 7 ≈ <b>166.57 cm</b>"],
-              "≈ 166.57 cm", "The cloth must be as long as the circumference."))
+              "≈ 166.57 cm", "The cloth must be as long as the circumference.",
+              {"img": "img/unit11/round-table.jpg", "alt": "a round table with cloth skirting all the way round",
+               "label": "The cloth goes all the way round the table: the circumference. · ผ้าล้อมรอบโต๊ะทั้งวง: เส้นรอบวง"}))
 check(r2(P314 * 38), 119.32, "p.171 Q2 C"); check(r2(P314 * 361), 1133.54, "p.171 Q2 A")
 q113.append(Q("Exercise 2", 171, "The diameter of a circular wood sheet is 38 cm. Find the circumference and area of this wood sheet. (Take π ≈ 3.14.)",
               "Circumference uses the diameter. Area uses the radius (halve the diameter).",
