@@ -1,0 +1,206 @@
+{
+ "icon": "⬟",
+ "th_title": "พื้นที่และความยาวรอบรูปของรูปหลายเหลี่ยม",
+ "quick": "poly",
+ "secs": [
+  [
+   "10.1 Interior angles",
+   "10.1 มุมภายใน"
+  ],
+  [
+   "10.2 Perimeter",
+   "10.2 ความยาวรอบรูป"
+  ],
+  [
+   "10.3 Area",
+   "10.3 พื้นที่"
+  ],
+  [
+   "10.4 Word problems",
+   "10.4 โจทย์ปัญหา"
+  ]
+ ],
+ "slides": [
+  {
+   "s": 0,
+   "e": "🔺",
+   "t": "Remember: triangles",
+   "tt": "ทบทวน: รูปสามเหลี่ยม",
+   "h": "<p>The 3 angles of a triangle add up to <b>180°</b>.</p><p>A polygon is a flat shape with straight sides.</p>",
+   "th": "มุมทั้ง 3 ของรูปสามเหลี่ยมรวมกันได้ 180° รูปหลายเหลี่ยมคือรูปแบนที่มีด้านตรง",
+   "p": 109
+  },
+  {
+   "s": 0,
+   "e": "✂️",
+   "f": "L0.1",
+   "t": "Cut it into triangles",
+   "tt": "แบ่งเป็นรูปสามเหลี่ยม",
+   "h": "<p>From one corner, cut the polygon into triangles.</p><p>Each triangle gives 180°.</p><p>Quadrilateral: 2 triangles → <b>360°</b></p>",
+   "th": "จากมุมเดียว แบ่งรูปหลายเหลี่ยมเป็นรูปสามเหลี่ยม แต่ละรูปให้ 180° รูปสี่เหลี่ยม: สามเหลี่ยม 2 รูป → 360°",
+   "p": 108
+  },
+  {
+   "s": 0,
+   "e": "⭐",
+   "f": "L0.2",
+   "t": "Pentagon = 540°",
+   "tt": "รูปห้าเหลี่ยม = 540°",
+   "h": "<p>A pentagon (5 sides) makes 3 triangles.</p><p>3 × 180° = <b>540°</b></p><p>Rule: triangles = sides - 2</p>",
+   "th": "รูปห้าเหลี่ยม (5 ด้าน) แบ่งเป็นสามเหลี่ยม 3 รูป 3 × 180° = 540° กฎ: จำนวนสามเหลี่ยม = จำนวนด้าน - 2",
+   "a": "A hexagon has 6 sides. Sum of its angles?",
+   "at": "รูปหกเหลี่ยมมี 6 ด้าน ผลรวมของมุมเท่าไร",
+   "n": "6 - 2 = 4 triangles, 4 × 180° = 720°",
+   "nt": "6 - 2 = 4 รูป, 4 × 180° = 720°",
+   "p": 108
+  },
+  {
+   "s": 0,
+   "e": "🟰",
+   "t": "Regular polygons",
+   "tt": "รูปหลายเหลี่ยมด้านเท่ามุมเท่า",
+   "h": "<p>Regular = all sides and all angles equal.</p><p>Each angle = sum ÷ number of sides.</p><p>Regular hexagon: 720° ÷ 6 = <b>120°</b></p>",
+   "th": "ด้านเท่ามุมเท่า = ทุกด้านและทุกมุมเท่ากัน แต่ละมุม = ผลรวม ÷ จำนวนด้าน รูปหกเหลี่ยมด้านเท่า: 720° ÷ 6 = 120°",
+   "a": "A regular octagon has angles adding to 1,080°. Each angle?",
+   "at": "รูปแปดเหลี่ยมด้านเท่ามีมุมรวม 1,080° แต่ละมุมเท่าไร",
+   "n": "1,080° ÷ 8 = 135°",
+   "nt": "1,080° ÷ 8 = 135°",
+   "p": 109
+  },
+  {
+   "s": 0,
+   "e": "▱",
+   "f": "L0.4",
+   "t": "Parallelograms",
+   "tt": "รูปสี่เหลี่ยมด้านขนาน",
+   "h": "<p>Opposite angles are <b>equal</b>.</p><p>Angles next to each other add up to <b>180°</b>.</p><p>∠DAB = 140°, so the next angle = 180° - 140° = <b>40°</b></p>",
+   "th": "มุมตรงข้ามเท่ากัน มุมที่อยู่ติดกันรวมกันได้ 180° ∠DAB = 140° มุมถัดไป = 180° - 140° = 40°",
+   "p": 110
+  },
+  {
+   "s": 0,
+   "e": "🔄",
+   "t": "Angles at a point",
+   "tt": "มุมรอบจุด",
+   "h": "<p>All the way round a point = <b>360°</b>.</p><p>Outside angle 114° → inside reflex angle = 360° - 114° = <b>246°</b></p>",
+   "th": "มุมรอบจุดหนึ่งจุด = 360° มุมด้านนอก 114° → มุมกลับด้านใน = 360° - 114° = 246°",
+   "p": 109
+  },
+  {
+   "s": 1,
+   "e": "➕",
+   "f": "L1.1",
+   "t": "Perimeter of a polygon",
+   "tt": "ความยาวรอบรูปของรูปหลายเหลี่ยม",
+   "h": "<p>Add <b>all</b> the sides. Tick each one as you add it.</p><p>9 + 12 + 21 + 13.5 + 12 = <b>67.5 cm</b></p>",
+   "th": "บวกทุกด้าน ขีดทุกด้านที่บวกแล้ว 9 + 12 + 21 + 13.5 + 12 = 67.5 cm",
+   "p": 118
+  },
+  {
+   "s": 1,
+   "e": "✖️",
+   "t": "Same sides? Multiply",
+   "tt": "ด้านเท่ากัน? ใช้การคูณ",
+   "h": "<p>6 sides of 10.5 cm: 10.5 × 6 = <b>63 cm</b></p><p>Much faster than adding 6 times!</p>",
+   "th": "ด้านยาว 10.5 cm จำนวน 6 ด้าน: 10.5 × 6 = 63 cm เร็วกว่าการบวก 6 ครั้งมาก!",
+   "a": "A regular octagon has sides of 2.9 m. Perimeter?",
+   "at": "รูปแปดเหลี่ยมด้านเท่ามีด้านยาว 2.9 m ความยาวรอบรูปเท่าไร",
+   "n": "2.9 × 8 = 23.2 m",
+   "nt": "2.9 × 8 = 23.2 m",
+   "p": 118
+  },
+  {
+   "s": 2,
+   "e": "🧩",
+   "f": "L2.0",
+   "t": "Split it up",
+   "tt": "แบ่งเป็นส่วน ๆ",
+   "h": "<p>Cut the shape into rectangles, squares and triangles.</p><p>Find each area, then <b>add</b>.</p>",
+   "th": "ตัดรูปเป็นสี่เหลี่ยมผืนผ้า สี่เหลี่ยมจัตุรัส และสามเหลี่ยม หาพื้นที่แต่ละส่วน แล้วบวกกัน",
+   "p": 124
+  },
+  {
+   "s": 2,
+   "e": "🏠",
+   "f": "L2.5",
+   "t": "Triangle + rectangle + square",
+   "tt": "สามเหลี่ยม + สี่เหลี่ยมผืนผ้า + สี่เหลี่ยมจัตุรัส",
+   "h": "<p>A = ½ × 5 × 4 = 10 m²</p><p>B = 6 × 5 = 30 m²</p><p>C = 6 × 6 = 36 m²</p><p>Total = <b>76 m²</b></p>",
+   "th": "A = ½ × 5 × 4 = 10 m² B = 6 × 5 = 30 m² C = 6 × 6 = 36 m² รวม = 76 m²",
+   "p": 127
+  },
+  {
+   "s": 2,
+   "e": "🛑",
+   "t": "Equal pieces",
+   "tt": "ชิ้นส่วนที่เท่ากัน",
+   "h": "<p>A regular octagon is 8 equal triangles.</p><p>One triangle: ½ × 2.2 × 4 = 4.4 m²</p><p>Octagon: 4.4 × 8 = <b>35.2 m²</b></p>",
+   "th": "รูปแปดเหลี่ยมด้านเท่าคือสามเหลี่ยมที่เท่ากัน 8 รูป สามเหลี่ยมหนึ่งรูป: ½ × 2.2 × 4 = 4.4 m² รูปแปดเหลี่ยม: 4.4 × 8 = 35.2 m²",
+   "p": 124
+  },
+  {
+   "s": 3,
+   "e": "📖",
+   "t": "Read, draw, solve",
+   "tt": "อ่าน วาด แก้โจทย์",
+   "h": "<p>1. Read twice. 2. Draw and write the numbers on it.</p><p>3. Around the edge → perimeter. Inside → area.</p><p>4. Write the unit!</p>",
+   "th": "1. อ่านสองรอบ 2. วาดรูปและเขียนตัวเลข 3. รอบขอบ → ความยาวรอบรูป ข้างใน → พื้นที่ 4. เขียนหน่วย!",
+   "a": "A regular hexagonal tray has perimeter 144 cm. Each side?",
+   "at": "ถาดรูปหกเหลี่ยมด้านเท่ามีความยาวรอบรูป 144 cm แต่ละด้านยาวเท่าไร",
+   "n": "144 ÷ 6 = 24 cm",
+   "nt": "144 ÷ 6 = 24 cm",
+   "p": 132
+  },
+  {
+   "s": 3,
+   "e": "🎉",
+   "t": "Great job! Time to play",
+   "tt": "เก่งมาก! ได้เวลาเล่นเกมแล้ว",
+   "h": "<p>Angle sum = (sides - 2) × 180°.</p><p>Perimeter: add the sides. Area: split into shapes.</p>",
+   "th": "ผลรวมของมุม = (จำนวนด้าน - 2) × 180° ความยาวรอบรูป: บวกด้าน พื้นที่: แบ่งเป็นรูปย่อย",
+   "p": 132
+  }
+ ],
+ "tf": [
+  [
+   "A quadrilateral's angles add up to 360°. · มุมของรูปสี่เหลี่ยมรวมกันได้ 360°",
+   true,
+   "2 triangles: 2 × 180° = 360°."
+  ],
+  [
+   "A pentagon's angles add up to 360°. · มุมของรูปห้าเหลี่ยมรวมกันได้ 360°",
+   false,
+   "A pentagon is 3 triangles: 540°."
+  ],
+  [
+   "A hexagon's angles add up to 720°. · มุมของรูปหกเหลี่ยมรวมกันได้ 720°",
+   true,
+   "4 triangles: 4 × 180° = 720°."
+  ],
+  [
+   "Opposite angles of a parallelogram are equal. · มุมตรงข้ามของสี่เหลี่ยมด้านขนานเท่ากัน",
+   true,
+   "That is a parallelogram rule."
+  ],
+  [
+   "Angles around a point add up to 180°. · มุมรอบจุดรวมกันได้ 180°",
+   false,
+   "All the way round is 360°."
+  ],
+  [
+   "Each angle of a regular hexagon is 120°. · แต่ละมุมของรูปหกเหลี่ยมด้านเท่าคือ 120°",
+   true,
+   "720° ÷ 6 = 120°."
+  ],
+  [
+   "Perimeter includes the lines inside a shape. · ความยาวรอบรูปรวมเส้นที่อยู่ข้างในด้วย",
+   false,
+   "Perimeter is only the outside edge."
+  ],
+  [
+   "We can split a polygon into shapes to find its area. · เราแบ่งรูปหลายเหลี่ยมเป็นรูปย่อยเพื่อหาพื้นที่ได้",
+   true,
+   "Find each piece, then add."
+  ]
+ ]
+}

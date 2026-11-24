@@ -1,0 +1,173 @@
+{
+ "icon": "🥤",
+ "th_title": "ปริมาตรและความจุ",
+ "quick": "volume",
+ "secs": [
+  [
+   "12.1 Volume",
+   "12.1 ปริมาตร"
+  ],
+  [
+   "12.2 Word problems",
+   "12.2 โจทย์ปัญหา"
+  ]
+ ],
+ "slides": [
+  {
+   "s": 0,
+   "e": "🧊",
+   "f": "L0.0",
+   "t": "What is volume?",
+   "tt": "ปริมาตรคืออะไร",
+   "h": "<p><span class='word'>Volume</span> is the space a solid takes up.</p><p>A 1 cm cube has a volume of <b>1 cm³</b>.</p><p>Count the cubes to find the volume.</p>",
+   "th": "ปริมาตรคือขนาดของพื้นที่ที่รูปทรงใช้ ลูกบาศก์ขนาด 1 cm มีปริมาตร 1 cm³ นับลูกบาศก์เพื่อหาปริมาตร",
+   "p": 182
+  },
+  {
+   "s": 0,
+   "e": "📦",
+   "f": "L0.1",
+   "t": "Length × width × height",
+   "tt": "ยาว × กว้าง × สูง",
+   "h": "<p><b>Cuboid: length × width × height</b></p><p><b>Cube: edge × edge × edge</b></p><p>2 × 2 × 2 = <b>8 cm³</b></p>",
+   "th": "ทรงสี่เหลี่ยมมุมฉาก: ยาว × กว้าง × สูง ลูกบาศก์: ขอบ × ขอบ × ขอบ 2 × 2 × 2 = 8 cm³",
+   "a": "A box is 8 m × 4 m × 3 m. Volume?",
+   "at": "กล่องขนาด 8 m × 4 m × 3 m ปริมาตรเท่าไร",
+   "n": "8 × 4 × 3 = 96 m³",
+   "nt": "8 × 4 × 3 = 96 m³",
+   "p": 183
+  },
+  {
+   "s": 0,
+   "e": "🟫",
+   "t": "Base area × height",
+   "tt": "พื้นที่ฐาน × ความสูง",
+   "h": "<p>Base area = length × width.</p><p><b>Volume = base area × height</b></p><p>So <b>height = volume ÷ base area</b>: 840 ÷ 70 = <b>12 cm</b></p>",
+   "th": "พื้นที่ฐาน = ยาว × กว้าง ปริมาตร = พื้นที่ฐาน × ความสูง ดังนั้น ความสูง = ปริมาตร ÷ พื้นที่ฐาน: 840 ÷ 70 = 12 cm",
+   "p": 182
+  },
+  {
+   "s": 0,
+   "e": "🎲",
+   "t": "Find the edge of a cube",
+   "tt": "หาขอบของลูกบาศก์",
+   "h": "<p>Face area 36 cm²: 6 × 6 = 36, so the edge is <b>6 cm</b>.</p><p>Volume 125 cm³: 5 × 5 × 5 = 125, so the edge is <b>5 cm</b>.</p>",
+   "th": "หน้ามีพื้นที่ 36 cm²: 6 × 6 = 36 ขอบจึงยาว 6 cm ปริมาตร 125 cm³: 5 × 5 × 5 = 125 ขอบจึงยาว 5 cm",
+   "a": "A cube has volume 64 m³. Edge?",
+   "at": "ลูกบาศก์มีปริมาตร 64 m³ ขอบยาวเท่าไร",
+   "n": "4 × 4 × 4 = 64, so 4 m",
+   "nt": "4 × 4 × 4 = 64 จึงยาว 4 m",
+   "p": 182
+  },
+  {
+   "s": 0,
+   "e": "🧩",
+   "f": "L0.6",
+   "t": "Split into cuboids",
+   "tt": "แบ่งเป็นทรงสี่เหลี่ยมมุมฉาก",
+   "h": "<p>Part 1: 12 × 1.5 × 4.5 = 81 cm³</p><p>Part 2: 4 × 1.5 × 9.5 = 57 cm³</p><p>Total: 81 + 57 = <b>138 cm³</b></p>",
+   "th": "ส่วนที่ 1: 12 × 1.5 × 4.5 = 81 cm³ ส่วนที่ 2: 4 × 1.5 × 9.5 = 57 cm³ รวม: 81 + 57 = 138 cm³",
+   "p": 189
+  },
+  {
+   "s": 0,
+   "e": "🥛",
+   "t": "Capacity and litres",
+   "tt": "ความจุและลิตร",
+   "h": "<p><span class='word'>Capacity</span> = how much a container holds when full.</p><p><b>1 ℓ = 1,000 cm³</b></p><p>1 m³ = 1,000,000 cm³</p>",
+   "th": "ความจุ = ปริมาณที่ภาชนะบรรจุได้เมื่อเต็ม 1 ℓ = 1,000 cm³ 1 m³ = 1,000,000 cm³",
+   "a": "5 ℓ = ? cm³",
+   "at": "5 ℓ = ? cm³",
+   "n": "5 × 1,000 = 5,000 cm³",
+   "nt": "5 × 1,000 = 5,000 cm³",
+   "p": 182
+  },
+  {
+   "s": 1,
+   "e": "🐟",
+   "t": "Water in a tank",
+   "tt": "น้ำในถัง",
+   "h": "<p>Water volume = <b>base area × water height</b>.</p><p>Water height = volume ÷ base area.</p><p>56 m³ ÷ 8 m² = <b>7 m</b></p>",
+   "th": "ปริมาตรน้ำ = พื้นที่ฐาน × ความสูงของน้ำ ความสูงของน้ำ = ปริมาตร ÷ พื้นที่ฐาน 56 m³ ÷ 8 m² = 7 m",
+   "p": 198
+  },
+  {
+   "s": 1,
+   "e": "🚰",
+   "t": "Pouring water away",
+   "tt": "เทน้ำออก",
+   "h": "<p>Tank 38 cm × 24 cm, water 15 cm high. 5,472 cm³ poured away.</p><p>Drop = 5,472 ÷ 912 = 6 cm</p><p>Water left: 15 - 6 = <b>9 cm</b> high</p>",
+   "th": "ถังขนาด 38 cm × 24 cm น้ำสูง 15 cm เทออก 5,472 cm³ ลดลง = 5,472 ÷ 912 = 6 cm น้ำเหลือสูง 15 - 6 = 9 cm",
+   "p": 198
+  },
+  {
+   "s": 1,
+   "e": "⏱️",
+   "t": "Filling with a tap",
+   "tt": "เติมน้ำด้วยก๊อก",
+   "h": "<p>12 ℓ a minute for 30 minutes: 12 × 30 = 360 ℓ = 360,000 cm³.</p><p>Base 75 × 60 = 4,500 cm². Height = 360,000 ÷ 4,500 = <b>80 cm</b></p>",
+   "th": "นาทีละ 12 ℓ เป็นเวลา 30 นาที: 12 × 30 = 360 ℓ = 360,000 cm³ ฐาน 75 × 60 = 4,500 cm² ความสูง = 360,000 ÷ 4,500 = 80 cm",
+   "p": 198
+  },
+  {
+   "s": 1,
+   "e": "🪨",
+   "t": "A block in the water",
+   "tt": "ก้อนที่อยู่ในน้ำ",
+   "h": "<p>A block inside a tank takes up space.</p><p>Water = water box - block: 3,200 - 1,200 = <b>2,000 cm³</b></p>",
+   "th": "ก้อนที่อยู่ในถังใช้พื้นที่ น้ำ = กล่องน้ำ - ก้อน: 3,200 - 1,200 = 2,000 cm³",
+   "p": 198
+  },
+  {
+   "s": 1,
+   "e": "🎉",
+   "t": "Great job! Time to play",
+   "tt": "เก่งมาก! ได้เวลาเล่นเกมแล้ว",
+   "h": "<p>Volume = length × width × height = base area × height.</p><p>1 ℓ = 1,000 cm³.</p>",
+   "th": "ปริมาตร = ยาว × กว้าง × สูง = พื้นที่ฐาน × ความสูง 1 ℓ = 1,000 cm³",
+   "p": 198
+  }
+ ],
+ "tf": [
+  [
+   "Volume of a cuboid = length × width × height. · ปริมาตรทรงสี่เหลี่ยมมุมฉาก = ยาว × กว้าง × สูง",
+   true,
+   "Multiply all three."
+  ],
+  [
+   "1 ℓ = 100 cm³. · 1 ℓ = 100 cm³",
+   false,
+   "1 ℓ = 1,000 cm³."
+  ],
+  [
+   "Volume is measured in cm³. · ปริมาตรวัดเป็น cm³",
+   true,
+   "Cubic units."
+  ],
+  [
+   "Height = volume ÷ base area. · ความสูง = ปริมาตร ÷ พื้นที่ฐาน",
+   true,
+   "Because volume = base area × height."
+  ],
+  [
+   "A cube with edge 3 cm has volume 9 cm³. · ลูกบาศก์ขอบ 3 cm มีปริมาตร 9 cm³",
+   false,
+   "3 × 3 × 3 = 27 cm³."
+  ],
+  [
+   "A block inside a tank leaves less room for water. · ก้อนในถังทำให้มีที่ใส่น้ำน้อยลง",
+   true,
+   "Subtract its volume."
+  ],
+  [
+   "1 m³ = 1,000,000 cm³. · 1 m³ = 1,000,000 cm³",
+   true,
+   "100 × 100 × 100."
+  ],
+  [
+   "Water changes its volume when poured into another tank. · น้ำเปลี่ยนปริมาตรเมื่อเทลงถังอื่น",
+   false,
+   "The volume stays the same; only the height changes."
+  ]
+ ]
+}

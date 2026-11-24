@@ -1,0 +1,208 @@
+{
+ "icon": "📐",
+ "th_title": "ความยาวรอบรูปและพื้นที่ของรูปสามเหลี่ยม",
+ "quick": "tri",
+ "secs": [
+  [
+   "9.1 Perimeter",
+   "9.1 ความยาวรอบรูป"
+  ],
+  [
+   "9.2 Area",
+   "9.2 พื้นที่"
+  ],
+  [
+   "9.3 Word problems",
+   "9.3 โจทย์ปัญหา"
+  ]
+ ],
+ "slides": [
+  {
+   "s": 0,
+   "e": "🐜",
+   "p": 72,
+   "t": "What is perimeter?",
+   "tt": "ความยาวรอบรูปคืออะไร",
+   "h": "<p>An ant 🐜 walks all the way round a triangle and back to the start.</p><p>The distance it walks is the <span class='word'>perimeter</span>.</p><p><b>Perimeter = side + side + side</b></p>",
+   "th": "มด 🐜 เดินรอบรูปสามเหลี่ยมจนกลับมาที่เดิม ระยะทางที่มันเดินคือความยาวรอบรูป ความยาวรอบรูป = ด้าน + ด้าน + ด้าน"
+  },
+  {
+   "s": 0,
+   "e": "➕",
+   "p": 73,
+   "f": "L0.2",
+   "t": "Add the 3 sides",
+   "tt": "บวกทั้ง 3 ด้าน",
+   "h": "<p>Triangle STU: 12 cm, 26 cm and 19 cm.</p><p>12 + 26 = 38</p><p>38 + 19 = <b>57 cm</b></p>",
+   "th": "รูปสามเหลี่ยม STU: 12 cm, 26 cm และ 19 cm 12 + 26 = 38 แล้ว 38 + 19 = 57 cm",
+   "a": "Sides 8 cm, 10 cm and 12 cm. Perimeter?",
+   "at": "ด้าน 8 cm, 10 cm และ 12 cm ความยาวรอบรูปเท่าไร",
+   "n": "8 + 10 + 12 = 30 cm",
+   "nt": "8 + 10 + 12 = 30 cm"
+  },
+  {
+   "s": 0,
+   "e": "🟰",
+   "p": 72,
+   "f": "L0.1",
+   "t": "Equal sides? Multiply!",
+   "tt": "ด้านเท่ากัน? คูณเลย!",
+   "h": "<p>Tick marks show equal sides.</p><p>Equilateral triangle, each side 15 cm:</p><p>15 × 3 = <b>45 cm</b></p>",
+   "th": "ขีดบนด้านบอกด้านที่ยาวเท่ากัน รูปสามเหลี่ยมด้านเท่า ด้านละ 15 cm: 15 × 3 = 45 cm",
+   "a": "An equilateral triangle has sides of 11 cm. Perimeter?",
+   "at": "รูปสามเหลี่ยมด้านเท่ามีด้านยาว 11 cm ความยาวรอบรูปเท่าไร",
+   "n": "11 × 3 = 33 cm",
+   "nt": "11 × 3 = 33 cm"
+  },
+  {
+   "s": 0,
+   "e": "🔍",
+   "p": 73,
+   "f": "L0.4",
+   "t": "Find the missing side",
+   "tt": "หาด้านที่หายไป",
+   "h": "<p>Step 1: Add the 2 sides you know. 21 + 25 = 46</p><p>Step 2: Take that away from the perimeter. 69 - 46 = <b>23 cm</b></p><p>Check: 21 + 25 + 23 = 69 ✓</p>",
+   "th": "ขั้นที่ 1: บวก 2 ด้านที่รู้ 21 + 25 = 46 ขั้นที่ 2: นำไปลบออกจากความยาวรอบรูป 69 - 46 = 23 cm ตรวจสอบ: 21 + 25 + 23 = 69 ✓",
+   "a": "Perimeter 40 cm. Two sides are 12 cm and 15 cm. Third side?",
+   "at": "ความยาวรอบรูป 40 cm มีสองด้านยาว 12 cm และ 15 cm ด้านที่สามยาวเท่าไร",
+   "n": "12 + 15 = 27, and 40 - 27 = 13 cm",
+   "nt": "12 + 15 = 27 และ 40 - 27 = 13 cm"
+  },
+  {
+   "s": 1,
+   "e": "▭",
+   "p": 78,
+   "f": "L1.0",
+   "t": "Half of a rectangle",
+   "tt": "ครึ่งหนึ่งของสี่เหลี่ยมผืนผ้า",
+   "h": "<p>Draw a rectangle around the triangle with the same <b>base</b> and <b>height</b>.</p><p>The triangle is always <span class='word'>half</span> of that rectangle.</p>",
+   "th": "วาดสี่เหลี่ยมผืนผ้าล้อมรูปสามเหลี่ยม ให้มีฐานและความสูงเท่ากัน รูปสามเหลี่ยมเป็นครึ่งหนึ่งของสี่เหลี่ยมผืนผ้านั้นเสมอ"
+  },
+  {
+   "s": 1,
+   "e": "🧮",
+   "p": 78,
+   "f": "L1.1",
+   "t": "Count to check",
+   "tt": "นับช่องเพื่อตรวจ",
+   "h": "<p>Rectangle 6 cm × 4 cm = 24 cm².</p><p>The triangle is half: 24 ÷ 2 = <b>12 cm²</b>.</p><p>Count the squares: they make 12 ✓</p>",
+   "th": "สี่เหลี่ยมผืนผ้า 6 cm × 4 cm = 24 cm² รูปสามเหลี่ยมเป็นครึ่งหนึ่ง: 24 ÷ 2 = 12 cm² นับช่องดู: ได้ 12 ✓"
+  },
+  {
+   "s": 1,
+   "e": "✨",
+   "p": 80,
+   "f": "L1.3",
+   "t": "The area rule",
+   "tt": "สูตรพื้นที่",
+   "h": "<p><b>Area = ½ × base × height</b></p><p>Base 4 cm, height 3 cm:</p><p>½ × 4 × 3 = ½ × 12 = <b>6 cm²</b></p>",
+   "th": "พื้นที่ = ½ × ฐาน × ความสูง ฐาน 4 cm ความสูง 3 cm: ½ × 4 × 3 = ½ × 12 = 6 cm²",
+   "a": "Base 10 cm, height 6 cm. Area?",
+   "at": "ฐาน 10 cm ความสูง 6 cm พื้นที่เท่าไร",
+   "n": "½ × 10 × 6 = ½ × 60 = 30 cm²",
+   "nt": "½ × 10 × 6 = ½ × 60 = 30 cm²"
+  },
+  {
+   "s": 1,
+   "e": "📏",
+   "p": 78,
+   "t": "Which line is the height?",
+   "tt": "เส้นไหนคือความสูง",
+   "h": "<p>The height meets the base at a <b>right angle</b> (90°), like a wall stands on the floor.</p><p>A slanted side is <b>not</b> the height.</p><p>Right triangle 5, 12, 13: use 5 and 12. Area = ½ × 5 × 12 = <b>30 cm²</b>.</p>",
+   "th": "ความสูงตั้งฉากกับฐาน (90°) เหมือนกำแพงตั้งบนพื้น ด้านที่เอียงไม่ใช่ความสูง สามเหลี่ยมมุมฉาก 5, 12, 13: ใช้ 5 กับ 12 พื้นที่ = ½ × 5 × 12 = 30 cm²"
+  },
+  {
+   "s": 1,
+   "e": "↗️",
+   "p": 81,
+   "f": "L1.4",
+   "t": "Height outside",
+   "tt": "ความสูงอยู่ข้างนอก",
+   "h": "<p>Sometimes the height is a dotted line <b>outside</b> the triangle.</p><p>It still meets the base line at 90°.</p><p>Base 7 cm, height 16 cm: ½ × 7 × 16 = <b>56 cm²</b></p>",
+   "th": "บางครั้งความสูงเป็นเส้นประที่อยู่นอกรูปสามเหลี่ยม แต่ยังตั้งฉากกับแนวฐาน (90°) ฐาน 7 cm ความสูง 16 cm: ½ × 7 × 16 = 56 cm²"
+  },
+  {
+   "s": 1,
+   "e": "✂️",
+   "p": 81,
+   "f": "L1.6",
+   "t": "Shaded parts",
+   "tt": "ส่วนที่แรเงา",
+   "h": "<p>Shaded = <b>whole shape - white part</b></p><p>Rectangle 12 × 8 = 96 cm²</p><p>White triangle ½ × 12 × 8 = 48 cm²</p><p>Shaded = 96 - 48 = <b>48 cm²</b></p>",
+   "th": "ส่วนที่แรเงา = ทั้งหมด - ส่วนสีขาว สี่เหลี่ยมผืนผ้า 12 × 8 = 96 cm² สามเหลี่ยมสีขาว ½ × 12 × 8 = 48 cm² ส่วนที่แรเงา = 96 - 48 = 48 cm²"
+  },
+  {
+   "s": 2,
+   "e": "📖",
+   "p": 89,
+   "t": "Perimeter or area?",
+   "tt": "ความยาวรอบรูปหรือพื้นที่",
+   "h": "<p>Around the edge (fence, frame) → <b>perimeter</b>, in cm or m.</p><p>Covering the inside (paint, tiles) → <b>area</b>, in cm² or m².</p>",
+   "th": "รอบขอบ (รั้ว กรอบ) → ความยาวรอบรูป หน่วย cm หรือ m ปิดข้างใน (ทาสี ปูกระเบื้อง) → พื้นที่ หน่วย cm² หรือ m²",
+   "a": "Lily paints a triangle of wood. Perimeter or area?",
+   "at": "ลิลี่ทาสีแผ่นไม้รูปสามเหลี่ยม ความยาวรอบรูปหรือพื้นที่",
+   "n": "Area: paint covers the inside.",
+   "nt": "พื้นที่: สีปิดข้างใน"
+  },
+  {
+   "s": 2,
+   "e": "🔁",
+   "p": 89,
+   "t": "Change units first",
+   "tt": "เปลี่ยนหน่วยก่อน",
+   "h": "<p>1 m = 100 cm.</p><p>Tom's scarf: 1.2 m + 0.8 m + 0.8 m = 2.8 m</p><p>2.8 × 100 = <b>280 cm</b></p>",
+   "th": "1 m = 100 cm ผ้าพันคอของทอม: 1.2 m + 0.8 m + 0.8 m = 2.8 m แล้ว 2.8 × 100 = 280 cm"
+  },
+  {
+   "s": 2,
+   "e": "🎉",
+   "p": 89,
+   "t": "Great job! Time to play",
+   "tt": "เก่งมาก! ได้เวลาเล่นเกมแล้ว",
+   "h": "<p>Perimeter: add all 3 sides (cm).</p><p>Area: ½ × base × height (cm²).</p><p>The height meets the base at 90°.</p>",
+   "th": "ความยาวรอบรูป: บวกทั้ง 3 ด้าน (cm) พื้นที่: ½ × ฐาน × ความสูง (cm²) ความสูงตั้งฉากกับฐาน (90°)"
+  }
+ ],
+ "tf": [
+  [
+   "Perimeter is the distance all the way around. · ความยาวรอบรูปคือระยะทางรอบรูป",
+   true,
+   "Like an ant walking round the edge."
+  ],
+  [
+   "Area of a triangle = base × height. · พื้นที่สามเหลี่ยม = ฐาน × ความสูง",
+   false,
+   "Don't forget the ½: ½ × base × height."
+  ],
+  [
+   "A triangle is half of its related rectangle. · สามเหลี่ยมเป็นครึ่งหนึ่งของสี่เหลี่ยมผืนผ้าที่เกี่ยวข้อง",
+   true,
+   "Same base and same height."
+  ],
+  [
+   "The height can be outside the triangle. · ความสูงอยู่นอกรูปสามเหลี่ยมได้",
+   true,
+   "It still meets the base line at 90°."
+  ],
+  [
+   "A slanted side is always the height. · ด้านที่เอียงเป็นความสูงเสมอ",
+   false,
+   "The height must meet the base at a right angle."
+  ],
+  [
+   "Area is measured in cm². · พื้นที่วัดเป็น cm²",
+   true,
+   "Square units for area."
+  ],
+  [
+   "Perimeter is measured in cm². · ความยาวรอบรูปวัดเป็น cm²",
+   false,
+   "Perimeter is a length: cm or m."
+  ],
+  [
+   "1 m = 100 cm. · 1 m = 100 cm",
+   true,
+   "Multiply by 100 to change m to cm."
+  ]
+ ]
+}

@@ -1,0 +1,193 @@
+{
+ "icon": "⭕",
+ "th_title": "เส้นรอบวงและพื้นที่ของวงกลม",
+ "quick": "circle",
+ "secs": [
+  [
+   "11.1 Circumference",
+   "11.1 เส้นรอบวง"
+  ],
+  [
+   "11.2 Area",
+   "11.2 พื้นที่"
+  ],
+  [
+   "11.3 Word problems",
+   "11.3 โจทย์ปัญหา"
+  ]
+ ],
+ "slides": [
+  {
+   "s": 0,
+   "e": "🥧",
+   "t": "Meet π (pi)",
+   "tt": "รู้จัก π (พาย)",
+   "h": "<p>Measure any circle. Circumference ÷ diameter is always about <b>3.14</b>.</p><p>We call this number <span class='word'>π</span> (\"pie\").</p><p>We use π ≈ 3.14 or π ≈ 22/7. The question tells you which.</p>",
+   "th": "วัดวงกลมวงไหนก็ได้ เส้นรอบวง ÷ เส้นผ่านศูนย์กลาง ได้ประมาณ 3.14 เสมอ เราเรียกตัวเลขนี้ว่า π (พาย) ใช้ π ≈ 3.14 หรือ π ≈ 22/7 โจทย์จะบอกว่าใช้ค่าไหน",
+   "p": 150
+  },
+  {
+   "s": 0,
+   "e": "📏",
+   "f": "L0.1",
+   "t": "Circumference rule",
+   "tt": "สูตรเส้นรอบวง",
+   "h": "<p><b>Circumference = π × diameter</b></p><p>or <b>2 × π × radius</b></p><p>A bit more than 3 times the diameter.</p>",
+   "th": "เส้นรอบวง = π × เส้นผ่านศูนย์กลาง หรือ 2 × π × รัศมี ยาวกว่า 3 เท่าของเส้นผ่านศูนย์กลางเล็กน้อย",
+   "p": 150
+  },
+  {
+   "s": 0,
+   "e": "7️⃣",
+   "f": "L0.3",
+   "t": "Using 22/7",
+   "tt": "การใช้ 22/7",
+   "h": "<p>Diameter 21 cm:</p><p>22/7 × 21 → 21 ÷ 7 = 3 → 22 × 3 = <b>66 cm</b></p><p>Tip: divide by 7 first!</p>",
+   "th": "เส้นผ่านศูนย์กลาง 21 cm: 22/7 × 21 → 21 ÷ 7 = 3 → 22 × 3 = 66 cm เคล็ดลับ: หารด้วย 7 ก่อน!",
+   "a": "Diameter 14 cm. Circumference? (π ≈ 22/7)",
+   "at": "เส้นผ่านศูนย์กลาง 14 cm เส้นรอบวงเท่าไร (π ≈ 22/7)",
+   "n": "14 ÷ 7 = 2, 22 × 2 = 44 cm",
+   "nt": "14 ÷ 7 = 2, 22 × 2 = 44 cm",
+   "p": 151
+  },
+  {
+   "s": 0,
+   "e": "🌗",
+   "f": "L0.5",
+   "t": "Semicircles",
+   "tt": "ครึ่งวงกลม",
+   "h": "<p>Perimeter = half the circumference + the <b>diameter</b> (the straight edge).</p><p>Diameter 10 cm: ½ × 3.14 × 10 = 15.7, then 15.7 + 10 = <b>25.7 cm</b></p>",
+   "th": "ความยาวรอบรูป = ครึ่งหนึ่งของเส้นรอบวง + เส้นผ่านศูนย์กลาง (เส้นตรง) เส้นผ่านศูนย์กลาง 10 cm: ½ × 3.14 × 10 = 15.7 แล้ว 15.7 + 10 = 25.7 cm",
+   "p": 151
+  },
+  {
+   "s": 0,
+   "e": "🍕",
+   "f": "L0.6",
+   "t": "Quarter circles",
+   "tt": "เสี้ยววงกลม",
+   "h": "<p>Perimeter = ¼ of the circumference + <b>2 radii</b>.</p><p>Radius 5 cm: 7.85 + 5 + 5 = <b>17.85 cm</b></p>",
+   "th": "ความยาวรอบรูป = ¼ ของเส้นรอบวง + รัศมี 2 เส้น รัศมี 5 cm: 7.85 + 5 + 5 = 17.85 cm",
+   "p": 152
+  },
+  {
+   "s": 1,
+   "e": "🔲",
+   "t": "Area of a circle",
+   "tt": "พื้นที่ของวงกลม",
+   "h": "<p>Cut a circle into thin slices and line them up: they make a rectangle π × r long and r tall.</p><p><b>Area = π × r × r</b></p>",
+   "th": "ตัดวงกลมเป็นชิ้นบาง ๆ แล้วเรียงกัน จะได้สี่เหลี่ยมผืนผ้ายาว π × r สูง r พื้นที่ = π × r × r",
+   "p": 158
+  },
+  {
+   "s": 1,
+   "e": "🧮",
+   "f": "L1.1",
+   "t": "Radius 7 cm",
+   "tt": "รัศมี 7 cm",
+   "h": "<p>22/7 × 7 × 7</p><p>= 22 × 7 = <b>154 cm²</b></p>",
+   "th": "22/7 × 7 × 7 = 22 × 7 = 154 cm²",
+   "a": "Radius 10 cm. Area? (π ≈ 3.14)",
+   "at": "รัศมี 10 cm พื้นที่เท่าไร (π ≈ 3.14)",
+   "n": "3.14 × 10 × 10 = 314 cm²",
+   "nt": "3.14 × 10 × 10 = 314 cm²",
+   "p": 160
+  },
+  {
+   "s": 1,
+   "e": "⚠️",
+   "t": "Radius, not diameter!",
+   "tt": "ใช้รัศมี ไม่ใช่เส้นผ่านศูนย์กลาง!",
+   "h": "<p>The area rule uses the <b>radius</b>.</p><p>Given the diameter? Halve it first: diameter 42 cm → radius 21 cm.</p>",
+   "th": "สูตรพื้นที่ใช้รัศมี ถ้าโจทย์ให้เส้นผ่านศูนย์กลาง ให้แบ่งครึ่งก่อน: เส้นผ่านศูนย์กลาง 42 cm → รัศมี 21 cm",
+   "a": "Diameter 14 cm. Area? (π ≈ 22/7)",
+   "at": "เส้นผ่านศูนย์กลาง 14 cm พื้นที่เท่าไร (π ≈ 22/7)",
+   "n": "Radius 7 cm: 22/7 × 7 × 7 = 154 cm²",
+   "nt": "รัศมี 7 cm: 22/7 × 7 × 7 = 154 cm²",
+   "p": 158
+  },
+  {
+   "s": 1,
+   "e": "💍",
+   "f": "L1.4",
+   "t": "Rings",
+   "tt": "วงแหวน",
+   "h": "<p>Ring = big circle - small circle.</p><p>706.5 - 200.96 = <b>505.54 cm²</b></p>",
+   "th": "วงแหวน = วงกลมใหญ่ - วงกลมเล็ก 706.5 - 200.96 = 505.54 cm²",
+   "p": 160
+  },
+  {
+   "s": 2,
+   "e": "🚲",
+   "t": "Wheels",
+   "tt": "ล้อ",
+   "h": "<p>1 turn of a wheel = <b>1 circumference</b>.</p><p>Distance = circumference × number of turns.</p><p>Radius 25 cm: 1 turn ≈ 157 cm. 50 turns ≈ 7,850 cm = <b>78.5 m</b></p>",
+   "th": "ล้อหมุน 1 รอบ = เส้นรอบวง 1 วง ระยะทาง = เส้นรอบวง × จำนวนรอบ รัศมี 25 cm: 1 รอบ ≈ 157 cm 50 รอบ ≈ 7,850 cm = 78.5 m",
+   "p": 166
+  },
+  {
+   "s": 2,
+   "e": "🤔",
+   "t": "Edge or inside?",
+   "tt": "รอบขอบหรือข้างใน",
+   "h": "<p>Fence, trim, ribbon, wheel → <b>circumference</b>.</p><p>Paint, paper, grass → <b>area</b>.</p>",
+   "th": "รั้ว ขอบ ริบบิ้น ล้อ → เส้นรอบวง ทาสี กระดาษ หญ้า → พื้นที่",
+   "a": "Lily puts a ribbon around a round cake. Circumference or area?",
+   "at": "ลิลี่ติดริบบิ้นรอบเค้กกลม เส้นรอบวงหรือพื้นที่",
+   "n": "Circumference: the ribbon goes around the edge.",
+   "nt": "เส้นรอบวง: ริบบิ้นไปรอบขอบ",
+   "p": 166
+  },
+  {
+   "s": 2,
+   "e": "🎉",
+   "t": "Great job! Time to play",
+   "tt": "เก่งมาก! ได้เวลาเล่นเกมแล้ว",
+   "h": "<p>Circumference = π × d = 2 × π × r.</p><p>Area = π × r × r.</p><p>Use the π the question gives.</p>",
+   "th": "เส้นรอบวง = π × d = 2 × π × r พื้นที่ = π × r × r ใช้ค่า π ตามที่โจทย์ให้",
+   "p": 166
+  }
+ ],
+ "tf": [
+  [
+   "π is about 3.14. · π มีค่าประมาณ 3.14",
+   true,
+   "Or 22/7."
+  ],
+  [
+   "Circumference = π × radius. · เส้นรอบวง = π × รัศมี",
+   false,
+   "It is π × diameter, or 2 × π × radius."
+  ],
+  [
+   "Area of a circle = π × r × r. · พื้นที่วงกลม = π × r × r",
+   true,
+   "Use the radius."
+  ],
+  [
+   "To find the area we can use the diameter directly. · หาพื้นที่โดยใช้เส้นผ่านศูนย์กลางได้เลย",
+   false,
+   "Halve the diameter first to get the radius."
+  ],
+  [
+   "One turn of a wheel rolls one circumference. · ล้อหมุนหนึ่งรอบเคลื่อนที่ได้หนึ่งเส้นรอบวง",
+   true,
+   "Distance = circumference × turns."
+  ],
+  [
+   "A semicircle's perimeter is just half the circumference. · ความยาวรอบรูปครึ่งวงกลมคือครึ่งหนึ่งของเส้นรอบวงเท่านั้น",
+   false,
+   "Add the straight edge (the diameter) too."
+  ],
+  [
+   "The circumference is a bit more than 3 times the diameter. · เส้นรอบวงยาวกว่า 3 เท่าของเส้นผ่านศูนย์กลางเล็กน้อย",
+   true,
+   "About 3.14 times."
+  ],
+  [
+   "Area is measured in cm². · พื้นที่วัดเป็น cm²",
+   true,
+   "Square units."
+  ]
+ ]
+}
