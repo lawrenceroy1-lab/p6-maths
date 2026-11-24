@@ -93,6 +93,12 @@ const QUICK = {
     return { q: `${L} ℓ = ? cm³ · ${L} ℓ = ? cm³`, options: opts(`${c.toLocaleString("en-US")} cm³`, [`${(L * 100).toLocaleString("en-US")} cm³`, `${(L * 10).toLocaleString("en-US")} cm³`, `${(L * 1000000).toLocaleString("en-US")} cm³`]),
       right: `${c.toLocaleString("en-US")} cm³`, why: `1 ℓ = 1,000 cm³, so ${L} × 1,000 = ${c.toLocaleString("en-US")} cm³.` };
   },
+  pattern() {
+    const a = rnd(1, 20), d = rnd(2, 9), n = pick([10, 12, 15, 20, 25, 30, 50]), t = a + (n - 1) * d;
+    return { q: `${a}, ${a + d}, ${a + 2 * d}, ${a + 3 * d}, … What is term ${n}? · พจน์ที่ ${n} คืออะไร`,
+      options: opts(String(t), [String(a + n * d), String(t + d), String(n * d), String(t - 1)]), right: String(t),
+      why: `The jump is ${d}. Term ${n} has ${n - 1} jumps: ${a} + (${n - 1} × ${d}) = ${t}.` };
+  },
 };
 
 const GAMES = {

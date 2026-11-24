@@ -14,7 +14,7 @@ const UNITS = [
   { id: "10", title: "Area and Perimeter of Polygons",   pages: "p.105 to 146",icon: "⬟",  ready: true  },
   { id: "11", title: "Circumference and Area of Circles",pages: "p.147 to 180",icon: "⭕", ready: true  },
   { id: "12", title: "Volume and Capacity",              pages: "p.181 to 214",icon: "🥤", ready: true  },
-  { id: "13", title: "Patterns",                         pages: "p.215 to 230",icon: "🔢", ready: false },
+  { id: "13", title: "Patterns",                         pages: "p.215 to 230",icon: "🔢", ready: true  },
   { id: "14", title: "Presentation of Data",             pages: "p.231 to 244",icon: "🥧", ready: false },
   { id: "review", title: "Review",                       pages: "p.245 to 264",icon: "⭐", ready: false }
 ];

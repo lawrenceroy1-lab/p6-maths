@@ -1,0 +1,40 @@
+{
+  "13-1": {
+    "explore": "pattern",
+    "facts": [
+      ["Find the jump: second term - first term.", "หาระยะกระโดด: พจน์ที่สอง - พจน์แรก"],
+      ["The number of jumps is 1 less than the term number.", "จำนวนการกระโดดน้อยกว่าลำดับที่ของพจน์ 1"],
+      ["Term = first number + (jumps × the jump).", "พจน์ = จำนวนแรก + (จำนวนการกระโดด × ระยะกระโดด)"],
+      ["Square numbers: 1, 4, 9, 16, 25, … (1 × 1, 2 × 2, 3 × 3, …).", "จำนวนกำลังสอง: 1, 4, 9, 16, 25, … (1 × 1, 2 × 2, 3 × 3, …)"],
+      ["To add a long list, pair the first and last numbers.", "เมื่อบวกจำนวนยาว ๆ ให้จับคู่ตัวแรกกับตัวสุดท้าย"]
+    ],
+    "mistakes": [
+      ["Multiplying by the term number instead of the number of jumps. Term 10 has 9 jumps!", "คูณด้วยลำดับที่ของพจน์แทนจำนวนการกระโดด พจน์ที่ 10 มีการกระโดด 9 ครั้ง!"],
+      ["Forgetting to add the first number at the end.", "ลืมบวกจำนวนแรกตอนท้าย"],
+      ["Thinking every pattern adds the same number. Check the jumps: some grow (6, 9, 12, …).", "คิดว่าทุกแบบรูปบวกจำนวนเท่าเดิม ให้ตรวจดูการกระโดด บางแบบเพิ่มขึ้นเรื่อย ๆ (6, 9, 12, …)"]
+    ],
+    "words": [
+      ["pattern", "แบบรูป", "a rule that repeats", "กฎที่ทำซ้ำ"],
+      ["term", "พจน์", "one number in the pattern", "จำนวนหนึ่งในแบบรูป"],
+      ["rule", "กฎ", "what the pattern does each time", "สิ่งที่แบบรูปทำทุกครั้ง"],
+      ["square number", "จำนวนกำลังสอง", "a number times itself", "จำนวนที่คูณตัวเอง"],
+      ["even number", "จำนวนคู่", "2, 4, 6, 8, …", "2, 4, 6, 8, …"],
+      ["odd number", "จำนวนคี่", "1, 3, 5, 7, …", "1, 3, 5, 7, …"],
+      ["sum", "ผลบวก", "all added together", "บวกรวมทั้งหมด"]
+    ]
+  },
+  "13-ch": {
+    "explore": "pattern",
+    "facts": [
+      ["Problem solving: find the pattern, then use the rule.", "การแก้โจทย์ปัญหา: หาแบบรูป แล้วใช้กฎ"],
+      ["Check by working backward or drawing a model.", "ตรวจสอบโดยคิดย้อนกลับหรือวาดแบบจำลอง"]
+    ],
+    "mistakes": [
+      ["Counting the starting amount as one of the groups.", "นับจำนวนตอนเริ่มต้นเป็นกลุ่มหนึ่งด้วย"]
+    ],
+    "words": [
+      ["model", "แบบจำลอง", "a drawing that shows the problem", "ภาพที่แสดงโจทย์"],
+      ["check", "ตรวจสอบ", "make sure the answer is right", "ดูว่าคำตอบถูกต้อง"]
+    ]
+  }
+}

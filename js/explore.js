@@ -617,5 +617,54 @@ const Explore = (() => {
     draw();
   }
 
-  return { triangle, circle, compass, solid, net, tarea, polygon, split, circum, carea, volume, tank };
+  // ================= PATTERNS (number pattern and growing tiles) =================
+  function pattern(el) {
+    let a = 4, d = 6, n = 10, tiles = false;
+    el.innerHTML = `<div class="ex">
+      <p class="ex-tip">${T("Choose the first number and the jump. Then pick any term to find it.", "เลือกจำนวนแรกและระยะกระโดด แล้วเลือกพจน์ที่ต้องการหา")}</p>
+      <div class="ex-btns">
+        <label class="ex-slider">${T("First number", "จำนวนแรก")} <input type="range" data-k="a" min="1" max="20" value="${a}"> <b class="va"></b></label>
+        <label class="ex-slider">${T("Jump", "ระยะกระโดด")} <input type="range" data-k="d" min="1" max="12" value="${d}"> <b class="vd"></b></label>
+        <label class="ex-slider">${T("Term number", "พจน์ที่")} <input type="range" data-k="n" min="1" max="100" value="${n}"> <b class="vn"></b></label>
+        <button class="chip" data-t="1">${T("Show as tiles", "แสดงเป็นกระเบื้อง")}</button></div>
+      <svg class="ex-svg" viewBox="0 0 560 200"></svg><div class="ex-info"></div></div>`;
+    const svg = el.querySelector(".ex-svg"), info = el.querySelector(".ex-info");
+    el.querySelectorAll("input").forEach(i => i.oninput = () => { ({ a: () => a = +i.value, d: () => d = +i.value, n: () => n = +i.value })[i.dataset.k](); draw(); });
+    el.querySelector("[data-t]").onclick = e => { tiles = !tiles; e.currentTarget.classList.toggle("on", tiles); draw(); };
+    const term = k => a + (k - 1) * d;
+    function draw() {
+      let o = "";
+      if (!tiles) {
+        const xs = k => 40 + (k - 1) * 92;
+        for (let k = 1; k <= 6; k++) {
+          o += `<circle cx="${xs(k)}" cy="120" r="26" fill="${k === 1 ? "#FFE0B2" : "#BBDEFB"}" stroke="#1f2a44" stroke-width="2.5"/>
+            <text x="${xs(k)}" y="127" class="ex-lab">${term(k)}</text><text x="${xs(k)}" y="170" class="ex-len">${T("term", "พจน์").replace(/<[^>]+>/g, " ")} ${k}</text>`;
+          if (k < 6) o += `<path d="M${xs(k) + 14},${92} Q${(xs(k) + xs(k + 1)) / 2},${40} ${xs(k + 1) - 14},${92}" fill="none" stroke="#E53935" stroke-width="2.5"/>
+            <text x="${(xs(k) + xs(k + 1)) / 2}" y="${52}" class="ex-lab" fill="#E53935">+${d}</text>`;
+        }
+        svg.setAttribute("viewBox", "0 0 560 200");
+      } else {
+        const s = 9;
+        let x = 20;
+        for (let k = 1; k <= 4; k++) {
+          const c = term(k), cols = Math.ceil(c / 10);
+          for (let i = 0; i < c; i++) {
+            const col = Math.floor(i / 10), row = i % 10;
+            o += `<rect x="${x + col * s}" y="${150 - row * s}" width="${s - 1}" height="${s - 1}" fill="${i < a ? "#FFCC80" : "#90CAF9"}"/>`;
+          }
+          o += `<text x="${x + cols * s / 2}" y="185" class="ex-len">Fig ${k}: ${c}</text>`;
+          x += Math.max(cols * s, 60) + 40;
+        }
+        svg.setAttribute("viewBox", `0 0 ${Math.max(560, x)} 200`);
+      }
+      svg.innerHTML = o;
+      el.querySelector(".va").textContent = a; el.querySelector(".vd").textContent = d; el.querySelector(".vn").textContent = n;
+      info.innerHTML = `<div class="ex-row"><b>${T("Rule", "กฎ")}:</b> ${T(`start at ${a}, add ${d} each time`, `เริ่มที่ ${a} บวก ${d} ทุกครั้ง`)}</div>
+        <div class="ex-row">${T(`Term ${n} has ${n - 1} jumps.`, `พจน์ที่ ${n} มีการกระโดด ${n - 1} ครั้ง`)}</div>
+        <div class="ex-row"><b>${T(`Term ${n}`, `พจน์ที่ ${n}`)}</b> = ${a} + (${n - 1} × ${d}) = ${a} + ${(n - 1) * d} = <b>${term(n).toLocaleString("en-US")}</b></div>`;
+    }
+    draw();
+  }
+
+  return { triangle, circle, compass, solid, net, tarea, polygon, split, circum, carea, volume, tank, pattern };
 })();
