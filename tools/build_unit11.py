@@ -325,7 +325,9 @@ check(r2(P314 * 38), 119.32, "p.171 Q2 C"); check(r2(P314 * 361), 1133.54, "p.17
 q113.append(Q("Exercise 2", 171, "The diameter of a circular wood sheet is 38 cm. Find the circumference and area of this wood sheet. (Take π ≈ 3.14.)",
               "Circumference uses the diameter. Area uses the radius (halve the diameter).",
               ["Circumference ≈ 3.14 × 38 = <b>119.32 cm</b>", "Radius = 38 ÷ 2 = <b>19 cm</b>", "19 × 19 = 361", "Area ≈ 3.14 × 361 = <b>1,133.54 cm²</b>"],
-              "Circumference ≈ 119.32 cm, area ≈ 1,133.54 cm²", "Two different formulas: π × d and π × r × r."))
+              "Circumference ≈ 119.32 cm, area ≈ 1,133.54 cm²", "Two different formulas: π × d and π × r × r.",
+              {"img": "img/unit11/round-wood.jpg", "alt": "a round sheet of wood",
+               "label": "The edge is the circumference. The flat top is the area. · ขอบคือเส้นรอบวง ด้านบนที่แบนคือพื้นที่"}))
 check(r2(2 * P314 * 25), 157, "p.172 Q3 turn"); check(r2(157 * 50 / 100), 78.5, "p.172 Q3")
 q113.append(Q("Exercise 3", 172, "A wheel of radius 25 cm made 50 complete turns. Find the distance covered. Give the answer in meters. (Take π ≈ 3.14.)",
               "1 turn = 1 circumference.", ["1 turn ≈ 2 × 3.14 × 25 = 3.14 × 50 = <b>157 cm</b>", "50 turns ≈ 50 × 157 = <b>7,850 cm</b>", "In meters: 7,850 ÷ 100 = <b>78.5 m</b>"],
