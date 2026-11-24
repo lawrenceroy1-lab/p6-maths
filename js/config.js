@@ -16,7 +16,7 @@ const UNITS = [
   { id: "12", title: "Volume and Capacity",              pages: "p.181 to 214",icon: "🥤", ready: true  },
   { id: "13", title: "Patterns",                         pages: "p.215 to 230",icon: "🔢", ready: true  },
   { id: "14", title: "Presentation of Data",             pages: "p.231 to 244",icon: "🥧", ready: true },
-  { id: "review", title: "Review",                       pages: "p.245 to 264",icon: "⭐", ready: false }
+  { id: "review", title: "Review",                       pages: "p.245 to 264",icon: "⭐", ready: true }
 ];
 
 const CLASSES = ["6/1", "6/2", "6/3"];

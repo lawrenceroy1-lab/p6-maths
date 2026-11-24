@@ -28,8 +28,9 @@ fetch(`content/unit${UNIT_ID}.json`, { cache: "no-cache" })
     EXTRA = await fetch(`content/extra${UNIT_ID}.json`, { cache: "no-cache" }).then(r => r.ok ? r.json() : {}).catch(() => ({}));
     RAW = d;
     DATA = thaiUnit(RAW);
-    document.title = `Unit ${Number(d.unit)}: ${d.title} | T. Roy`;
-    document.getElementById("unitTitle").textContent = `Unit ${Number(d.unit)}: ${d.title}`;
+    const head = isNaN(Number(d.unit)) ? `⭐ ${d.title} (Units 7 to 14)` : `Unit ${Number(d.unit)}: ${d.title}`;
+    document.title = `${head} | T. Roy`;
+    document.getElementById("unitTitle").textContent = head;
     readHash();
     renderTabs();
     go();
@@ -152,7 +153,7 @@ async function ExploreTab(sec) {
     </div></div>`;
   document.getElementById("exPrint").onclick = () => window.print();
   try {
-    if (!window.Explore) await loadScript("js/explore.js?v=29");
+    if (typeof Explore === "undefined") await loadScript("js/explore.js?v=30");
     const box = document.getElementById("exBox");
     if (!box) return;
     ({ triangle: () => Explore.triangle(box), sum: () => Explore.triangle(box, "sum"), circle: () => Explore.circle(box), compass: () => Explore.compass(box), solid: () => Explore.solid(box), net: () => Explore.net(box), perim: () => Explore.triangle(box, "perim"), tarea: () => Explore.tarea(box), angles: () => Explore.polygon(box), pperim: () => Explore.polygon(box, "perim"), split: () => Explore.split(box), circum: () => Explore.circum(box), carea: () => Explore.carea(box), volume: () => Explore.volume(box), tank: () => Explore.tank(box), pattern: () => Explore.pattern(box), pie: () => Explore.pie(box), pieparts: () => Explore.pieparts(box) })[x.explore]();
@@ -321,7 +322,7 @@ function Match(sec) {
     const best = store.get(key, null);
     const isBest = best === null || time < best;
     if (isBest) store.set(key, time);
-    saveScore({ unit: Number(DATA.unit), section: sec.title, activity: "Match Game", score: n, total: n, time });
+    saveScore({ unit: (isNaN(Number(DATA.unit)) ? "Review" : Number(DATA.unit)), section: sec.title, activity: "Match Game", score: n, total: n, time });
     view().innerHTML = `<div class="panel">${header(sec, "🧩 Match Game")}
       <div class="bigscore">⏱️ ${time} s</div>
       <p style="text-align:center;font-weight:800">${isBest ? "🎉 New best time!" : `Your best time: ${best} s`}</p>
@@ -398,7 +399,7 @@ function Quiz(sec) {
   }
   function end() {
     const time = Math.round((Date.now() - t0Quiz) / 1000);
-    saveScore({ unit: Number(DATA.unit), section: sec.title, activity: "Speed Quiz", score: correct, total: qs.length, time });
+    saveScore({ unit: (isNaN(Number(DATA.unit)) ? "Review" : Number(DATA.unit)), section: sec.title, activity: "Speed Quiz", score: correct, total: qs.length, time });
     const msg = correct === qs.length ? "Perfect! 🌟" : correct >= 7 ? "Great job! 🎉" : correct >= 4 ? "Good try! Keep practising 💪" : "Try Learn and Guided Answers, then play again 💪";
     view().innerHTML = `<div class="panel">${header(sec, "⚡ Speed Quiz")}
       <div class="bigscore">${correct} / ${qs.length}</div>
