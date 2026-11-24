@@ -97,7 +97,9 @@ for lab_, sides, key, unit, fg in [
 check(9.5 * 4, 38, "p.106 Q2")
 q101.append(Q("Let's Recall 2", 106, "A playground is in the shape of a rhombus. Each side of it is 9.5 m long. If we want to fence this playground, what should be its length?",
               "A rhombus has 4 equal sides.", ["A rhombus has 4 equal sides of 9.5 m.", "Perimeter = 9.5 + 9.5 + 9.5 + 9.5", "= 19 + 19 = <b>38 m</b>"],
-              "38 m", "The fence goes all the way round: 4 × 9.5 = 38 m."))
+              "38 m", "The fence goes all the way round: 4 × 9.5 = 38 m.",
+              {"img": "img/unit10/playground-fence.jpg", "alt": "a playground with a fence all the way round",
+               "label": "A fence goes all the way round the playground. · รั้วล้อมรอบสนามเด็กเล่นทั้งหมด"}))
 for lab_, how, val, key, unit, fg in [
     ("Let's Recall 3 (a)", "Area of parallelogram = height × base = 11 × 22", 11 * 22, 242, "cm",
      FIG({"_A": [90, 50], "_B": [290, 50], "_C": [240, 170], "_D": [40, 170], "_H": [90, 170]}, [poly(["_A", "_B", "_C", "_D"], ORANGE), seg("_A", "_H", True), ra("_H", "_A", "_C"), lab("_D", "_C", "22 cm", 16), lab("_A", "_H", "11 cm", -16), lab("_D", "_A", "13 cm", -24)], names=False)),
