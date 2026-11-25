@@ -34,6 +34,9 @@ function getStudent() {
 }
 function isTeacher() { const s = getStudent(); return !!(s && s.teacher); }
 function teacherPin() { try { return sessionStorage.getItem("tpin") || ""; } catch (e) { return ""; } }
+function teacherWho() { try { return sessionStorage.getItem("twho") || ""; } catch (e) { return ""; } }
+// Staff (Jaa, Aor, Kong, Lookpat, Yo) use the Teacher login button: their name + the staff password.
+// The password is checked by Google (Code.gs v7), never stored in this file.
 
 async function loadClassLists() {
   const cached = store.get("classLists", null);
@@ -46,9 +49,10 @@ async function loadClassLists() {
   return cached;
 }
 
-async function teacherLogin(pin) {
+async function teacherLogin(pin, who) {
+  if (who === undefined) who = teacherWho();
   try {
-    const r = await fetch(SHEET_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "teacher", pin }) });
+    const r = await fetch(SHEET_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "teacher", pin, who }) });
     return await r.json();
   } catch (e) { return { ok: false, error: "No internet. Try again." }; }
 }
@@ -58,13 +62,13 @@ function renderStudentBar() {
   if (!bar) return;
   const s = getStudent();
   if (s && s.teacher) {
-    bar.innerHTML = `👩‍🏫 <b>T. Roy</b> (Teacher) <a class="linkbtn" href="teacher.html">Teacher page</a> <button class="linkbtn" id="changeName">Log out</button>`;
+    bar.innerHTML = `👩‍🏫 <b>${esc(s.name || "T. Roy")}</b> (Teacher) <a class="linkbtn" href="teacher.html">Teacher page</a> <button class="linkbtn" id="changeName">Log out</button>`;
   } else {
     bar.innerHTML = s ? `👋 Hi <b>${esc(s.name)}</b> (${esc(s.cls)}) <button class="linkbtn" id="changeName">Not you? Change name</button>` : "";
   }
   const btn = document.getElementById("changeName");
   if (btn) btn.onclick = () => {
-    if (s && s.teacher) { try { sessionStorage.removeItem("tpin"); } catch (e) { } store.set("student", null); location.href = "index.html"; return; }
+    if (s && s.teacher) { try { sessionStorage.removeItem("tpin"); sessionStorage.removeItem("twho"); } catch (e) { } store.set("student", null); location.href = "index.html"; return; }
     askName(true);
   };
 }
@@ -141,7 +145,7 @@ function askName(force) {
       <div class="cls-row">${CLASSES.map(c => `<button class="clsbtn big" data-c="${c}">${c}</button>`).join("")}</div>
       <p class="small" style="margin-top:14px">Are you the teacher? <button class="linkbtn dark" id="tBtn">Teacher login</button></p></div>`;
     wrap.querySelectorAll(".clsbtn").forEach(b => b.onclick = () => { cls = b.dataset.c; drawPick(); });
-    wrap.querySelector("#tBtn").onclick = drawTeacher;
+    wrap.querySelector("#tBtn").onclick = () => drawTeacher();
   }
 
   function drawPick() {
@@ -194,21 +198,25 @@ function askName(force) {
   function drawTeacher() {
     screen = "teacher";
     wrap.innerHTML = `<div class="modal-box">
-      <h2>👩‍🏫 Teacher login</h2><p>Type the teacher PIN.</p>
-      <input id="tPin" type="password" inputmode="numeric" maxlength="20" placeholder="PIN" autocomplete="off">
+      <h2>👩‍🏫 Teacher login</h2><p>Type your name and password.</p>
+      <input id="tWho" maxlength="20" placeholder="Your name (Kong, Lookpat, Yo…)" autocomplete="off" autocapitalize="words">
+      <input id="tPin" type="password" maxlength="20" placeholder="Password" autocomplete="off">
       <div class="btnrow"><button class="bigbtn dark" id="tGo">Log in</button></div>
       <p class="err" id="tErr"></p>
       <button class="linkbtn" id="tBack">⬅ I'm a student</button></div>`;
     const pin = wrap.querySelector("#tPin");
-    pin.focus();
+    const who = wrap.querySelector("#tWho");
+    who.focus();
+    who.onkeydown = e => { if (e.key === "Enter") pin.focus(); };
     const go = async () => {
       const err = wrap.querySelector("#tErr");
       if (!SHEET_URL) { err.textContent = "The Google Sheet is not connected."; return; }
       err.textContent = "Checking…";
-      const r = await teacherLogin(pin.value.trim());
-      if (!r.ok) { err.textContent = r.error || "Wrong PIN."; return; }
-      try { sessionStorage.setItem("tpin", pin.value.trim()); } catch (e) { }
-      store.set("student", { name: "T. Roy", cls: "Teacher", teacher: true, v: 2 });
+      const w = who.value.trim();
+      const r = await teacherLogin(pin.value.trim(), w);
+      if (!r.ok) { err.textContent = r.error || "Wrong password."; return; }
+      try { sessionStorage.setItem("tpin", pin.value.trim()); sessionStorage.setItem("twho", w); } catch (e) { }
+      store.set("student", { name: r.name || "T. Roy", cls: "Teacher", teacher: true, v: 2 });
       wrap.remove(); renderStudentBar();
       if (typeof onTeacherLogin === "function") onTeacherLogin(r);
     };
