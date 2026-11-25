@@ -105,7 +105,9 @@ learn121 = [
     L("Idea", "Solids made of cuboids", "<p>Split the solid into cuboids. Find each volume. <b>Add</b> them.</p>"
       "<p>Or find a big cuboid and <b>take away</b> the missing part.</p>", f189, 189),
     L("Example", "Split it into 2 parts", "<p>Part 1: 12 × 1.5 × 4.5 = 81 cm³<br>Part 2: 4 × 1.5 × 9.5 = 57 cm³</p><p>Volume = 81 + 57 = <b>138 cm³</b></p>", f189, 189),
-    L("Idea", "Capacity", "<p><b>Capacity</b> is how much a container can hold when full.</p><p>1 ℓ = 1,000 cm³ and 1 m³ = 1,000,000 cm³.</p>", None, 190),
+    L("Idea", "Capacity", "<p><b>Capacity</b> is how much a container can hold when full.</p><p>1 ℓ = 1,000 cm³ and 1 m³ = 1,000,000 cm³.</p>",
+      {"img": "img/unit12/swimming-pool.jpg", "alt": "a rectangular outdoor swimming pool full of clear blue water",
+       "label": "A full pool holds its capacity. Extra water spills over. · สระที่เต็มจะจุน้ำได้เท่ากับความจุ น้ำที่เกินจะล้นออกมา"}, 190),
 ]
 
 q121 = []
