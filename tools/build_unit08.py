@@ -660,7 +660,7 @@ fig65 = F(cuboid(20, 70, 70, 70, 40, BLUE) + cuboid(130, 90, 100, 50, 40, GREEN)
           + shift(square_pyramid(0, 0, 100, 110, PINK), 440, 150), 520, 180)
 pts_ps = []
 s10, s3, s12 = 10 * 8, 3 * 8, 12 * 8
-x0, y0 = 30, 40
+x0, y0 = 44, 40
 fig67 = F([rect(x0, y0 + s3, s10, s12, BLUE), rect(x0, y0, s10, s3, BLUE), rect(x0 + s10, y0 + s3, s3, s12, BLUE),
            rect(x0 + s10 + s3, y0 + s3, s10, s12, BLUE), rect(x0 + 2 * s10 + s3, y0 + s3, s3, s12, BLUE),
            rect(x0 + s10 + s3, y0 + s3 + s12, s10, s3, BLUE),

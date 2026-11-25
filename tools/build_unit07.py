@@ -1102,7 +1102,7 @@ parts_fig = circ([
     {"t": "seg", "p": ["A", "B"]}, {"t": "seg", "p": ["O", "D"]}, {"t": "seg", "p": ["E", "F"]}, {"t": "dot", "p": "O"},
     {"t": "pl", "p": "O", "d": [-2, -10]}, {"t": "pl", "p": "A", "d": [-14, 0]}, {"t": "pl", "p": "B", "d": [14, 10]},
     {"t": "pl", "p": "D", "d": [12, -4]}, {"t": "pl", "p": "E", "d": [-10, 18]}, {"t": "pl", "p": "F", "d": [12, 18]},
-    {"t": "txt", "at": [276, 30], "s": "circumference", "size": 14, "color": "#1565c0"}],
+    {"t": "txt", "at": [62, 28], "s": "circumference", "size": 14, "color": "#1565c0"}],
     {"A": polar(O, R, 200), "B": polar(O, R, 20), "D": polar(O, R, -50), "E": polar(O, R, 120), "F": polar(O, R, 60)})
 d_fig = circ([{"t": "seg", "p": ["O", "P"]}, {"t": "dot", "p": "O"}, {"t": "len", "p": ["O", "P"], "s": "4 cm", "off": -14},
               {"t": "pl", "p": "O", "d": [0, 22]}], {"P": polar(O, R, 0)}, fill=PINK)

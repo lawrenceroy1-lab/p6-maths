@@ -1,7 +1,7 @@
 // Unit page: loads content/unitXX.json and runs the 6 activities for each section.
 
 const params = new URLSearchParams(location.search);
-const UNIT_ID = params.get("u") || "07";
+const UNIT_ID = (u => /^\d$/.test(u) ? "0" + u : u)(params.get("u") || "07");   // "?u=7" works like "?u=07"
 let DATA = null, RAW = null, EXTRA = {};   // EXTRA = content/extraXX.json (explorers, key facts, mistakes, words)     // RAW = the English data; DATA = with Thai lines added
 let secIdx = 0;
 let act = "learn";
