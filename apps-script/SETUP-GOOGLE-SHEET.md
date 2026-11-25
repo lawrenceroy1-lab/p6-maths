@@ -57,3 +57,10 @@ Do this once. It takes about 5 minutes.
 - On the website, type **teacher** or **Lawrence** in the name box (or click "Teacher login"), then your PIN.
 - Google checks the PIN. After 5 wrong tries it pauses for 10 minutes.
 - The PIN is remembered only until the browser is closed.
+
+## Staff logins (code v7, added 25 Nov 2026)
+Jaa, Aor, Kong, Lookpat and Yo tap "Teacher login", type their name, then the staff password.
+1. In the sheet, open the **Settings** tab. Type `Staff PIN` in cell A3 and the staff password in cell **B3**.
+2. Extensions > Apps Script. Select all the old code, delete it, paste the whole new `Code.gs`, then Save.
+3. Deploy > Manage deployments > pencil (Edit) > Version: **New version** > Deploy. The link stays the same, so config.js does not change.
+T. Roy's own PIN (B2) still works and shows "T. Roy". To add a staff member, add the name to the STAFF list near the top of Code.gs and deploy again.
